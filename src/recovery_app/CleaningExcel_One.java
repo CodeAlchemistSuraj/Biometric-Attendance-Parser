@@ -63,7 +63,7 @@ public class CleaningExcel_One extends Application {
         alert.showAndWait();
     }
 
-    private void processWorkbook(File file) throws IOException {
+    public void processWorkbook(File file) throws IOException {
         try (FileInputStream fis = new FileInputStream(file);
              Workbook workbook = WorkbookFactory.create(fis)) {
 
@@ -435,6 +435,35 @@ public class CleaningExcel_One extends Application {
     }
 
     public static void main(String[] args) {
+    // Force JavaFX to use software rendering when a compatible GPU/pipeline isn't available.
+    // This must be set before the JavaFX toolkit is initialized (before launch()).
+    System.setProperty("prism.order", "sw");
+    System.setProperty("prism.forceGPU", "false");
+    // Enable some verbose output for debugging if needed.
+    System.setProperty("prism.verbose", "true");
+
+    // Note: you can also run with the JVM option:
+    // --enable-native-access=javafx.graphics
+    // to avoid warnings about restricted native access when using newer JDKs.
+
+        // If a file path is passed as the first argument, run in headless CLI mode
+        // to process the workbook without initializing JavaFX (avoids renderer errors).
+        if (args != null && args.length > 0 && args[0] != null && !args[0].isEmpty()) {
+            String path = args[0];
+            System.out.println("Headless mode: processing file = " + path);
+            try {
+                CleaningExcel_One processor = new CleaningExcel_One();
+                processor.processWorkbook(new File(path));
+                System.out.println("Processing completed: " + path);
+                return;
+            } catch (Exception ex) {
+                System.err.println("Headless processing failed: " + ex.getMessage());
+                ex.printStackTrace();
+                System.exit(1);
+            }
+        }
+
+        // No CLI args: launch the JavaFX application as before.
         launch(args);
     }
 }
