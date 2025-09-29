@@ -1,7 +1,5 @@
 package org.bioparse.cleaning;
 
-
-
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -18,12 +16,26 @@ public class AttendanceMerger {
         Map<String, List<String>> dailyData = new LinkedHashMap<>();
     }
 
-    public static void merge(String inputFilePath, String outputFilePath) throws Exception {
+    public static class MergeResult {
+        public List<EmployeeData> allEmployees;
+        public int monthDays;
+        public int year;
+        public int month;
+        public MergeResult(List<EmployeeData> allEmployees, int monthDays, int year, int month) {
+            this.allEmployees = allEmployees;
+            this.monthDays = monthDays;
+            this.year = year;
+            this.month = month;
+        }
+    }
+
+    public static MergeResult merge(String inputFilePath, String outputFilePath, List<Integer> holidays) throws Exception {
         FileInputStream fis = new FileInputStream(inputFilePath);
         Workbook inWb = new XSSFWorkbook(fis);
 
-        // Detect month + days from any sheet header
-        int monthDays = 31, year = 2025;
+        int monthDays = 31, year = Calendar.getInstance().get(Calendar.YEAR), month = 1;
+
+        // Improved month/year detection
         outer:
         for (int s = 0; s < inWb.getNumberOfSheets(); s++) {
             Sheet sheet = inWb.getSheetAt(s);
@@ -36,25 +48,25 @@ public class AttendanceMerger {
                         String[] parts = val.split(" ");
                         String monthName = parts[0];
                         year = Integer.parseInt(parts[2]);
-                        int month = monthNameToNumber(monthName);
+                        month = monthNameToNumber(monthName);
                         monthDays = YearMonth.of(year, month).lengthOfMonth();
-                        System.out.println("Detected Month: " + monthName + " (" + monthDays + " days)");
                         break outer;
                     }
                 }
             }
         }
+        System.out.println("Detected: Year=" + year + ", Month=" + month + ", Days=" + monthDays);
 
         Workbook outWb = new XSSFWorkbook();
         Sheet outSheet = outWb.createSheet("Master");
 
-        // Border style
         CellStyle borderStyle = outWb.createCellStyle();
         borderStyle.setBorderTop(BorderStyle.THIN);
         borderStyle.setBorderBottom(BorderStyle.THIN);
         borderStyle.setBorderLeft(BorderStyle.THIN);
         borderStyle.setBorderRight(BorderStyle.THIN);
 
+        List<EmployeeData> allEmployees = new ArrayList<>();
         int outRowNum = 0;
 
         for (int s = 0; s < inWb.getNumberOfSheets(); s++) {
@@ -65,37 +77,40 @@ public class AttendanceMerger {
 
             for (Row row : sheet) {
                 if (row == null) continue;
-
                 Cell first = row.getCell(0, Row.MissingCellPolicy.RETURN_BLANK_AS_NULL);
                 if (first == null || first.getCellType() != CellType.STRING) continue;
                 String firstVal = first.getStringCellValue().trim();
 
-                // Skip unwanted junk
-                if (firstVal.isEmpty()
-                        || firstVal.startsWith("Department:")
-                        || firstVal.startsWith("Monthly Status Report")
-                        || firstVal.matches("^[A-Za-z]{3} .*\\d{4}.*")) {
-                    continue;
-                }
+                if (firstVal.isEmpty() || firstVal.startsWith("Department:") || firstVal.startsWith("Monthly Status Report") || firstVal.matches("^[A-Za-z]{3} .*\\d{4}.*")) continue;
 
-                // Start of employee block
+                // Start employee block
                 if (firstVal.equalsIgnoreCase("Employee:")) {
                     if (current != null) {
-                        writeEmployee(current, outSheet, borderStyle, outRowNum, monthDays);
-                        outRowNum = outSheet.getLastRowNum() + 3; // gap of 2 blank rows
+                        allEmployees.add(current);
+                        outRowNum = writeEmployee(current, outSheet, borderStyle, outRowNum, monthDays, holidays, year, month) + 3;
                     }
 
-                    String empRaw = row.getCell(1).getStringCellValue();
-                    String[] parts = empRaw.split(":", 2);
+                    String empRaw = null;
+                    for (int i = 1; i <= 3; i++) {
+                        Cell c = row.getCell(i, Row.MissingCellPolicy.RETURN_BLANK_AS_NULL);
+                        if (c != null && !c.toString().trim().isEmpty()) {
+                            empRaw = c.toString().trim();
+                            break;
+                        }
+                    }
+
                     current = new EmployeeData();
-                    current.empId = parts[0].trim();
-                    current.empName = (parts.length > 1 ? parts[1].trim() : current.empId);
+                    if (empRaw != null) {
+                        String[] parts = empRaw.split(":", 2);
+                        current.empId = parts[0].trim();
+                        current.empName = (parts.length > 1 ? parts[1].trim() : current.empId);
+                    }
+
                     continue;
                 }
 
                 if (current == null) continue;
 
-                // Any line like Status / InTime / OutTime / Duration / Shift
                 String label = firstVal;
                 List<String> values = new ArrayList<>();
                 for (int i = 1; i < row.getLastCellNum(); i++) {
@@ -109,8 +124,8 @@ public class AttendanceMerger {
                 current.dailyData.put(label, values);
 
                 if (label.equalsIgnoreCase("Shift")) {
-                    writeEmployee(current, outSheet, borderStyle, outRowNum, monthDays);
-                    outRowNum = outSheet.getLastRowNum() + 3;
+                    allEmployees.add(current);
+                    outRowNum = writeEmployee(current, outSheet, borderStyle, outRowNum, monthDays, holidays, year, month) + 3;
                     current = null;
                 }
             }
@@ -125,12 +140,24 @@ public class AttendanceMerger {
         outWb.close();
 
         System.out.println("Master file created at: " + outputFilePath);
+        return new MergeResult(allEmployees, monthDays, year, month);
     }
 
-    private static void writeEmployee(EmployeeData emp, Sheet outSheet, CellStyle borderStyle, int startRow, int days) {
-        int rowNum = startRow;
+    private static int writeEmployee(EmployeeData emp, Sheet outSheet, CellStyle borderStyle,
+                                     int startRow, int days, List<Integer> holidays, int year, int month) {
 
-        // Employee line
+        int rowNum = startRow;
+        int maxDataIndex = emp.dailyData.values().stream()
+                .mapToInt(list -> {
+                    for (int i = list.size() - 1; i >= 0; i--) {
+                        if (!list.get(i).isEmpty()) return i;
+                    }
+                    return -1;
+                })
+                .max().orElse(-1);
+
+        int colsToWrite = maxDataIndex + 1;
+
         Row empRow = outSheet.createRow(rowNum++);
         createCell(empRow, 0, "Employee:", borderStyle);
         createCell(empRow, 1, emp.empId + " : " + emp.empName, borderStyle);
@@ -138,10 +165,24 @@ public class AttendanceMerger {
         for (Map.Entry<String, List<String>> e : emp.dailyData.entrySet()) {
             Row r = outSheet.createRow(rowNum++);
             createCell(r, 0, e.getKey(), borderStyle);
-            for (int i = 0; i < days; i++) {
-                createCell(r, i + 1, e.getValue().get(i), borderStyle);
+
+            int colIndex = 1;
+            for (int i = 0; i < colsToWrite; i++) {
+                int dayNum = i + 1;
+                if (isWeekend(year, month, dayNum) || (holidays != null && holidays.contains(dayNum))) {
+                    continue;
+                }
+                createCell(r, colIndex++, e.getValue().get(i), borderStyle);
             }
         }
+        return rowNum - 1; // Return last row index
+    }
+
+    private static boolean isWeekend(int year, int month, int day) {
+        Calendar cal = Calendar.getInstance();
+        cal.set(year, month - 1, day);
+        int dow = cal.get(Calendar.DAY_OF_WEEK);
+        return dow == Calendar.SATURDAY || dow == Calendar.SUNDAY;
     }
 
     private static void createCell(Row r, int col, String val, CellStyle style) {
@@ -153,11 +194,5 @@ public class AttendanceMerger {
     private static int monthNameToNumber(String name) {
         String shortName = name.substring(0, 3).toUpperCase(Locale.ENGLISH);
         return java.time.Month.valueOf(shortName).getValue();
-    }
-
-    public static void main(String[] args) throws Exception {
-        String inputFile = "C:\\Users\\MOHD GULZAR KHAN\\Desktop\\Suraj Working\\Java Git\\Biomteric Sheets\\WorkDurationReport.xlsx";
-        String outputFile = "C:\\Users\\MOHD GULZAR KHAN\\Desktop\\Suraj Working\\Java Git\\output.xlsx";
-        merge(inputFile, outputFile);
     }
 }
