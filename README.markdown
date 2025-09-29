@@ -1,94 +1,275 @@
-# Biometric-Attendance-Parser
+Biometric Attendance Parser
+Overview
+Biometric Attendance Parser is a Java-based desktop application designed to process biometric attendance data from Excel files. It merges multiple attendance sheets into a single master file, generates employee reports with key metrics (e.g., lates, leaves, overtime), and provides a user-friendly GUI for querying and viewing attendance data. The app skips weekends and holidays, computes duration-based metrics (full days, half days), and supports visual displays via tables.
+The application is built using:
 
-## Overview
-Biometric-Attendance-Parser is a Java-based application designed to process and consolidate biometric attendance data from multiple Excel sheets into a single, clean output file. The application handles Excel files containing employee attendance records, removes redundant header rows, and merges employee data blocks while ensuring a standardized "Days" row at the top, tailored to the specified month and year.
+Apache POI for Excel file manipulation.
+FlatLaf for a modern UI look and feel.
+Swing for the graphical user interface.
 
-## Features
-- **Input Processing**: Reads multiple Excel files (.xlsx) from a specified input directory.
-- **Header Removal**: Removes predefined header rows (e.g., "Monthly Status Report", company details, etc.) from each sheet.
-- **Days Row Handling**: Extracts or generates a "Days" row for the specified month and year, ensuring it appears only once at the top of the merged output.
-- **Employee Data Consolidation**: Stacks employee data blocks from all sheets into a single output sheet, preserving relevant attendance details.
-- **Dynamic Month/Year Support**: Prompts the user for the month and year to determine the number of days and generate the appropriate "Days" row if not present.
-- **Apache POI Integration**: Utilizes the Apache POI library for robust Excel file manipulation.
+This tool is ideal for HR departments or businesses managing employee attendance from biometric systems, automating manual tasks and providing actionable insights.
+Features
 
-## Prerequisites
-- **Java**: JDK 8 or higher.
-- **Apache POI**: Required for Excel file processing. Include the following dependencies in your project:
-  ```xml
-  <dependency>
-      <groupId>org.apache.poi</groupId>
-      <artifactId>poi</artifactId>
-      <version>5.2.3</version>
-  </dependency>
-  <dependency>
-      <groupId>org.apache.poi</groupId>
-      <artifactId>poi-ooxml</artifactId>
-      <version>5.2.3</version>
-  </dependency>
-  ```
-- **Input Directory**: A directory named `input` containing the Excel files (.xlsx) to be processed.
+Data Merging: Merge multiple biometric Excel sheets into a master file, detecting month/year and handling holidays/weekends.
+Report Generation: Compute employee metrics such as total lates, leaves, full days, half days, overtime days/hours, punch misses, and half OT days. Outputs to Excel or CSV.
+Query and View: Query attendance by employee code, date, or date range, displaying results in tables or text summaries.
+GUI with Navigation: Sidebar navigation for Home, Configuration, Data Viewer, and Report Viewer. Configuration uses a wizard-style flow for ease of use.
+Error Handling: Built-in validation and error messages for file selection, processing, and queries.
+Customizable: Supports holiday input, year/month selection, and multi-file input.
 
-## Installation
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-username/Biometric-Attendance-Parser.git
-   ```
-2. Navigate to the project directory:
-   ```bash
-   cd Biometric-Attendance-Parser
-   ```
-3. Ensure the `input` directory exists and contains the Excel files to process.
-4. Build the project using Maven (if using Maven):
-   ```bash
-   mvn clean install
-   ```
+Requirements
 
-## Usage
-1. Place all input Excel files in the `input` directory.
-2. Run the application:
-   ```bash
-   java -jar Biometric-Attendance-Parser.jar
-   ```
-3. When prompted, enter the month (1-12) and year (e.g., 2025) for which the attendance data is being processed.
-4. The application will:
-   - Process all `.xlsx` files in the `input` directory.
-   - Remove redundant headers and duplicate "Days" rows.
-   - Merge employee data into a single output file named `merged.xlsx` in the project root directory.
+Java: JDK 17 (LTS version, recommended for stability).
+Maven: 3.9.11 or later for building the project.
+Dependencies (handled by Maven):
 
-## Input Excel File Structure
-Each input Excel file is expected to contain:
-- Optional header rows (e.g., "Monthly Status Report", "Company:", date ranges) that will be removed.
-- An optional "Days" row specifying the days of the month (e.g., "1 F", "2 St", etc.), which may vary based on the month’s length.
-- Employee data blocks containing details such as:
-  - Department
-  - Employee ID and name
-  - Attendance status (e.g., "P" for Present, "WO" for Weekly Off)
-  - InTime, OutTime, Duration, etc.
+Apache POI 5.3.0 for Excel processing.
+FlatLaf 3.2.5 for UI styling.
+Commons Logging 1.3.0 for logging.
 
-Example "Days" row for August 2025:
-```
-"Days","","1 F","2 St","3 S","4 M","5 T","6 W","7 Th","8 F","9 St","10 S",...
-```
 
-## Output
-The output is a single Excel file (`merged.xlsx`) with:
-- A single "Days" row at the top, either copied from the first sheet or generated based on the user-specified month and year.
-- All employee data blocks stacked vertically, with redundant headers and duplicate "Days" rows removed.
+OS: Windows 10/11, Linux, or macOS (tested on Windows 10).
+Input Data: Excel files (.xlsx) with biometric attendance data (e.g., monthly status reports with Employee, InTime, OutTime, Duration, Status).
 
-## Example Run
-```bash
-Enter the month (1-12): 8
-Enter the year (e.g., 2025): 2025
-Merged file created: merged.xlsx
-```
+Installation
 
-## Limitations
-- Assumes all input Excel files are in `.xlsx` format and located in the `input` directory.
-- The "Days" row generation assumes a standard format (e.g., "1 F" for Friday, etc.) and may need adjustment for custom day abbreviations.
-- Handles only the first sheet of each Excel file.
+Clone the Repository:
+textgit clone https://your-repo-url/Biometric-Attendance-Parser.git
+cd Biometric-Attendance-Parser
 
-## Contributing
-Contributions are welcome! Please submit a pull request or open an issue to discuss improvements or bug fixes.
+Set Up JAVA_HOME:
 
-## License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+Download JDK 17 from Adoptium or Oracle.
+Set environment variable:
+
+Windows: set JAVA_HOME=C:\Program Files\Java\jdk-17 (add to Path: %JAVA_HOME%\bin).
+Linux/macOS: export JAVA_HOME=/usr/lib/jvm/java-17-openjdk (add to .bashrc or .zshrc).
+
+
+Verify:
+textjava -version
+
+
+
+Build with Maven:
+textmvn clean install
+
+This compiles the code and generates a JAR file in target/Biometric-Attendance-Parser-1.0-SNAPSHOT.jar.
+
+
+Eclipse Setup (Optional for Development):
+
+Import the project as a Maven project.
+Configure JRE: Window > Preferences > Java > Installed JREs > Add JDK 17.
+Update build path: Right-click project > Build Path > Configure Build Path > Remove unbound JRE > Add JDK 17.
+Maven > Update Project.
+
+
+
+How to Run
+
+Run the JAR File:
+textjava -jar target/Biometric-Attendance-Parser-1.0-SNAPSHOT.jar
+
+The GUI will launch with a sidebar navigation.
+
+
+Using the GUI:
+
+Home: Dashboard with welcome message and recent summaries (extendable for stats).
+Configuration (Wizard):
+
+Step 1: Choose input Excel files (multi-select) and merged output file.
+Step 2: Enter holidays (comma-separated, e.g., "15,26"), select year and month.
+Click "Process" to merge data and compute metrics.
+
+
+Data Viewer: Enter employee code, day, or date range to query attendance. Results show in tables.
+Report Viewer: Click "Generate Report" to view or save metrics (lates, leaves, OT, etc.).
+File Menu: Open input, save report.
+Help Menu: About dialog.
+
+
+Command-Line Alternative (Optional):
+
+Use AttendanceProcessor.java (if available) for CLI mode:
+textjava -cp target/Biometric-Attendance-Parser-1.0-SNAPSHOT.jar org.bioparse.cleaning.AttendanceProcessor
+
+Hardcode input/output paths in the code for batch processing.
+
+
+
+Example Data
+Before Processing (Input Data)
+Input: Multiple Excel files (.xlsx) with raw biometric attendance data. Example structure for a single sheet:
+
+Header: "August 15 2025 Monthly Status Report"
+Employee block:
+
+Employee: EMP001 : John Doe
+InTime: (cells for days 1-31)
+OutTime: (cells for days 1-31)
+Duration: (e.g., "08:30")
+Status: (e.g., "P", "L" for leave)
+
+
+
+Example snippet from input Excel:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+12...31Employee: EMP001 : John DoeInTime09:0009:15...09:00OutTime17:3017:45...17:30Duration08:3008:30...08:30StatusPP...L
+
+Holidays: 15, 26 (e.g., Independence Day, Republic Day).
+Weekends skipped automatically.
+
+After Processing (Output Data)
+
+Merged File (Merged.xlsx): Consolidated master sheet with employee blocks, skipping holidays/weekends.
+Example:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Employee: EMP001 : John DoeInTimeOutTimeDurationStatus
+
+Report File (Employee_Report.xlsx): Summary metrics.
+Example:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Employee CodeTotal Working DaysTotal LatesTotal LeavesTotal Full DaysHalf DaysFinal HalfDaysTotal OT DaysTotal OT HoursTotal Punch MissedTotal Half OT DaysEMP001253220421210
+
+Query Example:
+
+By Employee EMP001: Table with daily InTime, OutTime, Duration, Status.
+By Date 1: List of all employees' data for day 1.
+By Date Range 1-5: Detailed table for the range.
+
+
+
+Value Delivered to Business
+
+Efficiency: Automates merging and report generation from raw biometric data, reducing manual effort from hours to minutes for HR teams.
+Accuracy: Automatically skips weekends/holidays, calculates duration-based metrics (full/half days, OT), and detects punch misses, minimizing errors in payroll and attendance tracking.
+Insights: Provides key metrics (lates, leaves, OT) for performance reviews, compliance (e.g., labor laws), and resource planning.
+User-Friendly: GUI with wizard and viewers simplifies usage for non-technical users, with export to Excel/CSV for sharing.
+Cost Savings: Reduces administrative costs by streamlining attendance analysis, enabling better workforce management.
+Scalability: Handles multiple files and large datasets, suitable for small to medium businesses.
+
+Data Analysis
+The app performs the following analysis on attendance data:
+
+Metric Calculation:
+
+Total Working Days: Non-holiday/weekend days with duration or status.
+Total Lates: InTime after 09:15.
+Total Leaves: Status "L".
+Total Full Days: Duration ≥ 510 minutes (8h 30m).
+Half Days: Duration ≥ 240 minutes (4h) but < 510 minutes; final half days = half days / 2.
+Total OT Days/Hours: Duration > 510 + 30 minutes; OT hours = (extra minutes) / 60.
+Total Punch Missed: Duration > 0 but InTime or OutTime missing.
+Total Half OT Days: OT < 240 minutes.
+
+
+Data Processing:
+
+Merges sheets, detects month/year, trims to month days (e.g., 31 for August).
+Skips weekends (Sat/Sun) and holidays.
+Parses durations (HH:MM to minutes) for thresholds.
+
+
+Query Analysis: Filters by employee/date/range, displaying raw data (InTime, OutTime, Duration, Status).
+Insights: Enables trend analysis (e.g., frequent lates), compliance checks, and performance metrics for business decisions.
+
+If you encounter any issues or need customization, open an issue on the repository or contact the developer.
+
+This README is comprehensive and self-contained. If you need additions (e.g., screenshots, license), let me know!
