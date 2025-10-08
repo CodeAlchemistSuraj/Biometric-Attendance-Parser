@@ -1,0 +1,1205 @@
+Apache Maven 3.9.11 (3e54c93a704957b63ee3494413a2b544fd3d825b)
+Maven home: C:\Program Files\Apache\apache-maven-3.9.11
+Java version: 17.0.16, vendor: Eclipse Adoptium, runtime: C:\Program Files\Eclipse Adoptium\jdk-17.0.16.8-hotspot
+Default locale: en_IN, platform encoding: Cp1252
+OS name: "windows 10", version: "10.0", arch: "amd64", family: "windows"
+[DEBUG] Created new class realm maven.api
+[DEBUG] Importing foreign packages into class realm maven.api
+[DEBUG]   Imported: javax.annotation.* < plexus.core
+[DEBUG]   Imported: javax.annotation.security.* < plexus.core
+[DEBUG]   Imported: javax.inject.* < plexus.core
+[DEBUG]   Imported: org.apache.maven.* < plexus.core
+[DEBUG]   Imported: org.apache.maven.artifact < plexus.core
+[DEBUG]   Imported: org.apache.maven.classrealm < plexus.core
+[DEBUG]   Imported: org.apache.maven.cli < plexus.core
+[DEBUG]   Imported: org.apache.maven.configuration < plexus.core
+[DEBUG]   Imported: org.apache.maven.exception < plexus.core
+[DEBUG]   Imported: org.apache.maven.execution < plexus.core
+[DEBUG]   Imported: org.apache.maven.execution.scope < plexus.core
+[DEBUG]   Imported: org.apache.maven.graph < plexus.core
+[DEBUG]   Imported: org.apache.maven.lifecycle < plexus.core
+[DEBUG]   Imported: org.apache.maven.model < plexus.core
+[DEBUG]   Imported: org.apache.maven.monitor < plexus.core
+[DEBUG]   Imported: org.apache.maven.plugin < plexus.core
+[DEBUG]   Imported: org.apache.maven.profiles < plexus.core
+[DEBUG]   Imported: org.apache.maven.project < plexus.core
+[DEBUG]   Imported: org.apache.maven.reporting < plexus.core
+[DEBUG]   Imported: org.apache.maven.repository < plexus.core
+[DEBUG]   Imported: org.apache.maven.rtinfo < plexus.core
+[DEBUG]   Imported: org.apache.maven.settings < plexus.core
+[DEBUG]   Imported: org.apache.maven.toolchain < plexus.core
+[DEBUG]   Imported: org.apache.maven.usability < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.* < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.authentication < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.authorization < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.events < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.observers < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.proxy < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.repository < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.resource < plexus.core
+[DEBUG]   Imported: org.codehaus.classworlds < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.* < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.classworlds < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.component < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.configuration < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.container < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.context < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.lifecycle < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.logging < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.personality < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.util.xml.Xpp3Dom < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.util.xml.pull.XmlPullParser < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.util.xml.pull.XmlPullParserException < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.util.xml.pull.XmlSerializer < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.* < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.artifact < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.collection < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.deployment < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.graph < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.impl < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.installation < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.internal.impl < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.metadata < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.repository < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.resolution < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.spi < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.transfer < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.util < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.version < plexus.core
+[DEBUG]   Imported: org.fusesource.jansi.* < plexus.core
+[DEBUG]   Imported: org.slf4j.* < plexus.core
+[DEBUG]   Imported: org.slf4j.event.* < plexus.core
+[DEBUG]   Imported: org.slf4j.helpers.* < plexus.core
+[DEBUG]   Imported: org.slf4j.spi.* < plexus.core
+[DEBUG] Populating class realm maven.api
+[DEBUG] Created adapter factory; available factories [file-lock, rwlock-local, semaphore-local, noop]; available name mappers [discriminating, file-gav, file-hgav, file-static, gav, static]
+[INFO] Error stacktraces are turned on.
+[DEBUG] Message scheme: color
+[DEBUG] Message styles: debug info warning error success failure strong mojo project
+[DEBUG] Reading global settings from C:\Program Files\Apache\apache-maven-3.9.11\conf\settings.xml
+[DEBUG] Reading user settings from C:\Users\MOHD GULZAR KHAN\.m2\settings.xml
+[DEBUG] Reading global toolchains from C:\Program Files\Apache\apache-maven-3.9.11\conf\toolchains.xml
+[DEBUG] Reading user toolchains from C:\Users\MOHD GULZAR KHAN\.m2\toolchains.xml
+[DEBUG] Using local repository at C:\Users\MOHD GULZAR KHAN\.m2\repository
+[DEBUG] Using manager EnhancedLocalRepositoryManager with priority 10.0 for C:\Users\MOHD GULZAR KHAN\.m2\repository
+[INFO] Scanning for projects...
+[DEBUG] Extension realms for project org.bioparse:Biometric-Attendance-Parser:jar:1.0-SNAPSHOT: (none)
+[DEBUG] Looking up lifecycle mappings for packaging jar from ClassRealm[plexus.core, parent: null]
+[DEBUG] === REACTOR BUILD PLAN ================================================
+[DEBUG] Project: org.bioparse:Biometric-Attendance-Parser:jar:1.0-SNAPSHOT
+[DEBUG] Tasks:   [clean, package]
+[DEBUG] Style:   Regular
+[DEBUG] =======================================================================
+[INFO] 
+[INFO] --------------< org.bioparse:Biometric-Attendance-Parser >--------------
+[INFO] Building Biometric-Attendance-Parser 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] Creating adapter using nameMapper 'gav' and factory 'rwlock-local'
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] === PROJECT BUILD PLAN ================================================
+[DEBUG] Project:       org.bioparse:Biometric-Attendance-Parser:1.0-SNAPSHOT
+[DEBUG] Dependencies (collect): []
+[DEBUG] Dependencies (resolve): [compile, runtime, test]
+[DEBUG] Repositories (dependencies): [central (https://repo.maven.apache.org/maven2, default, releases)]
+[DEBUG] Repositories (plugins)     : [central (https://repo.maven.apache.org/maven2, default, releases)]
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.apache.maven.plugins:maven-clean-plugin:3.2.0:clean (default-clean)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <directory default-value="${project.build.directory}"/>
+  <excludeDefaultDirectories default-value="false">${maven.clean.excludeDefaultDirectories}</excludeDefaultDirectories>
+  <failOnError default-value="true">${maven.clean.failOnError}</failOnError>
+  <fast default-value="false">${maven.clean.fast}</fast>
+  <fastDir>${maven.clean.fastDir}</fastDir>
+  <fastMode default-value="background">${maven.clean.fastMode}</fastMode>
+  <followSymLinks default-value="false">${maven.clean.followSymLinks}</followSymLinks>
+  <outputDirectory default-value="${project.build.outputDirectory}"/>
+  <reportDirectory default-value="${project.build.outputDirectory}"/>
+  <retryOnError default-value="true">${maven.clean.retryOnError}</retryOnError>
+  <session default-value="${session}"/>
+  <skip default-value="false">${maven.clean.skip}</skip>
+  <testOutputDirectory default-value="${project.build.testOutputDirectory}"/>
+  <verbose>${maven.clean.verbose}</verbose>
+</configuration>
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.apache.maven.plugins:maven-resources-plugin:3.3.1:resources (default-resources)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <addDefaultExcludes default-value="true"/>
+  <buildFilters default-value="${project.build.filters}"/>
+  <encoding default-value="${project.build.sourceEncoding}"/>
+  <escapeWindowsPaths default-value="true"/>
+  <fileNameFiltering default-value="false"/>
+  <includeEmptyDirs default-value="false"/>
+  <outputDirectory default-value="${project.build.outputDirectory}"/>
+  <overwrite default-value="false"/>
+  <project default-value="${project}"/>
+  <resources default-value="${project.resources}"/>
+  <session default-value="${session}"/>
+  <skip default-value="false">${maven.resources.skip}</skip>
+  <supportMultiLineFiltering default-value="false"/>
+  <useBuildFilters default-value="true"/>
+  <useDefaultDelimiters default-value="true"/>
+</configuration>
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.apache.maven.plugins:maven-compiler-plugin:3.13.0:compile (default-compile)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <annotationProcessorPathsUseDepMgmt default-value="false"/>
+  <basedir default-value="${basedir}"/>
+  <buildDirectory default-value="${project.build.directory}"/>
+  <compilePath default-value="${project.compileClasspathElements}"/>
+  <compileSourceRoots default-value="${project.compileSourceRoots}"/>
+  <compilerId default-value="javac">${maven.compiler.compilerId}</compilerId>
+  <compilerReuseStrategy default-value="${reuseCreated}">${maven.compiler.compilerReuseStrategy}</compilerReuseStrategy>
+  <compilerVersion>${maven.compiler.compilerVersion}</compilerVersion>
+  <createMissingPackageInfoClass default-value="true">${maven.compiler.createMissingPackageInfoClass}</createMissingPackageInfoClass>
+  <debug default-value="true">${maven.compiler.debug}</debug>
+  <debugFileName default-value="javac"/>
+  <debuglevel>${maven.compiler.debuglevel}</debuglevel>
+  <enablePreview default-value="false">${maven.compiler.enablePreview}</enablePreview>
+  <encoding default-value="${project.build.sourceEncoding}">${encoding}</encoding>
+  <executable>${maven.compiler.executable}</executable>
+  <failOnError default-value="true">${maven.compiler.failOnError}</failOnError>
+  <failOnWarning default-value="false">${maven.compiler.failOnWarning}</failOnWarning>
+  <fileExtensions default-value="class,jar"/>
+  <forceJavacCompilerUse default-value="false">${maven.compiler.forceJavacCompilerUse}</forceJavacCompilerUse>
+  <forceLegacyJavacApi default-value="false">${maven.compiler.forceLegacyJavacApi}</forceLegacyJavacApi>
+  <fork default-value="false">${maven.compiler.fork}</fork>
+  <generatedSourcesDirectory default-value="${project.build.directory}/generated-sources/annotations"/>
+  <implicit>${maven.compiler.implicit}</implicit>
+  <maxmem>${maven.compiler.maxmem}</maxmem>
+  <meminitial>${maven.compiler.meminitial}</meminitial>
+  <mojoExecution default-value="${mojoExecution}"/>
+  <optimize default-value="false">${maven.compiler.optimize}</optimize>
+  <outputDirectory default-value="${project.build.outputDirectory}">${maven.compiler.outputDirectory}</outputDirectory>
+  <outputTimestamp default-value="${project.build.outputTimestamp}"/>
+  <parameters default-value="false">${maven.compiler.parameters}</parameters>
+  <proc>${maven.compiler.proc}</proc>
+  <project default-value="${project}"/>
+  <projectArtifact default-value="${project.artifact}"/>
+  <release>17</release>
+  <session default-value="${session}"/>
+  <showCompilationChanges default-value="false">${maven.compiler.showCompilationChanges}</showCompilationChanges>
+  <showDeprecation default-value="false">${maven.compiler.showDeprecation}</showDeprecation>
+  <showWarnings default-value="true">${maven.compiler.showWarnings}</showWarnings>
+  <skipMain>${maven.main.skip}</skipMain>
+  <skipMultiThreadWarning default-value="false">${maven.compiler.skipMultiThreadWarning}</skipMultiThreadWarning>
+  <source default-value="1.8">${maven.compiler.source}</source>
+  <staleMillis default-value="0">${lastModGranularityMs}</staleMillis>
+  <target default-value="1.8">${maven.compiler.target}</target>
+  <useIncrementalCompilation default-value="true">${maven.compiler.useIncrementalCompilation}</useIncrementalCompilation>
+  <verbose default-value="false">${maven.compiler.verbose}</verbose>
+</configuration>
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.apache.maven.plugins:maven-resources-plugin:3.3.1:testResources (default-testResources)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <addDefaultExcludes default-value="true"/>
+  <buildFilters default-value="${project.build.filters}"/>
+  <encoding default-value="${project.build.sourceEncoding}"/>
+  <escapeWindowsPaths default-value="true"/>
+  <fileNameFiltering default-value="false"/>
+  <includeEmptyDirs default-value="false"/>
+  <outputDirectory default-value="${project.build.testOutputDirectory}"/>
+  <overwrite default-value="false"/>
+  <project default-value="${project}"/>
+  <resources default-value="${project.testResources}"/>
+  <session default-value="${session}"/>
+  <skip default-value="false">${maven.test.skip}</skip>
+  <supportMultiLineFiltering default-value="false"/>
+  <useBuildFilters default-value="true"/>
+  <useDefaultDelimiters default-value="true"/>
+</configuration>
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.apache.maven.plugins:maven-compiler-plugin:3.13.0:testCompile (default-testCompile)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <annotationProcessorPathsUseDepMgmt default-value="false"/>
+  <basedir default-value="${basedir}"/>
+  <buildDirectory default-value="${project.build.directory}"/>
+  <compileSourceRoots default-value="${project.testCompileSourceRoots}"/>
+  <compilerId default-value="javac">${maven.compiler.compilerId}</compilerId>
+  <compilerReuseStrategy default-value="${reuseCreated}">${maven.compiler.compilerReuseStrategy}</compilerReuseStrategy>
+  <compilerVersion>${maven.compiler.compilerVersion}</compilerVersion>
+  <createMissingPackageInfoClass default-value="true">${maven.compiler.createMissingPackageInfoClass}</createMissingPackageInfoClass>
+  <debug default-value="true">${maven.compiler.debug}</debug>
+  <debugFileName default-value="javac-test"/>
+  <debuglevel>${maven.compiler.debuglevel}</debuglevel>
+  <enablePreview default-value="false">${maven.compiler.enablePreview}</enablePreview>
+  <encoding default-value="${project.build.sourceEncoding}">${encoding}</encoding>
+  <executable>${maven.compiler.executable}</executable>
+  <failOnError default-value="true">${maven.compiler.failOnError}</failOnError>
+  <failOnWarning default-value="false">${maven.compiler.failOnWarning}</failOnWarning>
+  <fileExtensions default-value="class,jar"/>
+  <forceJavacCompilerUse default-value="false">${maven.compiler.forceJavacCompilerUse}</forceJavacCompilerUse>
+  <forceLegacyJavacApi default-value="false">${maven.compiler.forceLegacyJavacApi}</forceLegacyJavacApi>
+  <fork default-value="false">${maven.compiler.fork}</fork>
+  <generatedTestSourcesDirectory default-value="${project.build.directory}/generated-test-sources/test-annotations"/>
+  <implicit>${maven.compiler.implicit}</implicit>
+  <maxmem>${maven.compiler.maxmem}</maxmem>
+  <meminitial>${maven.compiler.meminitial}</meminitial>
+  <mojoExecution default-value="${mojoExecution}"/>
+  <optimize default-value="false">${maven.compiler.optimize}</optimize>
+  <outputDirectory default-value="${project.build.testOutputDirectory}"/>
+  <outputTimestamp default-value="${project.build.outputTimestamp}"/>
+  <parameters default-value="false">${maven.compiler.parameters}</parameters>
+  <proc>${maven.compiler.proc}</proc>
+  <project default-value="${project}"/>
+  <release>17</release>
+  <session default-value="${session}"/>
+  <showCompilationChanges default-value="false">${maven.compiler.showCompilationChanges}</showCompilationChanges>
+  <showDeprecation default-value="false">${maven.compiler.showDeprecation}</showDeprecation>
+  <showWarnings default-value="true">${maven.compiler.showWarnings}</showWarnings>
+  <skip>${maven.test.skip}</skip>
+  <skipMultiThreadWarning default-value="false">${maven.compiler.skipMultiThreadWarning}</skipMultiThreadWarning>
+  <source default-value="1.8">${maven.compiler.source}</source>
+  <staleMillis default-value="0">${lastModGranularityMs}</staleMillis>
+  <target default-value="1.8">${maven.compiler.target}</target>
+  <testPath default-value="${project.testClasspathElements}"/>
+  <testRelease>${maven.compiler.testRelease}</testRelease>
+  <testSource>${maven.compiler.testSource}</testSource>
+  <testTarget>${maven.compiler.testTarget}</testTarget>
+  <useIncrementalCompilation default-value="true">${maven.compiler.useIncrementalCompilation}</useIncrementalCompilation>
+  <useModulePath default-value="true"/>
+  <verbose default-value="false">${maven.compiler.verbose}</verbose>
+</configuration>
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.apache.maven.plugins:maven-surefire-plugin:3.2.5:test (default-test)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <additionalClasspathDependencies>${maven.test.additionalClasspathDependencies}</additionalClasspathDependencies>
+  <additionalClasspathElements>${maven.test.additionalClasspath}</additionalClasspathElements>
+  <argLine>${argLine}</argLine>
+  <basedir default-value="${basedir}"/>
+  <childDelegation default-value="false">${childDelegation}</childDelegation>
+  <classesDirectory default-value="${project.build.outputDirectory}"/>
+  <classpathDependencyExcludes>${maven.test.dependency.excludes}</classpathDependencyExcludes>
+  <debugForkedProcess>${maven.surefire.debug}</debugForkedProcess>
+  <dependenciesToScan>${dependenciesToScan}</dependenciesToScan>
+  <disableXmlReport default-value="false">${disableXmlReport}</disableXmlReport>
+  <enableAssertions default-value="true">${enableAssertions}</enableAssertions>
+  <enableProcessChecker>${surefire.enableProcessChecker}</enableProcessChecker>
+  <encoding default-value="${project.reporting.outputEncoding}">${surefire.encoding}</encoding>
+  <excludeJUnit5Engines>${surefire.excludeJUnit5Engines}</excludeJUnit5Engines>
+  <excludedEnvironmentVariables>${surefire.excludedEnvironmentVariables}</excludedEnvironmentVariables>
+  <excludedGroups>${excludedGroups}</excludedGroups>
+  <excludes>${surefire.excludes}</excludes>
+  <excludesFile>${surefire.excludesFile}</excludesFile>
+  <failIfNoSpecifiedTests default-value="true">${surefire.failIfNoSpecifiedTests}</failIfNoSpecifiedTests>
+  <failIfNoTests default-value="false">${failIfNoTests}</failIfNoTests>
+  <failOnFlakeCount default-value="0">${surefire.failOnFlakeCount}</failOnFlakeCount>
+  <forkCount default-value="1">${forkCount}</forkCount>
+  <forkNode>${surefire.forkNode}</forkNode>
+  <forkedProcessExitTimeoutInSeconds default-value="30">${surefire.exitTimeout}</forkedProcessExitTimeoutInSeconds>
+  <forkedProcessTimeoutInSeconds>${surefire.timeout}</forkedProcessTimeoutInSeconds>
+  <groups>${groups}</groups>
+  <includeJUnit5Engines>${surefire.includeJUnit5Engines}</includeJUnit5Engines>
+  <includes>${surefire.includes}</includes>
+  <includesFile>${surefire.includesFile}</includesFile>
+  <junitArtifactName default-value="junit:junit">${junitArtifactName}</junitArtifactName>
+  <jvm>${jvm}</jvm>
+  <objectFactory>${objectFactory}</objectFactory>
+  <parallel>${parallel}</parallel>
+  <parallelMavenExecution default-value="${session.parallel}"/>
+  <parallelOptimized default-value="true">${parallelOptimized}</parallelOptimized>
+  <parallelTestsTimeoutForcedInSeconds>${surefire.parallel.forcedTimeout}</parallelTestsTimeoutForcedInSeconds>
+  <parallelTestsTimeoutInSeconds>${surefire.parallel.timeout}</parallelTestsTimeoutInSeconds>
+  <perCoreThreadCount default-value="true">${perCoreThreadCount}</perCoreThreadCount>
+  <pluginArtifactMap>${plugin.artifactMap}</pluginArtifactMap>
+  <pluginDescriptor default-value="${plugin}"/>
+  <printSummary default-value="true">${surefire.printSummary}</printSummary>
+  <project default-value="${project}"/>
+  <projectArtifactMap>${project.artifactMap}</projectArtifactMap>
+  <projectBuildDirectory default-value="${project.build.directory}"/>
+  <redirectTestOutputToFile default-value="false">${maven.test.redirectTestOutputToFile}</redirectTestOutputToFile>
+  <reportFormat default-value="brief">${surefire.reportFormat}</reportFormat>
+  <reportNameSuffix default-value="">${surefire.reportNameSuffix}</reportNameSuffix>
+  <reportsDirectory default-value="${project.build.directory}/surefire-reports"/>
+  <rerunFailingTestsCount default-value="0">${surefire.rerunFailingTestsCount}</rerunFailingTestsCount>
+  <reuseForks default-value="true">${reuseForks}</reuseForks>
+  <runOrder default-value="filesystem">${surefire.runOrder}</runOrder>
+  <runOrderRandomSeed>${surefire.runOrder.random.seed}</runOrderRandomSeed>
+  <session default-value="${session}"/>
+  <shutdown default-value="exit">${surefire.shutdown}</shutdown>
+  <skip default-value="false">${maven.test.skip}</skip>
+  <skipAfterFailureCount default-value="0">${surefire.skipAfterFailureCount}</skipAfterFailureCount>
+  <skipExec>${maven.test.skip.exec}</skipExec>
+  <skipTests default-value="false">${skipTests}</skipTests>
+  <suiteXmlFiles>${surefire.suiteXmlFiles}</suiteXmlFiles>
+  <systemPropertiesFile>${surefire.systemPropertiesFile}</systemPropertiesFile>
+  <tempDir default-value="surefire">${tempDir}</tempDir>
+  <test>${test}</test>
+  <testClassesDirectory default-value="${project.build.testOutputDirectory}"/>
+  <testFailureIgnore default-value="false">${maven.test.failure.ignore}</testFailureIgnore>
+  <testNGArtifactName default-value="org.testng:testng">${testNGArtifactName}</testNGArtifactName>
+  <testSourceDirectory default-value="${project.build.testSourceDirectory}"/>
+  <threadCount>${threadCount}</threadCount>
+  <threadCountClasses default-value="0">${threadCountClasses}</threadCountClasses>
+  <threadCountMethods default-value="0">${threadCountMethods}</threadCountMethods>
+  <threadCountSuites default-value="0">${threadCountSuites}</threadCountSuites>
+  <trimStackTrace default-value="false">${trimStackTrace}</trimStackTrace>
+  <useFile default-value="true">${surefire.useFile}</useFile>
+  <useManifestOnlyJar default-value="true">${surefire.useManifestOnlyJar}</useManifestOnlyJar>
+  <useModulePath default-value="true">${surefire.useModulePath}</useModulePath>
+  <useSystemClassLoader default-value="true">${surefire.useSystemClassLoader}</useSystemClassLoader>
+  <useUnlimitedThreads default-value="false">${useUnlimitedThreads}</useUnlimitedThreads>
+  <workingDirectory>${basedir}</workingDirectory>
+</configuration>
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.apache.maven.plugins:maven-jar-plugin:3.3.0:jar (default-jar)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <archive>
+    <manifest>
+      <mainClass>org.bioparse.cleaning.AttendanceAppGUI</mainClass>
+    </manifest>
+  </archive>
+  <classesDirectory default-value="${project.build.outputDirectory}"/>
+  <finalName default-value="${project.build.finalName}"/>
+  <forceCreation default-value="false">${maven.jar.forceCreation}</forceCreation>
+  <outputDirectory default-value="${project.build.directory}"/>
+  <outputTimestamp default-value="${project.build.outputTimestamp}"/>
+  <project default-value="${project}"/>
+  <session default-value="${session}"/>
+  <skipIfEmpty default-value="false"/>
+  <useDefaultManifestFile default-value="false">${jar.useDefaultManifestFile}</useDefaultManifestFile>
+</configuration>
+[DEBUG] =======================================================================
+[DEBUG] Using mirror maven-default-http-blocker (http://0.0.0.0/) for apache.snapshots (http://repository.apache.org/snapshots).
+[DEBUG] Dependency collection stats {ConflictMarker.analyzeTime=767800, ConflictMarker.markTime=74500, ConflictMarker.nodeCount=26, ConflictIdSorter.graphTime=482700, ConflictIdSorter.topsortTime=359400, ConflictIdSorter.conflictIdCount=16, ConflictIdSorter.conflictIdCycleCount=0, ConflictResolver.totalTime=3947400, ConflictResolver.conflictItemCount=25, DfDependencyCollector.collectTime=180729300, DfDependencyCollector.transformTime=7403500}
+[DEBUG] org.bioparse:Biometric-Attendance-Parser:jar:1.0-SNAPSHOT
+[DEBUG]    org.apache.poi:poi:jar:5.3.0:compile
+[DEBUG]       commons-codec:commons-codec:jar:1.17.0:compile
+[DEBUG]       org.apache.commons:commons-collections4:jar:4.4:compile
+[DEBUG]       org.apache.commons:commons-math3:jar:3.6.1:compile
+[DEBUG]       commons-io:commons-io:jar:2.16.1:compile
+[DEBUG]       com.zaxxer:SparseBitSet:jar:1.3:compile
+[DEBUG]       org.apache.logging.log4j:log4j-api:jar:2.23.1:compile
+[DEBUG]    org.apache.poi:poi-ooxml:jar:5.3.0:compile
+[DEBUG]       org.apache.poi:poi-ooxml-lite:jar:5.3.0:compile
+[DEBUG]       org.apache.xmlbeans:xmlbeans:jar:5.2.1:compile
+[DEBUG]       org.apache.commons:commons-compress:jar:1.26.2:compile
+[DEBUG]          org.apache.commons:commons-lang3:jar:3.14.0:compile
+[DEBUG]       com.github.virtuald:curvesapi:jar:1.08:compile
+[DEBUG]    org.apache.poi:poi-ooxml-schemas:jar:4.1.2:compile
+[DEBUG]    commons-logging:commons-logging:jar:1.3.0:compile
+[DEBUG]    com.formdev:flatlaf:jar:3.2.5:compile
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ Biometric-Attendance-Parser ---
+[DEBUG] Dependency collection stats {ConflictMarker.analyzeTime=16400, ConflictMarker.markTime=47600, ConflictMarker.nodeCount=3, ConflictIdSorter.graphTime=6300, ConflictIdSorter.topsortTime=9500, ConflictIdSorter.conflictIdCount=3, ConflictIdSorter.conflictIdCycleCount=0, ConflictResolver.totalTime=88500, ConflictResolver.conflictItemCount=3, DfDependencyCollector.collectTime=24591000, DfDependencyCollector.transformTime=180500}
+[DEBUG] org.apache.maven.plugins:maven-clean-plugin:jar:3.2.0
+[DEBUG]    org.apache.maven.shared:maven-shared-utils:jar:3.3.4:compile
+[DEBUG]       commons-io:commons-io:jar:2.6:compile
+[DEBUG] Created new class realm plugin>org.apache.maven.plugins:maven-clean-plugin:3.2.0
+[DEBUG] Importing foreign packages into class realm plugin>org.apache.maven.plugins:maven-clean-plugin:3.2.0
+[DEBUG]   Imported:  < maven.api
+[DEBUG] Populating class realm plugin>org.apache.maven.plugins:maven-clean-plugin:3.2.0
+[DEBUG]   Included: org.apache.maven.plugins:maven-clean-plugin:jar:3.2.0
+[DEBUG]   Included: org.apache.maven.shared:maven-shared-utils:jar:3.3.4
+[DEBUG]   Included: commons-io:commons-io:jar:2.6
+[DEBUG] Loading mojo org.apache.maven.plugins:maven-clean-plugin:3.2.0:clean from plugin realm ClassRealm[plugin>org.apache.maven.plugins:maven-clean-plugin:3.2.0, parent: jdk.internal.loader.ClassLoaders$AppClassLoader@73d16e93]
+[DEBUG] Configuring mojo execution 'org.apache.maven.plugins:maven-clean-plugin:3.2.0:clean:default-clean' with basic configurator -->
+[DEBUG]   (f) directory = C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target
+[DEBUG]   (f) excludeDefaultDirectories = false
+[DEBUG]   (f) failOnError = true
+[DEBUG]   (f) fast = false
+[DEBUG]   (f) fastMode = background
+[DEBUG]   (f) followSymLinks = false
+[DEBUG]   (f) outputDirectory = C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\classes
+[DEBUG]   (f) reportDirectory = C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\classes
+[DEBUG]   (f) retryOnError = true
+[DEBUG]   (f) session = org.apache.maven.execution.MavenSession@7fd8c559
+[DEBUG]   (f) skip = false
+[DEBUG]   (f) testOutputDirectory = C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\test-classes
+[DEBUG] -- end configuration --
+[INFO] Deleting C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target
+[INFO] Deleting directory C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\test-classes
+[INFO] Deleting file C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\maven-status\maven-compiler-plugin\testCompile\default-testCompile\inputFiles.lst
+[INFO] Deleting file C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\maven-status\maven-compiler-plugin\testCompile\default-testCompile\createdFiles.lst
+[INFO] Deleting directory C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\maven-status\maven-compiler-plugin\testCompile\default-testCompile
+[INFO] Deleting directory C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\maven-status\maven-compiler-plugin\testCompile
+[INFO] Deleting file C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\maven-status\maven-compiler-plugin\compile\default-compile\inputFiles.lst
+[INFO] Deleting file C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\maven-status\maven-compiler-plugin\compile\default-compile\createdFiles.lst
+[INFO] Deleting directory C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\maven-status\maven-compiler-plugin\compile\default-compile
+[INFO] Deleting directory C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\maven-status\maven-compiler-plugin\compile
+[INFO] Deleting directory C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\maven-status\maven-compiler-plugin
+[INFO] Deleting directory C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\maven-status
+[INFO] Deleting file C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\maven-archiver\pom.properties
+[INFO] Deleting directory C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\maven-archiver
+[INFO] Deleting directory C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\generated-test-sources\test-annotations
+[INFO] Deleting directory C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\generated-test-sources
+[INFO] Deleting directory C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\generated-sources\annotations
+[INFO] Deleting directory C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\generated-sources
+[INFO] Deleting file C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\classes\org\bioparse\cleaning\AttendanceUtils.class
+[INFO] Deleting file C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\classes\org\bioparse\cleaning\AttendanceReportGenerator.class
+[INFO] Deleting file C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\classes\org\bioparse\cleaning\AttendanceReportGenerator$Metrics.class
+[INFO] Deleting file C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\classes\org\bioparse\cleaning\AttendanceQueryViewer.class
+[INFO] Deleting file C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\classes\org\bioparse\cleaning\AttendanceQueryViewer$2.class
+[INFO] Deleting file C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\classes\org\bioparse\cleaning\AttendanceQueryViewer$1.class
+[INFO] Deleting file C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\classes\org\bioparse\cleaning\AttendanceMerger.class
+[INFO] Deleting file C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\classes\org\bioparse\cleaning\AttendanceMerger$MergeResult.class
+[INFO] Deleting file C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\classes\org\bioparse\cleaning\AttendanceMerger$EmployeeData.class
+[INFO] Deleting file C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\classes\org\bioparse\cleaning\AttendanceAppGUI.class
+[INFO] Deleting file C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\classes\org\bioparse\cleaning\AttendanceAppGUI$3.class
+[INFO] Deleting file C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\classes\org\bioparse\cleaning\AttendanceAppGUI$2.class
+[INFO] Deleting file C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\classes\org\bioparse\cleaning\AttendanceAppGUI$1.class
+[INFO] Deleting directory C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\classes\org\bioparse\cleaning
+[INFO] Deleting directory C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\classes\org\bioparse
+[INFO] Deleting directory C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\classes\org
+[INFO] Deleting directory C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\classes
+[INFO] Deleting file C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\Biometric-Attendance-Parser-1.0-SNAPSHOT.jar
+[INFO] Deleting directory C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target
+[DEBUG] Skipping non-existing directory C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\classes
+[DEBUG] Skipping non-existing directory C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\test-classes
+[DEBUG] Skipping non-existing directory C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\classes
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ Biometric-Attendance-Parser ---
+[DEBUG] Dependency collection stats {ConflictMarker.analyzeTime=36400, ConflictMarker.markTime=48300, ConflictMarker.nodeCount=13, ConflictIdSorter.graphTime=12100, ConflictIdSorter.topsortTime=10400, ConflictIdSorter.conflictIdCount=9, ConflictIdSorter.conflictIdCycleCount=0, ConflictResolver.totalTime=259900, ConflictResolver.conflictItemCount=13, DfDependencyCollector.collectTime=55522100, DfDependencyCollector.transformTime=381100}
+[DEBUG] org.apache.maven.plugins:maven-resources-plugin:jar:3.3.1
+[DEBUG]    org.codehaus.plexus:plexus-interpolation:jar:1.26:runtime
+[DEBUG]    org.codehaus.plexus:plexus-utils:jar:3.5.1:compile
+[DEBUG]    org.apache.maven.shared:maven-filtering:jar:3.3.1:compile
+[DEBUG]       javax.inject:javax.inject:jar:1:compile
+[DEBUG]       org.slf4j:slf4j-api:jar:1.7.36:compile
+[DEBUG]       org.sonatype.plexus:plexus-build-api:jar:0.0.7:compile
+[DEBUG]    commons-io:commons-io:jar:2.11.0:compile
+[DEBUG]    org.apache.commons:commons-lang3:jar:3.12.0:compile
+[DEBUG] Created new class realm plugin>org.apache.maven.plugins:maven-resources-plugin:3.3.1
+[DEBUG] Importing foreign packages into class realm plugin>org.apache.maven.plugins:maven-resources-plugin:3.3.1
+[DEBUG]   Imported:  < maven.api
+[DEBUG] Populating class realm plugin>org.apache.maven.plugins:maven-resources-plugin:3.3.1
+[DEBUG]   Included: org.apache.maven.plugins:maven-resources-plugin:jar:3.3.1
+[DEBUG]   Included: org.codehaus.plexus:plexus-interpolation:jar:1.26
+[DEBUG]   Included: org.codehaus.plexus:plexus-utils:jar:3.5.1
+[DEBUG]   Included: org.apache.maven.shared:maven-filtering:jar:3.3.1
+[DEBUG]   Included: org.sonatype.plexus:plexus-build-api:jar:0.0.7
+[DEBUG]   Included: commons-io:commons-io:jar:2.11.0
+[DEBUG]   Included: org.apache.commons:commons-lang3:jar:3.12.0
+[DEBUG] Loading mojo org.apache.maven.plugins:maven-resources-plugin:3.3.1:resources from plugin realm ClassRealm[plugin>org.apache.maven.plugins:maven-resources-plugin:3.3.1, parent: jdk.internal.loader.ClassLoaders$AppClassLoader@73d16e93]
+[DEBUG] Configuring mojo execution 'org.apache.maven.plugins:maven-resources-plugin:3.3.1:resources:default-resources' with basic configurator -->
+[DEBUG]   (f) addDefaultExcludes = true
+[DEBUG]   (f) buildFilters = []
+[DEBUG]   (f) encoding = UTF-8
+[DEBUG]   (f) escapeWindowsPaths = true
+[DEBUG]   (f) fileNameFiltering = false
+[DEBUG]   (s) includeEmptyDirs = false
+[DEBUG]   (s) outputDirectory = C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\classes
+[DEBUG]   (s) overwrite = false
+[DEBUG]   (f) project = MavenProject: org.bioparse:Biometric-Attendance-Parser:1.0-SNAPSHOT @ C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\pom.xml
+[DEBUG]   (s) resources = [Resource {targetPath: null, filtering: false, FileSet {directory: C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\src\main\resources, PatternSet [includes: {}, excludes: {}]}}]
+[DEBUG]   (f) session = org.apache.maven.execution.MavenSession@7fd8c559
+[DEBUG]   (f) skip = false
+[DEBUG]   (f) supportMultiLineFiltering = false
+[DEBUG]   (f) useBuildFilters = true
+[DEBUG]   (s) useDefaultDelimiters = true
+[DEBUG] -- end configuration --
+[DEBUG] properties used:
+[DEBUG] classworlds.conf: C:\Program Files\Apache\apache-maven-3.9.11\bin\m2.conf
+[DEBUG] env.=C:: C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser
+[DEBUG] env.=EXITCODE: 00000000
+[DEBUG] env.ALLUSERSPROFILE: C:\ProgramData
+[DEBUG] env.APPDATA: C:\Users\MOHD GULZAR KHAN\AppData\Roaming
+[DEBUG] env.CLASSWORLDS_JAR: "C:\Program Files\Apache\apache-maven-3.9.11\boot\plexus-classworlds-2.9.0.jar"
+[DEBUG] env.CLASSWORLDS_LAUNCHER: org.codehaus.plexus.classworlds.launcher.Launcher
+[DEBUG] env.COMMONPROGRAMFILES: C:\Program Files\Common Files
+[DEBUG] env.COMMONPROGRAMFILES(X86): C:\Program Files (x86)\Common Files
+[DEBUG] env.COMMONPROGRAMW6432: C:\Program Files\Common Files
+[DEBUG] env.COMPUTERNAME: DESKTOP-JH6HC07
+[DEBUG] env.COMSPEC: C:\Windows\system32\cmd.exe
+[DEBUG] env.DRIVERDATA: C:\Windows\System32\Drivers\DriverData
+[DEBUG] env.ERROR_CODE: 0
+[DEBUG] env.EXEC_DIR: C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser
+[DEBUG] env.HOMEDRIVE: C:
+[DEBUG] env.HOMEPATH: \Users\MOHD GULZAR KHAN
+[DEBUG] env.INTELLIJ IDEA COMMUNITY EDITION: C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2025.1.3\bin;
+[DEBUG] env.JAVACMD: C:\Program Files\Eclipse Adoptium\jdk-17.0.16.8-hotspot\bin\java.exe
+[DEBUG] env.JVMCONFIG: \.mvn\jvm.config
+[DEBUG] env.LOCALAPPDATA: C:\Users\MOHD GULZAR KHAN\AppData\Local
+[DEBUG] env.LOGONSERVER: \\DESKTOP-JH6HC07
+[DEBUG] env.M2_HOME: C:\Program Files\Apache\apache-maven-3.9.11\bin
+[DEBUG] env.MAVEN_CMD_LINE_ARGS: clean package -X
+[DEBUG] env.MAVEN_HOME: C:\Program Files\Apache\apache-maven-3.9.11
+[DEBUG] env.MAVEN_OPTS: --enable-native-access=ALL-UNNAMED 
+[DEBUG] env.MAVEN_PROJECTBASEDIR: C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser
+[DEBUG] env.MOZ_PLUGIN_PATH: C:\Program Files (x86)\Foxit Software\Foxit PDF Reader\plugins\
+[DEBUG] env.NUMBER_OF_PROCESSORS: 4
+[DEBUG] env.ONEDRIVE: C:\Users\MOHD GULZAR KHAN\OneDrive
+[DEBUG] env.OS: Windows_NT
+[DEBUG] env.PATH: C:\Program Files\Eclipse Adoptium\jdk-17.0.16.8-hotspot\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Program Files\GitHub CLI\;C:\Program Files\Apache\apache-maven-3.9.11\bin\bin;C:\Users\MOHD GULZAR KHAN\AppData\Local\Programs\Python\Python313\Scripts\;C:\Users\MOHD GULZAR KHAN\AppData\Local\Programs\Python\Python313\;C:\Users\MOHD GULZAR KHAN\AppData\Local\Microsoft\WindowsApps;C:\Users\MOHD GULZAR KHAN\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\MOHD GULZAR KHAN\AppData\Roaming\npm;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2025.1.3\bin;;C:\Users\MOHD GULZAR KHAN\AppData\Local\Programs\cursor\resources\app\bin;C:\Program Files\Apache\apache-maven-3.9.11;;C:\Program Files\Apache\apache-maven-3.9.11\bin
+[DEBUG] env.PATHEXT: .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
+[DEBUG] env.PROCESSOR_ARCHITECTURE: AMD64
+[DEBUG] env.PROCESSOR_IDENTIFIER: Intel64 Family 6 Model 94 Stepping 3, GenuineIntel
+[DEBUG] env.PROCESSOR_LEVEL: 6
+[DEBUG] env.PROCESSOR_REVISION: 5e03
+[DEBUG] env.PROGRAMDATA: C:\ProgramData
+[DEBUG] env.PROGRAMFILES: C:\Program Files
+[DEBUG] env.PROGRAMFILES(X86): C:\Program Files (x86)
+[DEBUG] env.PROGRAMW6432: C:\Program Files
+[DEBUG] env.PROMPT: $P$G
+[DEBUG] env.PSMODULEPATH: C:\Program Files\WindowsPowerShell\Modules;C:\Windows\system32\WindowsPowerShell\v1.0\Modules
+[DEBUG] env.PUBLIC: C:\Users\Public
+[DEBUG] env.SESSIONNAME: Console
+[DEBUG] env.SYSTEMDRIVE: C:
+[DEBUG] env.SYSTEMROOT: C:\Windows
+[DEBUG] env.TEMP: C:\Users\MOHDGU~1\AppData\Local\Temp
+[DEBUG] env.TMP: C:\Users\MOHDGU~1\AppData\Local\Temp
+[DEBUG] env.USERDOMAIN: DESKTOP-JH6HC07
+[DEBUG] env.USERDOMAIN_ROAMINGPROFILE: DESKTOP-JH6HC07
+[DEBUG] env.USERNAME: MOHD GULZAR KHAN
+[DEBUG] env.USERPROFILE: C:\Users\MOHD GULZAR KHAN
+[DEBUG] env.WDIR: C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser
+[DEBUG] env.WINDIR: C:\Windows
+[DEBUG] env.ZES_ENABLE_SYSMAN: 1
+[DEBUG] file.encoding: Cp1252
+[DEBUG] file.separator: \
+[DEBUG] java.class.path: C:\Program Files\Apache\apache-maven-3.9.11\boot\plexus-classworlds-2.9.0.jar
+[DEBUG] java.class.version: 61.0
+[DEBUG] java.home: C:\Program Files\Eclipse Adoptium\jdk-17.0.16.8-hotspot
+[DEBUG] java.io.tmpdir: C:\Users\MOHDGU~1\AppData\Local\Temp\
+[DEBUG] java.library.path: C:\Program Files\Eclipse Adoptium\jdk-17.0.16.8-hotspot\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files\Eclipse Adoptium\jdk-17.0.16.8-hotspot\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Program Files\GitHub CLI\;C:\Program Files\Apache\apache-maven-3.9.11\bin\bin;C:\Users\MOHD GULZAR KHAN\AppData\Local\Programs\Python\Python313\Scripts\;C:\Users\MOHD GULZAR KHAN\AppData\Local\Programs\Python\Python313\;C:\Users\MOHD GULZAR KHAN\AppData\Local\Microsoft\WindowsApps;C:\Users\MOHD GULZAR KHAN\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\MOHD GULZAR KHAN\AppData\Roaming\npm;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2025.1.3\bin;;C:\Users\MOHD GULZAR KHAN\AppData\Local\Programs\cursor\resources\app\bin;C:\Program Files\Apache\apache-maven-3.9.11;;C:\Program Files\Apache\apache-maven-3.9.11\bin;.
+[DEBUG] java.runtime.name: OpenJDK Runtime Environment
+[DEBUG] java.runtime.version: 17.0.16+8
+[DEBUG] java.specification.maintenance.version: 1
+[DEBUG] java.specification.name: Java Platform API Specification
+[DEBUG] java.specification.vendor: Oracle Corporation
+[DEBUG] java.specification.version: 17
+[DEBUG] java.vendor: Eclipse Adoptium
+[DEBUG] java.vendor.url: https://adoptium.net/
+[DEBUG] java.vendor.url.bug: https://github.com/adoptium/adoptium-support/issues
+[DEBUG] java.vendor.version: Temurin-17.0.16+8
+[DEBUG] java.version: 17.0.16
+[DEBUG] java.version.date: 2025-07-15
+[DEBUG] java.vm.compressedOopsMode: 32-bit
+[DEBUG] java.vm.info: mixed mode, sharing
+[DEBUG] java.vm.name: OpenJDK 64-Bit Server VM
+[DEBUG] java.vm.specification.name: Java Virtual Machine Specification
+[DEBUG] java.vm.specification.vendor: Oracle Corporation
+[DEBUG] java.vm.specification.version: 17
+[DEBUG] java.vm.vendor: Eclipse Adoptium
+[DEBUG] java.vm.version: 17.0.16+8
+[DEBUG] jdk.debug: release
+[DEBUG] library.jansi.path: C:\Program Files\Apache\apache-maven-3.9.11\lib\jansi-native
+[DEBUG] line.separator: 
+
+[DEBUG] maven.build.timestamp: 2025-10-07T06:16:06Z
+[DEBUG] maven.build.version: Apache Maven 3.9.11 (3e54c93a704957b63ee3494413a2b544fd3d825b)
+[DEBUG] maven.compiler.source: 17
+[DEBUG] maven.compiler.target: 17
+[DEBUG] maven.conf: C:\Program Files\Apache\apache-maven-3.9.11/conf
+[DEBUG] maven.home: C:\Program Files\Apache\apache-maven-3.9.11
+[DEBUG] maven.multiModuleProjectDirectory: C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser
+[DEBUG] maven.version: 3.9.11
+[DEBUG] native.encoding: Cp1252
+[DEBUG] os.arch: amd64
+[DEBUG] os.name: Windows 10
+[DEBUG] os.version: 10.0
+[DEBUG] path.separator: ;
+[DEBUG] project.baseUri: file:/C:/Users/MOHD%20GULZAR%20KHAN/Desktop/Suraj%20Working/java.git.projects/Biometric-Attendance-Parser/
+[DEBUG] project.build.sourceEncoding: UTF-8
+[DEBUG] sun.arch.data.model: 64
+[DEBUG] sun.boot.library.path: C:\Program Files\Eclipse Adoptium\jdk-17.0.16.8-hotspot\bin
+[DEBUG] sun.cpu.endian: little
+[DEBUG] sun.cpu.isalist: amd64
+[DEBUG] sun.io.unicode.encoding: UnicodeLittle
+[DEBUG] sun.java.command: org.codehaus.plexus.classworlds.launcher.Launcher clean package -X
+[DEBUG] sun.java.launcher: SUN_STANDARD
+[DEBUG] sun.jnu.encoding: Cp1252
+[DEBUG] sun.management.compiler: HotSpot 64-Bit Tiered Compilers
+[DEBUG] sun.os.patch.level: 
+[DEBUG] sun.stderr.encoding: cp437
+[DEBUG] user.country: IN
+[DEBUG] user.dir: C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser
+[DEBUG] user.home: C:\Users\MOHD GULZAR KHAN
+[DEBUG] user.language: en
+[DEBUG] user.name: MOHD GULZAR KHAN
+[DEBUG] user.script: 
+[DEBUG] user.variant: 
+[DEBUG] Using 'UTF-8' encoding to copy filtered resources.
+[DEBUG] Using 'UTF-8' encoding to copy filtered properties files.
+[DEBUG] resource with targetPath null
+directory C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\src\main\resources
+excludes []
+includes []
+[DEBUG] ignoreDelta true
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[DEBUG] no user filter components
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ Biometric-Attendance-Parser ---
+[DEBUG] Dependency collection stats {ConflictMarker.analyzeTime=49700, ConflictMarker.markTime=52000, ConflictMarker.nodeCount=22, ConflictIdSorter.graphTime=18100, ConflictIdSorter.topsortTime=13300, ConflictIdSorter.conflictIdCount=14, ConflictIdSorter.conflictIdCycleCount=0, ConflictResolver.totalTime=475200, ConflictResolver.conflictItemCount=22, DfDependencyCollector.collectTime=62680900, DfDependencyCollector.transformTime=623000}
+[DEBUG] org.apache.maven.plugins:maven-compiler-plugin:jar:3.13.0
+[DEBUG]    org.apache.maven.shared:maven-shared-utils:jar:3.4.2:compile
+[DEBUG]       org.slf4j:slf4j-api:jar:1.7.36:compile
+[DEBUG]       commons-io:commons-io:jar:2.11.0:compile
+[DEBUG]    org.apache.maven.shared:maven-shared-incremental:jar:1.1:compile
+[DEBUG]    org.codehaus.plexus:plexus-java:jar:1.2.0:compile
+[DEBUG]       org.ow2.asm:asm:jar:9.6:compile
+[DEBUG]       com.thoughtworks.qdox:qdox:jar:2.0.3:compile
+[DEBUG]    org.codehaus.plexus:plexus-compiler-api:jar:2.15.0:compile
+[DEBUG]    org.codehaus.plexus:plexus-compiler-manager:jar:2.15.0:compile
+[DEBUG]       javax.inject:javax.inject:jar:1:compile
+[DEBUG]       org.codehaus.plexus:plexus-xml:jar:3.0.0:compile (version managed from default)
+[DEBUG]    org.codehaus.plexus:plexus-compiler-javac:jar:2.15.0:runtime
+[DEBUG]    org.codehaus.plexus:plexus-utils:jar:4.0.0:compile
+[DEBUG] Created new class realm plugin>org.apache.maven.plugins:maven-compiler-plugin:3.13.0
+[DEBUG] Importing foreign packages into class realm plugin>org.apache.maven.plugins:maven-compiler-plugin:3.13.0
+[DEBUG]   Imported:  < maven.api
+[DEBUG] Populating class realm plugin>org.apache.maven.plugins:maven-compiler-plugin:3.13.0
+[DEBUG]   Included: org.apache.maven.plugins:maven-compiler-plugin:jar:3.13.0
+[DEBUG]   Included: org.apache.maven.shared:maven-shared-utils:jar:3.4.2
+[DEBUG]   Included: commons-io:commons-io:jar:2.11.0
+[DEBUG]   Included: org.apache.maven.shared:maven-shared-incremental:jar:1.1
+[DEBUG]   Included: org.codehaus.plexus:plexus-java:jar:1.2.0
+[DEBUG]   Included: org.ow2.asm:asm:jar:9.6
+[DEBUG]   Included: com.thoughtworks.qdox:qdox:jar:2.0.3
+[DEBUG]   Included: org.codehaus.plexus:plexus-compiler-api:jar:2.15.0
+[DEBUG]   Included: org.codehaus.plexus:plexus-compiler-manager:jar:2.15.0
+[DEBUG]   Included: org.codehaus.plexus:plexus-xml:jar:3.0.0
+[DEBUG]   Included: org.codehaus.plexus:plexus-compiler-javac:jar:2.15.0
+[DEBUG]   Included: org.codehaus.plexus:plexus-utils:jar:4.0.0
+[DEBUG] Loading mojo org.apache.maven.plugins:maven-compiler-plugin:3.13.0:compile from plugin realm ClassRealm[plugin>org.apache.maven.plugins:maven-compiler-plugin:3.13.0, parent: jdk.internal.loader.ClassLoaders$AppClassLoader@73d16e93]
+[DEBUG] Configuring mojo execution 'org.apache.maven.plugins:maven-compiler-plugin:3.13.0:compile:default-compile' with basic configurator -->
+[DEBUG]   (f) annotationProcessorPathsUseDepMgmt = false
+[DEBUG]   (f) basedir = C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser
+[DEBUG]   (f) buildDirectory = C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target
+[DEBUG]   (f) compilePath = [C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\classes, C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\poi\poi\5.3.0\poi-5.3.0.jar, C:\Users\MOHD GULZAR KHAN\.m2\repository\commons-codec\commons-codec\1.17.0\commons-codec-1.17.0.jar, C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\commons\commons-collections4\4.4\commons-collections4-4.4.jar, C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\commons\commons-math3\3.6.1\commons-math3-3.6.1.jar, C:\Users\MOHD GULZAR KHAN\.m2\repository\commons-io\commons-io\2.16.1\commons-io-2.16.1.jar, C:\Users\MOHD GULZAR KHAN\.m2\repository\com\zaxxer\SparseBitSet\1.3\SparseBitSet-1.3.jar, C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\logging\log4j\log4j-api\2.23.1\log4j-api-2.23.1.jar, C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\poi\poi-ooxml\5.3.0\poi-ooxml-5.3.0.jar, C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\poi\poi-ooxml-lite\5.3.0\poi-ooxml-lite-5.3.0.jar, C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\xmlbeans\xmlbeans\5.2.1\xmlbeans-5.2.1.jar, C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\commons\commons-compress\1.26.2\commons-compress-1.26.2.jar, C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\commons\commons-lang3\3.14.0\commons-lang3-3.14.0.jar, C:\Users\MOHD GULZAR KHAN\.m2\repository\com\github\virtuald\curvesapi\1.08\curvesapi-1.08.jar, C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\poi\poi-ooxml-schemas\4.1.2\poi-ooxml-schemas-4.1.2.jar, C:\Users\MOHD GULZAR KHAN\.m2\repository\commons-logging\commons-logging\1.3.0\commons-logging-1.3.0.jar, C:\Users\MOHD GULZAR KHAN\.m2\repository\com\formdev\flatlaf\3.2.5\flatlaf-3.2.5.jar]
+[DEBUG]   (f) compileSourceRoots = [C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\src\main\java]
+[DEBUG]   (f) compilerId = javac
+[DEBUG]   (f) createMissingPackageInfoClass = true
+[DEBUG]   (f) debug = true
+[DEBUG]   (f) debugFileName = javac
+[DEBUG]   (f) enablePreview = false
+[DEBUG]   (f) encoding = UTF-8
+[DEBUG]   (f) failOnError = true
+[DEBUG]   (f) failOnWarning = false
+[DEBUG]   (f) fileExtensions = [jar, class]
+[DEBUG]   (f) forceJavacCompilerUse = false
+[DEBUG]   (f) forceLegacyJavacApi = false
+[DEBUG]   (f) fork = false
+[DEBUG]   (f) generatedSourcesDirectory = C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\generated-sources\annotations
+[DEBUG]   (f) mojoExecution = org.apache.maven.plugins:maven-compiler-plugin:3.13.0:compile {execution: default-compile}
+[DEBUG]   (f) optimize = false
+[DEBUG]   (f) outputDirectory = C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\classes
+[DEBUG]   (f) parameters = false
+[DEBUG]   (f) project = MavenProject: org.bioparse:Biometric-Attendance-Parser:1.0-SNAPSHOT @ C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\pom.xml
+[DEBUG]   (f) projectArtifact = org.bioparse:Biometric-Attendance-Parser:jar:1.0-SNAPSHOT
+[DEBUG]   (s) release = 17
+[DEBUG]   (f) session = org.apache.maven.execution.MavenSession@7fd8c559
+[DEBUG]   (f) showCompilationChanges = false
+[DEBUG]   (f) showDeprecation = false
+[DEBUG]   (f) showWarnings = true
+[DEBUG]   (f) skipMultiThreadWarning = false
+[DEBUG]   (f) source = 17
+[DEBUG]   (f) staleMillis = 0
+[DEBUG]   (s) target = 17
+[DEBUG]   (f) useIncrementalCompilation = true
+[DEBUG]   (f) verbose = false
+[DEBUG] -- end configuration --
+[DEBUG] Using compiler 'javac'.
+[DEBUG] Adding C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\generated-sources\annotations to compile source roots:
+  C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\src\main\java
+[DEBUG] New compile source roots:
+  C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\src\main\java
+  C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\generated-sources\annotations
+[DEBUG] CompilerReuseStrategy: reuseCreated
+[DEBUG] useIncrementalCompilation enabled
+[INFO] 	Stale source detected: C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\src\main\java\org\bioparse\cleaning\AttendanceReportGenerator.java
+[INFO] 	Stale source detected: C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\src\main\java\org\bioparse\cleaning\AttendanceUtils.java
+[INFO] 	Stale source detected: C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\src\main\java\org\bioparse\cleaning\AttendanceMerger.java
+[INFO] 	Stale source detected: C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\src\main\java\org\bioparse\cleaning\AttendanceAppGUI.java
+[INFO] 	Stale source detected: C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\src\main\java\org\bioparse\cleaning\AttendanceQueryViewer.java
+[INFO] 	Input tree files (+): C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\src\main\java\org\bioparse\cleaning\AttendanceAppGUI.java
+[INFO] 	Input tree files (+): C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\src\main\java\org\bioparse\cleaning\AttendanceMerger.java
+[INFO] 	Input tree files (+): C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\src\main\java\org\bioparse\cleaning\AttendanceQueryViewer.java
+[INFO] 	Input tree files (+): C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\src\main\java\org\bioparse\cleaning\AttendanceReportGenerator.java
+[INFO] 	Input tree files (+): C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\src\main\java\org\bioparse\cleaning\AttendanceUtils.java
+[INFO] Recompiling the module because of changed source code.
+[DEBUG] Classpath:
+[DEBUG]  C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\classes
+[DEBUG]  C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\poi\poi\5.3.0\poi-5.3.0.jar
+[DEBUG]  C:\Users\MOHD GULZAR KHAN\.m2\repository\commons-codec\commons-codec\1.17.0\commons-codec-1.17.0.jar
+[DEBUG]  C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\commons\commons-collections4\4.4\commons-collections4-4.4.jar
+[DEBUG]  C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\commons\commons-math3\3.6.1\commons-math3-3.6.1.jar
+[DEBUG]  C:\Users\MOHD GULZAR KHAN\.m2\repository\commons-io\commons-io\2.16.1\commons-io-2.16.1.jar
+[DEBUG]  C:\Users\MOHD GULZAR KHAN\.m2\repository\com\zaxxer\SparseBitSet\1.3\SparseBitSet-1.3.jar
+[DEBUG]  C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\logging\log4j\log4j-api\2.23.1\log4j-api-2.23.1.jar
+[DEBUG]  C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\poi\poi-ooxml\5.3.0\poi-ooxml-5.3.0.jar
+[DEBUG]  C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\poi\poi-ooxml-lite\5.3.0\poi-ooxml-lite-5.3.0.jar
+[DEBUG]  C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\xmlbeans\xmlbeans\5.2.1\xmlbeans-5.2.1.jar
+[DEBUG]  C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\commons\commons-compress\1.26.2\commons-compress-1.26.2.jar
+[DEBUG]  C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\commons\commons-lang3\3.14.0\commons-lang3-3.14.0.jar
+[DEBUG]  C:\Users\MOHD GULZAR KHAN\.m2\repository\com\github\virtuald\curvesapi\1.08\curvesapi-1.08.jar
+[DEBUG]  C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\poi\poi-ooxml-schemas\4.1.2\poi-ooxml-schemas-4.1.2.jar
+[DEBUG]  C:\Users\MOHD GULZAR KHAN\.m2\repository\commons-logging\commons-logging\1.3.0\commons-logging-1.3.0.jar
+[DEBUG]  C:\Users\MOHD GULZAR KHAN\.m2\repository\com\formdev\flatlaf\3.2.5\flatlaf-3.2.5.jar
+[DEBUG] Source roots:
+[DEBUG]  C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\src\main\java
+[DEBUG]  C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\generated-sources\annotations
+[DEBUG] Command line options:
+[DEBUG] -d C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\classes -classpath C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\classes;C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\poi\poi\5.3.0\poi-5.3.0.jar;C:\Users\MOHD GULZAR KHAN\.m2\repository\commons-codec\commons-codec\1.17.0\commons-codec-1.17.0.jar;C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\commons\commons-collections4\4.4\commons-collections4-4.4.jar;C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\commons\commons-math3\3.6.1\commons-math3-3.6.1.jar;C:\Users\MOHD GULZAR KHAN\.m2\repository\commons-io\commons-io\2.16.1\commons-io-2.16.1.jar;C:\Users\MOHD GULZAR KHAN\.m2\repository\com\zaxxer\SparseBitSet\1.3\SparseBitSet-1.3.jar;C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\logging\log4j\log4j-api\2.23.1\log4j-api-2.23.1.jar;C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\poi\poi-ooxml\5.3.0\poi-ooxml-5.3.0.jar;C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\poi\poi-ooxml-lite\5.3.0\poi-ooxml-lite-5.3.0.jar;C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\xmlbeans\xmlbeans\5.2.1\xmlbeans-5.2.1.jar;C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\commons\commons-compress\1.26.2\commons-compress-1.26.2.jar;C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\commons\commons-lang3\3.14.0\commons-lang3-3.14.0.jar;C:\Users\MOHD GULZAR KHAN\.m2\repository\com\github\virtuald\curvesapi\1.08\curvesapi-1.08.jar;C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\poi\poi-ooxml-schemas\4.1.2\poi-ooxml-schemas-4.1.2.jar;C:\Users\MOHD GULZAR KHAN\.m2\repository\commons-logging\commons-logging\1.3.0\commons-logging-1.3.0.jar;C:\Users\MOHD GULZAR KHAN\.m2\repository\com\formdev\flatlaf\3.2.5\flatlaf-3.2.5.jar; -sourcepath C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\src\main\java;C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\generated-sources\annotations; -s C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\generated-sources\annotations -g --release 17 -encoding UTF-8 -XDuseUnsharedTable=true
+[DEBUG] incrementalBuildHelper#beforeRebuildExecution
+[INFO] Compiling 5 source files with javac [debug release 17] to target\classes
+[DEBUG] incrementalBuildHelper#afterRebuildExecution
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ Biometric-Attendance-Parser ---
+[DEBUG] Loading mojo org.apache.maven.plugins:maven-resources-plugin:3.3.1:testResources from plugin realm ClassRealm[plugin>org.apache.maven.plugins:maven-resources-plugin:3.3.1, parent: jdk.internal.loader.ClassLoaders$AppClassLoader@73d16e93]
+[DEBUG] Configuring mojo execution 'org.apache.maven.plugins:maven-resources-plugin:3.3.1:testResources:default-testResources' with basic configurator -->
+[DEBUG]   (f) addDefaultExcludes = true
+[DEBUG]   (f) buildFilters = []
+[DEBUG]   (f) encoding = UTF-8
+[DEBUG]   (f) escapeWindowsPaths = true
+[DEBUG]   (f) fileNameFiltering = false
+[DEBUG]   (s) includeEmptyDirs = false
+[DEBUG]   (s) outputDirectory = C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\test-classes
+[DEBUG]   (s) overwrite = false
+[DEBUG]   (f) project = MavenProject: org.bioparse:Biometric-Attendance-Parser:1.0-SNAPSHOT @ C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\pom.xml
+[DEBUG]   (s) resources = [Resource {targetPath: null, filtering: false, FileSet {directory: C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\src\test\resources, PatternSet [includes: {}, excludes: {}]}}]
+[DEBUG]   (f) session = org.apache.maven.execution.MavenSession@7fd8c559
+[DEBUG]   (f) skip = false
+[DEBUG]   (f) supportMultiLineFiltering = false
+[DEBUG]   (f) useBuildFilters = true
+[DEBUG]   (s) useDefaultDelimiters = true
+[DEBUG] -- end configuration --
+[DEBUG] properties used:
+[DEBUG] classworlds.conf: C:\Program Files\Apache\apache-maven-3.9.11\bin\m2.conf
+[DEBUG] env.=C:: C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser
+[DEBUG] env.=EXITCODE: 00000000
+[DEBUG] env.ALLUSERSPROFILE: C:\ProgramData
+[DEBUG] env.APPDATA: C:\Users\MOHD GULZAR KHAN\AppData\Roaming
+[DEBUG] env.CLASSWORLDS_JAR: "C:\Program Files\Apache\apache-maven-3.9.11\boot\plexus-classworlds-2.9.0.jar"
+[DEBUG] env.CLASSWORLDS_LAUNCHER: org.codehaus.plexus.classworlds.launcher.Launcher
+[DEBUG] env.COMMONPROGRAMFILES: C:\Program Files\Common Files
+[DEBUG] env.COMMONPROGRAMFILES(X86): C:\Program Files (x86)\Common Files
+[DEBUG] env.COMMONPROGRAMW6432: C:\Program Files\Common Files
+[DEBUG] env.COMPUTERNAME: DESKTOP-JH6HC07
+[DEBUG] env.COMSPEC: C:\Windows\system32\cmd.exe
+[DEBUG] env.DRIVERDATA: C:\Windows\System32\Drivers\DriverData
+[DEBUG] env.ERROR_CODE: 0
+[DEBUG] env.EXEC_DIR: C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser
+[DEBUG] env.HOMEDRIVE: C:
+[DEBUG] env.HOMEPATH: \Users\MOHD GULZAR KHAN
+[DEBUG] env.INTELLIJ IDEA COMMUNITY EDITION: C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2025.1.3\bin;
+[DEBUG] env.JAVACMD: C:\Program Files\Eclipse Adoptium\jdk-17.0.16.8-hotspot\bin\java.exe
+[DEBUG] env.JVMCONFIG: \.mvn\jvm.config
+[DEBUG] env.LOCALAPPDATA: C:\Users\MOHD GULZAR KHAN\AppData\Local
+[DEBUG] env.LOGONSERVER: \\DESKTOP-JH6HC07
+[DEBUG] env.M2_HOME: C:\Program Files\Apache\apache-maven-3.9.11\bin
+[DEBUG] env.MAVEN_CMD_LINE_ARGS: clean package -X
+[DEBUG] env.MAVEN_HOME: C:\Program Files\Apache\apache-maven-3.9.11
+[DEBUG] env.MAVEN_OPTS: --enable-native-access=ALL-UNNAMED 
+[DEBUG] env.MAVEN_PROJECTBASEDIR: C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser
+[DEBUG] env.MOZ_PLUGIN_PATH: C:\Program Files (x86)\Foxit Software\Foxit PDF Reader\plugins\
+[DEBUG] env.NUMBER_OF_PROCESSORS: 4
+[DEBUG] env.ONEDRIVE: C:\Users\MOHD GULZAR KHAN\OneDrive
+[DEBUG] env.OS: Windows_NT
+[DEBUG] env.PATH: C:\Program Files\Eclipse Adoptium\jdk-17.0.16.8-hotspot\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Program Files\GitHub CLI\;C:\Program Files\Apache\apache-maven-3.9.11\bin\bin;C:\Users\MOHD GULZAR KHAN\AppData\Local\Programs\Python\Python313\Scripts\;C:\Users\MOHD GULZAR KHAN\AppData\Local\Programs\Python\Python313\;C:\Users\MOHD GULZAR KHAN\AppData\Local\Microsoft\WindowsApps;C:\Users\MOHD GULZAR KHAN\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\MOHD GULZAR KHAN\AppData\Roaming\npm;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2025.1.3\bin;;C:\Users\MOHD GULZAR KHAN\AppData\Local\Programs\cursor\resources\app\bin;C:\Program Files\Apache\apache-maven-3.9.11;;C:\Program Files\Apache\apache-maven-3.9.11\bin
+[DEBUG] env.PATHEXT: .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
+[DEBUG] env.PROCESSOR_ARCHITECTURE: AMD64
+[DEBUG] env.PROCESSOR_IDENTIFIER: Intel64 Family 6 Model 94 Stepping 3, GenuineIntel
+[DEBUG] env.PROCESSOR_LEVEL: 6
+[DEBUG] env.PROCESSOR_REVISION: 5e03
+[DEBUG] env.PROGRAMDATA: C:\ProgramData
+[DEBUG] env.PROGRAMFILES: C:\Program Files
+[DEBUG] env.PROGRAMFILES(X86): C:\Program Files (x86)
+[DEBUG] env.PROGRAMW6432: C:\Program Files
+[DEBUG] env.PROMPT: $P$G
+[DEBUG] env.PSMODULEPATH: C:\Program Files\WindowsPowerShell\Modules;C:\Windows\system32\WindowsPowerShell\v1.0\Modules
+[DEBUG] env.PUBLIC: C:\Users\Public
+[DEBUG] env.SESSIONNAME: Console
+[DEBUG] env.SYSTEMDRIVE: C:
+[DEBUG] env.SYSTEMROOT: C:\Windows
+[DEBUG] env.TEMP: C:\Users\MOHDGU~1\AppData\Local\Temp
+[DEBUG] env.TMP: C:\Users\MOHDGU~1\AppData\Local\Temp
+[DEBUG] env.USERDOMAIN: DESKTOP-JH6HC07
+[DEBUG] env.USERDOMAIN_ROAMINGPROFILE: DESKTOP-JH6HC07
+[DEBUG] env.USERNAME: MOHD GULZAR KHAN
+[DEBUG] env.USERPROFILE: C:\Users\MOHD GULZAR KHAN
+[DEBUG] env.WDIR: C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser
+[DEBUG] env.WINDIR: C:\Windows
+[DEBUG] env.ZES_ENABLE_SYSMAN: 1
+[DEBUG] file.encoding: Cp1252
+[DEBUG] file.separator: \
+[DEBUG] java.class.path: C:\Program Files\Apache\apache-maven-3.9.11\boot\plexus-classworlds-2.9.0.jar
+[DEBUG] java.class.version: 61.0
+[DEBUG] java.home: C:\Program Files\Eclipse Adoptium\jdk-17.0.16.8-hotspot
+[DEBUG] java.io.tmpdir: C:\Users\MOHDGU~1\AppData\Local\Temp\
+[DEBUG] java.library.path: C:\Program Files\Eclipse Adoptium\jdk-17.0.16.8-hotspot\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files\Eclipse Adoptium\jdk-17.0.16.8-hotspot\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Program Files\GitHub CLI\;C:\Program Files\Apache\apache-maven-3.9.11\bin\bin;C:\Users\MOHD GULZAR KHAN\AppData\Local\Programs\Python\Python313\Scripts\;C:\Users\MOHD GULZAR KHAN\AppData\Local\Programs\Python\Python313\;C:\Users\MOHD GULZAR KHAN\AppData\Local\Microsoft\WindowsApps;C:\Users\MOHD GULZAR KHAN\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\MOHD GULZAR KHAN\AppData\Roaming\npm;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2025.1.3\bin;;C:\Users\MOHD GULZAR KHAN\AppData\Local\Programs\cursor\resources\app\bin;C:\Program Files\Apache\apache-maven-3.9.11;;C:\Program Files\Apache\apache-maven-3.9.11\bin;.
+[DEBUG] java.runtime.name: OpenJDK Runtime Environment
+[DEBUG] java.runtime.version: 17.0.16+8
+[DEBUG] java.specification.maintenance.version: 1
+[DEBUG] java.specification.name: Java Platform API Specification
+[DEBUG] java.specification.vendor: Oracle Corporation
+[DEBUG] java.specification.version: 17
+[DEBUG] java.vendor: Eclipse Adoptium
+[DEBUG] java.vendor.url: https://adoptium.net/
+[DEBUG] java.vendor.url.bug: https://github.com/adoptium/adoptium-support/issues
+[DEBUG] java.vendor.version: Temurin-17.0.16+8
+[DEBUG] java.version: 17.0.16
+[DEBUG] java.version.date: 2025-07-15
+[DEBUG] java.vm.compressedOopsMode: 32-bit
+[DEBUG] java.vm.info: mixed mode, sharing
+[DEBUG] java.vm.name: OpenJDK 64-Bit Server VM
+[DEBUG] java.vm.specification.name: Java Virtual Machine Specification
+[DEBUG] java.vm.specification.vendor: Oracle Corporation
+[DEBUG] java.vm.specification.version: 17
+[DEBUG] java.vm.vendor: Eclipse Adoptium
+[DEBUG] java.vm.version: 17.0.16+8
+[DEBUG] jdk.debug: release
+[DEBUG] library.jansi.path: C:\Program Files\Apache\apache-maven-3.9.11\lib\jansi-native
+[DEBUG] line.separator: 
+
+[DEBUG] maven.build.timestamp: 2025-10-07T06:16:08Z
+[DEBUG] maven.build.version: Apache Maven 3.9.11 (3e54c93a704957b63ee3494413a2b544fd3d825b)
+[DEBUG] maven.compiler.source: 17
+[DEBUG] maven.compiler.target: 17
+[DEBUG] maven.conf: C:\Program Files\Apache\apache-maven-3.9.11/conf
+[DEBUG] maven.home: C:\Program Files\Apache\apache-maven-3.9.11
+[DEBUG] maven.multiModuleProjectDirectory: C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser
+[DEBUG] maven.version: 3.9.11
+[DEBUG] native.encoding: Cp1252
+[DEBUG] os.arch: amd64
+[DEBUG] os.name: Windows 10
+[DEBUG] os.version: 10.0
+[DEBUG] path.separator: ;
+[DEBUG] project.baseUri: file:/C:/Users/MOHD%20GULZAR%20KHAN/Desktop/Suraj%20Working/java.git.projects/Biometric-Attendance-Parser/
+[DEBUG] project.build.sourceEncoding: UTF-8
+[DEBUG] sun.arch.data.model: 64
+[DEBUG] sun.boot.library.path: C:\Program Files\Eclipse Adoptium\jdk-17.0.16.8-hotspot\bin
+[DEBUG] sun.cpu.endian: little
+[DEBUG] sun.cpu.isalist: amd64
+[DEBUG] sun.io.unicode.encoding: UnicodeLittle
+[DEBUG] sun.java.command: org.codehaus.plexus.classworlds.launcher.Launcher clean package -X
+[DEBUG] sun.java.launcher: SUN_STANDARD
+[DEBUG] sun.jnu.encoding: Cp1252
+[DEBUG] sun.management.compiler: HotSpot 64-Bit Tiered Compilers
+[DEBUG] sun.os.patch.level: 
+[DEBUG] sun.stderr.encoding: cp437
+[DEBUG] user.country: IN
+[DEBUG] user.dir: C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser
+[DEBUG] user.home: C:\Users\MOHD GULZAR KHAN
+[DEBUG] user.language: en
+[DEBUG] user.name: MOHD GULZAR KHAN
+[DEBUG] user.script: 
+[DEBUG] user.variant: 
+[DEBUG] Using 'UTF-8' encoding to copy filtered resources.
+[DEBUG] Using 'UTF-8' encoding to copy filtered properties files.
+[DEBUG] resource with targetPath null
+directory C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\src\test\resources
+excludes []
+includes []
+[INFO] skip non existing resourceDirectory C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\src\test\resources
+[DEBUG] no user filter components
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ Biometric-Attendance-Parser ---
+[DEBUG] Loading mojo org.apache.maven.plugins:maven-compiler-plugin:3.13.0:testCompile from plugin realm ClassRealm[plugin>org.apache.maven.plugins:maven-compiler-plugin:3.13.0, parent: jdk.internal.loader.ClassLoaders$AppClassLoader@73d16e93]
+[DEBUG] Configuring mojo execution 'org.apache.maven.plugins:maven-compiler-plugin:3.13.0:testCompile:default-testCompile' with basic configurator -->
+[DEBUG]   (f) annotationProcessorPathsUseDepMgmt = false
+[DEBUG]   (f) basedir = C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser
+[DEBUG]   (f) buildDirectory = C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target
+[DEBUG]   (f) compileSourceRoots = [C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\src\test\java]
+[DEBUG]   (f) compilerId = javac
+[DEBUG]   (f) createMissingPackageInfoClass = true
+[DEBUG]   (f) debug = true
+[DEBUG]   (f) debugFileName = javac-test
+[DEBUG]   (f) enablePreview = false
+[DEBUG]   (f) encoding = UTF-8
+[DEBUG]   (f) failOnError = true
+[DEBUG]   (f) failOnWarning = false
+[DEBUG]   (f) fileExtensions = [jar, class]
+[DEBUG]   (f) forceJavacCompilerUse = false
+[DEBUG]   (f) forceLegacyJavacApi = false
+[DEBUG]   (f) fork = false
+[DEBUG]   (f) generatedTestSourcesDirectory = C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\generated-test-sources\test-annotations
+[DEBUG]   (f) mojoExecution = org.apache.maven.plugins:maven-compiler-plugin:3.13.0:testCompile {execution: default-testCompile}
+[DEBUG]   (f) optimize = false
+[DEBUG]   (f) outputDirectory = C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\test-classes
+[DEBUG]   (f) parameters = false
+[DEBUG]   (f) project = MavenProject: org.bioparse:Biometric-Attendance-Parser:1.0-SNAPSHOT @ C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\pom.xml
+[DEBUG]   (s) release = 17
+[DEBUG]   (f) session = org.apache.maven.execution.MavenSession@7fd8c559
+[DEBUG]   (f) showCompilationChanges = false
+[DEBUG]   (f) showDeprecation = false
+[DEBUG]   (f) showWarnings = true
+[DEBUG]   (f) skipMultiThreadWarning = false
+[DEBUG]   (f) source = 17
+[DEBUG]   (f) staleMillis = 0
+[DEBUG]   (s) target = 17
+[DEBUG]   (f) testPath = [C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\test-classes, C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\classes, C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\poi\poi\5.3.0\poi-5.3.0.jar, C:\Users\MOHD GULZAR KHAN\.m2\repository\commons-codec\commons-codec\1.17.0\commons-codec-1.17.0.jar, C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\commons\commons-collections4\4.4\commons-collections4-4.4.jar, C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\commons\commons-math3\3.6.1\commons-math3-3.6.1.jar, C:\Users\MOHD GULZAR KHAN\.m2\repository\commons-io\commons-io\2.16.1\commons-io-2.16.1.jar, C:\Users\MOHD GULZAR KHAN\.m2\repository\com\zaxxer\SparseBitSet\1.3\SparseBitSet-1.3.jar, C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\logging\log4j\log4j-api\2.23.1\log4j-api-2.23.1.jar, C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\poi\poi-ooxml\5.3.0\poi-ooxml-5.3.0.jar, C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\poi\poi-ooxml-lite\5.3.0\poi-ooxml-lite-5.3.0.jar, C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\xmlbeans\xmlbeans\5.2.1\xmlbeans-5.2.1.jar, C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\commons\commons-compress\1.26.2\commons-compress-1.26.2.jar, C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\commons\commons-lang3\3.14.0\commons-lang3-3.14.0.jar, C:\Users\MOHD GULZAR KHAN\.m2\repository\com\github\virtuald\curvesapi\1.08\curvesapi-1.08.jar, C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\poi\poi-ooxml-schemas\4.1.2\poi-ooxml-schemas-4.1.2.jar, C:\Users\MOHD GULZAR KHAN\.m2\repository\commons-logging\commons-logging\1.3.0\commons-logging-1.3.0.jar, C:\Users\MOHD GULZAR KHAN\.m2\repository\com\formdev\flatlaf\3.2.5\flatlaf-3.2.5.jar]
+[DEBUG]   (f) useIncrementalCompilation = true
+[DEBUG]   (f) useModulePath = true
+[DEBUG]   (f) verbose = false
+[DEBUG] -- end configuration --
+[DEBUG] Using compiler 'javac'.
+[DEBUG] Adding C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\generated-test-sources\test-annotations to test-compile source roots:
+  C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\src\test\java
+[DEBUG] New test-compile source roots:
+  C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\src\test\java
+  C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\generated-test-sources\test-annotations
+[DEBUG] CompilerReuseStrategy: reuseCreated
+[DEBUG] useIncrementalCompilation enabled
+[INFO] 	New dependency detected: C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\classes\org\bioparse\cleaning\AttendanceAppGUI$1.class
+[INFO] Recompiling the module because of changed dependency.
+[DEBUG] Classpath:
+[DEBUG]  C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\test-classes
+[DEBUG]  C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\classes
+[DEBUG]  C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\poi\poi\5.3.0\poi-5.3.0.jar
+[DEBUG]  C:\Users\MOHD GULZAR KHAN\.m2\repository\commons-codec\commons-codec\1.17.0\commons-codec-1.17.0.jar
+[DEBUG]  C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\commons\commons-collections4\4.4\commons-collections4-4.4.jar
+[DEBUG]  C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\commons\commons-math3\3.6.1\commons-math3-3.6.1.jar
+[DEBUG]  C:\Users\MOHD GULZAR KHAN\.m2\repository\commons-io\commons-io\2.16.1\commons-io-2.16.1.jar
+[DEBUG]  C:\Users\MOHD GULZAR KHAN\.m2\repository\com\zaxxer\SparseBitSet\1.3\SparseBitSet-1.3.jar
+[DEBUG]  C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\logging\log4j\log4j-api\2.23.1\log4j-api-2.23.1.jar
+[DEBUG]  C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\poi\poi-ooxml\5.3.0\poi-ooxml-5.3.0.jar
+[DEBUG]  C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\poi\poi-ooxml-lite\5.3.0\poi-ooxml-lite-5.3.0.jar
+[DEBUG]  C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\xmlbeans\xmlbeans\5.2.1\xmlbeans-5.2.1.jar
+[DEBUG]  C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\commons\commons-compress\1.26.2\commons-compress-1.26.2.jar
+[DEBUG]  C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\commons\commons-lang3\3.14.0\commons-lang3-3.14.0.jar
+[DEBUG]  C:\Users\MOHD GULZAR KHAN\.m2\repository\com\github\virtuald\curvesapi\1.08\curvesapi-1.08.jar
+[DEBUG]  C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\poi\poi-ooxml-schemas\4.1.2\poi-ooxml-schemas-4.1.2.jar
+[DEBUG]  C:\Users\MOHD GULZAR KHAN\.m2\repository\commons-logging\commons-logging\1.3.0\commons-logging-1.3.0.jar
+[DEBUG]  C:\Users\MOHD GULZAR KHAN\.m2\repository\com\formdev\flatlaf\3.2.5\flatlaf-3.2.5.jar
+[DEBUG] Source roots:
+[DEBUG]  C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\src\test\java
+[DEBUG]  C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\generated-test-sources\test-annotations
+[DEBUG] Command line options:
+[DEBUG] -d C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\test-classes -classpath C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\test-classes;C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\classes;C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\poi\poi\5.3.0\poi-5.3.0.jar;C:\Users\MOHD GULZAR KHAN\.m2\repository\commons-codec\commons-codec\1.17.0\commons-codec-1.17.0.jar;C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\commons\commons-collections4\4.4\commons-collections4-4.4.jar;C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\commons\commons-math3\3.6.1\commons-math3-3.6.1.jar;C:\Users\MOHD GULZAR KHAN\.m2\repository\commons-io\commons-io\2.16.1\commons-io-2.16.1.jar;C:\Users\MOHD GULZAR KHAN\.m2\repository\com\zaxxer\SparseBitSet\1.3\SparseBitSet-1.3.jar;C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\logging\log4j\log4j-api\2.23.1\log4j-api-2.23.1.jar;C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\poi\poi-ooxml\5.3.0\poi-ooxml-5.3.0.jar;C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\poi\poi-ooxml-lite\5.3.0\poi-ooxml-lite-5.3.0.jar;C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\xmlbeans\xmlbeans\5.2.1\xmlbeans-5.2.1.jar;C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\commons\commons-compress\1.26.2\commons-compress-1.26.2.jar;C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\commons\commons-lang3\3.14.0\commons-lang3-3.14.0.jar;C:\Users\MOHD GULZAR KHAN\.m2\repository\com\github\virtuald\curvesapi\1.08\curvesapi-1.08.jar;C:\Users\MOHD GULZAR KHAN\.m2\repository\org\apache\poi\poi-ooxml-schemas\4.1.2\poi-ooxml-schemas-4.1.2.jar;C:\Users\MOHD GULZAR KHAN\.m2\repository\commons-logging\commons-logging\1.3.0\commons-logging-1.3.0.jar;C:\Users\MOHD GULZAR KHAN\.m2\repository\com\formdev\flatlaf\3.2.5\flatlaf-3.2.5.jar; -sourcepath C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\src\test\java;C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\generated-test-sources\test-annotations; -s C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\generated-test-sources\test-annotations -g --release 17 -encoding UTF-8 -XDuseUnsharedTable=true
+[DEBUG] incrementalBuildHelper#beforeRebuildExecution
+[DEBUG] incrementalBuildHelper#afterRebuildExecution
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ Biometric-Attendance-Parser ---
+[DEBUG] Using mirror maven-default-http-blocker (http://0.0.0.0/) for jboss-public-repository-group (http://repository.jboss.org/nexus/content/groups/public).
+[DEBUG] Dependency collection stats {ConflictMarker.analyzeTime=173600, ConflictMarker.markTime=99600, ConflictMarker.nodeCount=78, ConflictIdSorter.graphTime=62600, ConflictIdSorter.topsortTime=36800, ConflictIdSorter.conflictIdCount=39, ConflictIdSorter.conflictIdCycleCount=0, ConflictResolver.totalTime=3333200, ConflictResolver.conflictItemCount=76, DfDependencyCollector.collectTime=241578100, DfDependencyCollector.transformTime=3743900}
+[DEBUG] org.apache.maven.plugins:maven-surefire-plugin:jar:3.2.5
+[DEBUG]    org.apache.maven.surefire:maven-surefire-common:jar:3.2.5:compile
+[DEBUG]       org.apache.maven.surefire:surefire-api:jar:3.2.5:compile
+[DEBUG]          org.apache.maven.surefire:surefire-logger-api:jar:3.2.5:compile
+[DEBUG]       org.apache.maven.surefire:surefire-extensions-api:jar:3.2.5:compile
+[DEBUG]       org.apache.maven.surefire:surefire-booter:jar:3.2.5:compile
+[DEBUG]          org.apache.maven.surefire:surefire-extensions-spi:jar:3.2.5:compile
+[DEBUG]       org.eclipse.aether:aether-util:jar:1.0.0.v20140518:compile
+[DEBUG]          org.eclipse.aether:aether-api:jar:1.0.0.v20140518:compile
+[DEBUG]       org.apache.maven.shared:maven-common-artifact-filters:jar:3.1.1:compile (version managed from default) (exclusions managed from default)
+[DEBUG]          org.apache.maven:maven-artifact:jar:3.2.5:provided (scope managed from default) (version managed from default)
+[DEBUG]             org.codehaus.plexus:plexus-utils:jar:4.0.0:provided (version managed from default)
+[DEBUG]          org.apache.maven:maven-core:jar:3.2.5:provided (scope managed from default) (version managed from default)
+[DEBUG]             org.apache.maven:maven-settings:jar:3.2.5:provided (version managed from default)
+[DEBUG]             org.apache.maven:maven-settings-builder:jar:3.2.5:provided
+[DEBUG]             org.apache.maven:maven-repository-metadata:jar:3.2.5:provided
+[DEBUG]             org.apache.maven:maven-model-builder:jar:3.2.5:provided
+[DEBUG]             org.apache.maven:maven-aether-provider:jar:3.2.5:provided
+[DEBUG]                org.eclipse.aether:aether-spi:jar:1.0.0.v20140518:provided
+[DEBUG]             org.eclipse.aether:aether-impl:jar:1.0.0.v20140518:provided
+[DEBUG]             org.eclipse.sisu:org.eclipse.sisu.plexus:jar:0.9.0.M2:provided (version managed from default)
+[DEBUG]                javax.annotation:javax.annotation-api:jar:1.2:provided
+[DEBUG]                javax.enterprise:cdi-api:jar:1.2:provided
+[DEBUG]                org.eclipse.sisu:org.eclipse.sisu.inject:jar:0.9.0.M2:provided (version managed from default)
+[DEBUG]             org.sonatype.sisu:sisu-guice:jar:no_aop:3.2.3:provided
+[DEBUG]                javax.inject:javax.inject:jar:1:provided
+[DEBUG]                aopalliance:aopalliance:jar:1.0:provided
+[DEBUG]                com.google.guava:guava:jar:16.0.1:provided
+[DEBUG]             org.codehaus.plexus:plexus-interpolation:jar:1.21:provided
+[DEBUG]             org.codehaus.plexus:plexus-classworlds:jar:2.5.2:provided
+[DEBUG]             org.codehaus.plexus:plexus-component-annotations:jar:1.5.5:provided
+[DEBUG]             org.sonatype.plexus:plexus-sec-dispatcher:jar:1.3:provided
+[DEBUG]                org.sonatype.plexus:plexus-cipher:jar:1.4:provided
+[DEBUG]          org.apache.maven:maven-plugin-api:jar:3.2.5:provided (scope managed from default) (version managed from default)
+[DEBUG]          commons-io:commons-io:jar:2.15.1:compile (version managed from default)
+[DEBUG]       org.codehaus.plexus:plexus-java:jar:1.2.0:compile (version managed from default)
+[DEBUG]          org.ow2.asm:asm:jar:9.6:compile
+[DEBUG]          com.thoughtworks.qdox:qdox:jar:2.0.3:compile
+[DEBUG]       org.apache.maven.surefire:surefire-shared-utils:jar:3.2.5:compile
+[DEBUG] Created new class realm plugin>org.apache.maven.plugins:maven-surefire-plugin:3.2.5
+[DEBUG] Importing foreign packages into class realm plugin>org.apache.maven.plugins:maven-surefire-plugin:3.2.5
+[DEBUG]   Imported:  < maven.api
+[DEBUG] Populating class realm plugin>org.apache.maven.plugins:maven-surefire-plugin:3.2.5
+[DEBUG]   Included: org.apache.maven.plugins:maven-surefire-plugin:jar:3.2.5
+[DEBUG]   Included: org.apache.maven.surefire:maven-surefire-common:jar:3.2.5
+[DEBUG]   Included: org.apache.maven.surefire:surefire-api:jar:3.2.5
+[DEBUG]   Included: org.apache.maven.surefire:surefire-logger-api:jar:3.2.5
+[DEBUG]   Included: org.apache.maven.surefire:surefire-extensions-api:jar:3.2.5
+[DEBUG]   Included: org.apache.maven.surefire:surefire-booter:jar:3.2.5
+[DEBUG]   Included: org.apache.maven.surefire:surefire-extensions-spi:jar:3.2.5
+[DEBUG]   Included: org.apache.maven.shared:maven-common-artifact-filters:jar:3.1.1
+[DEBUG]   Included: commons-io:commons-io:jar:2.15.1
+[DEBUG]   Included: org.codehaus.plexus:plexus-java:jar:1.2.0
+[DEBUG]   Included: org.ow2.asm:asm:jar:9.6
+[DEBUG]   Included: com.thoughtworks.qdox:qdox:jar:2.0.3
+[DEBUG]   Included: org.apache.maven.surefire:surefire-shared-utils:jar:3.2.5
+[DEBUG] Loading mojo org.apache.maven.plugins:maven-surefire-plugin:3.2.5:test from plugin realm ClassRealm[plugin>org.apache.maven.plugins:maven-surefire-plugin:3.2.5, parent: jdk.internal.loader.ClassLoaders$AppClassLoader@73d16e93]
+[DEBUG] Configuring mojo execution 'org.apache.maven.plugins:maven-surefire-plugin:3.2.5:test:default-test' with basic configurator -->
+[DEBUG]   (f) additionalClasspathDependencies = []
+[DEBUG]   (s) additionalClasspathElements = []
+[DEBUG]   (s) basedir = C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser
+[DEBUG]   (s) childDelegation = false
+[DEBUG]   (f) classesDirectory = C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\classes
+[DEBUG]   (s) classpathDependencyExcludes = []
+[DEBUG]   (s) dependenciesToScan = []
+[DEBUG]   (s) disableXmlReport = false
+[DEBUG]   (s) enableAssertions = true
+[DEBUG]   (s) excludeJUnit5Engines = []
+[DEBUG]   (f) excludedEnvironmentVariables = []
+[DEBUG]   (s) excludes = []
+[DEBUG]   (s) failIfNoSpecifiedTests = true
+[DEBUG]   (s) failIfNoTests = false
+[DEBUG]   (s) failOnFlakeCount = 0
+[DEBUG]   (f) forkCount = 1
+[DEBUG]   (s) forkedProcessExitTimeoutInSeconds = 30
+[DEBUG]   (s) includeJUnit5Engines = []
+[DEBUG]   (s) includes = []
+[DEBUG]   (s) junitArtifactName = junit:junit
+[DEBUG]   (f) parallelMavenExecution = false
+[DEBUG]   (s) parallelOptimized = true
+[DEBUG]   (s) perCoreThreadCount = true
+[DEBUG]   (s) pluginArtifactMap = {org.apache.maven.plugins:maven-surefire-plugin=org.apache.maven.plugins:maven-surefire-plugin:maven-plugin:3.2.5:, org.apache.maven.surefire:maven-surefire-common=org.apache.maven.surefire:maven-surefire-common:jar:3.2.5:compile, org.apache.maven.surefire:surefire-api=org.apache.maven.surefire:surefire-api:jar:3.2.5:compile, org.apache.maven.surefire:surefire-logger-api=org.apache.maven.surefire:surefire-logger-api:jar:3.2.5:compile, org.apache.maven.surefire:surefire-extensions-api=org.apache.maven.surefire:surefire-extensions-api:jar:3.2.5:compile, org.apache.maven.surefire:surefire-booter=org.apache.maven.surefire:surefire-booter:jar:3.2.5:compile, org.apache.maven.surefire:surefire-extensions-spi=org.apache.maven.surefire:surefire-extensions-spi:jar:3.2.5:compile, org.eclipse.aether:aether-util=org.eclipse.aether:aether-util:jar:1.0.0.v20140518:compile, org.eclipse.aether:aether-api=org.eclipse.aether:aether-api:jar:1.0.0.v20140518:compile, org.apache.maven.shared:maven-common-artifact-filters=org.apache.maven.shared:maven-common-artifact-filters:jar:3.1.1:compile, commons-io:commons-io=commons-io:commons-io:jar:2.15.1:compile, org.codehaus.plexus:plexus-java=org.codehaus.plexus:plexus-java:jar:1.2.0:compile, org.ow2.asm:asm=org.ow2.asm:asm:jar:9.6:compile, com.thoughtworks.qdox:qdox=com.thoughtworks.qdox:qdox:jar:2.0.3:compile, org.apache.maven.surefire:surefire-shared-utils=org.apache.maven.surefire:surefire-shared-utils:jar:3.2.5:compile}
+[DEBUG]   (f) pluginDescriptor = Component Descriptor: role: 'org.apache.maven.plugin.Mojo', implementation: 'org.apache.maven.plugins.maven_surefire_plugin.HelpMojo', role hint: 'org.apache.maven.plugins:maven-surefire-plugin:3.2.5:help'
+role: 'org.apache.maven.plugin.Mojo', implementation: 'org.apache.maven.plugin.surefire.SurefirePlugin', role hint: 'org.apache.maven.plugins:maven-surefire-plugin:3.2.5:test'
+---
+[DEBUG]   (s) printSummary = true
+[DEBUG]   (s) project = MavenProject: org.bioparse:Biometric-Attendance-Parser:1.0-SNAPSHOT @ C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\pom.xml
+[DEBUG]   (s) projectArtifactMap = {org.apache.poi:poi=org.apache.poi:poi:jar:5.3.0:compile, commons-codec:commons-codec=commons-codec:commons-codec:jar:1.17.0:compile, org.apache.commons:commons-collections4=org.apache.commons:commons-collections4:jar:4.4:compile, org.apache.commons:commons-math3=org.apache.commons:commons-math3:jar:3.6.1:compile, commons-io:commons-io=commons-io:commons-io:jar:2.16.1:compile, com.zaxxer:SparseBitSet=com.zaxxer:SparseBitSet:jar:1.3:compile, org.apache.logging.log4j:log4j-api=org.apache.logging.log4j:log4j-api:jar:2.23.1:compile, org.apache.poi:poi-ooxml=org.apache.poi:poi-ooxml:jar:5.3.0:compile, org.apache.poi:poi-ooxml-lite=org.apache.poi:poi-ooxml-lite:jar:5.3.0:compile, org.apache.xmlbeans:xmlbeans=org.apache.xmlbeans:xmlbeans:jar:5.2.1:compile, org.apache.commons:commons-compress=org.apache.commons:commons-compress:jar:1.26.2:compile, org.apache.commons:commons-lang3=org.apache.commons:commons-lang3:jar:3.14.0:compile, com.github.virtuald:curvesapi=com.github.virtuald:curvesapi:jar:1.08:compile, org.apache.poi:poi-ooxml-schemas=org.apache.poi:poi-ooxml-schemas:jar:4.1.2:compile, commons-logging:commons-logging=commons-logging:commons-logging:jar:1.3.0:compile, com.formdev:flatlaf=com.formdev:flatlaf:jar:3.2.5:compile}
+[DEBUG]   (s) projectBuildDirectory = C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target
+[DEBUG]   (s) redirectTestOutputToFile = false
+[DEBUG]   (s) reportFormat = brief
+[DEBUG]   (s) reportsDirectory = C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\surefire-reports
+[DEBUG]   (f) rerunFailingTestsCount = 0
+[DEBUG]   (f) reuseForks = true
+[DEBUG]   (s) runOrder = filesystem
+[DEBUG]   (s) session = org.apache.maven.execution.MavenSession@7fd8c559
+[DEBUG]   (f) shutdown = exit
+[DEBUG]   (s) skip = false
+[DEBUG]   (f) skipAfterFailureCount = 0
+[DEBUG]   (s) skipTests = false
+[DEBUG]   (s) suiteXmlFiles = []
+[DEBUG]   (s) tempDir = surefire
+[DEBUG]   (s) testClassesDirectory = C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\test-classes
+[DEBUG]   (s) testFailureIgnore = false
+[DEBUG]   (s) testNGArtifactName = org.testng:testng
+[DEBUG]   (s) testSourceDirectory = C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\src\test\java
+[DEBUG]   (s) threadCountClasses = 0
+[DEBUG]   (s) threadCountMethods = 0
+[DEBUG]   (s) threadCountSuites = 0
+[DEBUG]   (s) trimStackTrace = false
+[DEBUG]   (s) useFile = true
+[DEBUG]   (s) useManifestOnlyJar = true
+[DEBUG]   (f) useModulePath = true
+[DEBUG]   (s) useSystemClassLoader = true
+[DEBUG]   (s) useUnlimitedThreads = false
+[DEBUG]   (s) workingDirectory = C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser
+[DEBUG] -- end configuration --
+[DEBUG] Using JVM: C:\Program Files\Eclipse Adoptium\jdk-17.0.16.8-hotspot\bin\java with Java version 17.0
+[DEBUG] Resolved included and excluded patterns: **/Test*.java, **/*Test.java, **/*Tests.java, **/*TestCase.java, !**/*$*
+[INFO] 
+[INFO] --- jar:3.3.0:jar (default-jar) @ Biometric-Attendance-Parser ---
+[DEBUG] Dependency collection stats {ConflictMarker.analyzeTime=416500, ConflictMarker.markTime=204100, ConflictMarker.nodeCount=22, ConflictIdSorter.graphTime=24000, ConflictIdSorter.topsortTime=13400, ConflictIdSorter.conflictIdCount=13, ConflictIdSorter.conflictIdCycleCount=0, ConflictResolver.totalTime=914100, ConflictResolver.conflictItemCount=22, DfDependencyCollector.collectTime=112709900, DfDependencyCollector.transformTime=1589500}
+[DEBUG] org.apache.maven.plugins:maven-jar-plugin:jar:3.3.0
+[DEBUG]    org.apache.maven.shared:file-management:jar:3.1.0:compile
+[DEBUG]       org.slf4j:slf4j-api:jar:1.7.36:compile
+[DEBUG]       commons-io:commons-io:jar:2.11.0:compile
+[DEBUG]    org.apache.maven:maven-archiver:jar:3.6.0:compile
+[DEBUG]       org.codehaus.plexus:plexus-io:jar:3.4.0:compile
+[DEBUG]          javax.inject:javax.inject:jar:1:compile
+[DEBUG]       org.codehaus.plexus:plexus-archiver:jar:4.4.0:compile
+[DEBUG]          org.apache.commons:commons-compress:jar:1.21:compile
+[DEBUG]          org.iq80.snappy:snappy:jar:0.4:compile
+[DEBUG]          org.tukaani:xz:jar:1.9:runtime
+[DEBUG]       org.codehaus.plexus:plexus-interpolation:jar:1.26:compile
+[DEBUG]    org.codehaus.plexus:plexus-utils:jar:3.4.2:compile
+[DEBUG] Created new class realm plugin>org.apache.maven.plugins:maven-jar-plugin:3.3.0
+[DEBUG] Importing foreign packages into class realm plugin>org.apache.maven.plugins:maven-jar-plugin:3.3.0
+[DEBUG]   Imported:  < maven.api
+[DEBUG] Populating class realm plugin>org.apache.maven.plugins:maven-jar-plugin:3.3.0
+[DEBUG]   Included: org.apache.maven.plugins:maven-jar-plugin:jar:3.3.0
+[DEBUG]   Included: org.apache.maven.shared:file-management:jar:3.1.0
+[DEBUG]   Included: commons-io:commons-io:jar:2.11.0
+[DEBUG]   Included: org.apache.maven:maven-archiver:jar:3.6.0
+[DEBUG]   Included: org.codehaus.plexus:plexus-io:jar:3.4.0
+[DEBUG]   Included: org.codehaus.plexus:plexus-archiver:jar:4.4.0
+[DEBUG]   Included: org.apache.commons:commons-compress:jar:1.21
+[DEBUG]   Included: org.iq80.snappy:snappy:jar:0.4
+[DEBUG]   Included: org.tukaani:xz:jar:1.9
+[DEBUG]   Included: org.codehaus.plexus:plexus-interpolation:jar:1.26
+[DEBUG]   Included: org.codehaus.plexus:plexus-utils:jar:3.4.2
+[DEBUG] Loading mojo org.apache.maven.plugins:maven-jar-plugin:3.3.0:jar from plugin realm ClassRealm[plugin>org.apache.maven.plugins:maven-jar-plugin:3.3.0, parent: jdk.internal.loader.ClassLoaders$AppClassLoader@73d16e93]
+[DEBUG] Configuring mojo execution 'org.apache.maven.plugins:maven-jar-plugin:3.3.0:jar:default-jar' with basic configurator -->
+[DEBUG]   (s) mainClass = org.bioparse.cleaning.AttendanceAppGUI
+[DEBUG]   (s) manifest = org.apache.maven.archiver.ManifestConfiguration@629fc74d
+[DEBUG]   (f) archive = org.apache.maven.archiver.MavenArchiveConfiguration@12dab9a8
+[DEBUG]   (f) classesDirectory = C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\classes
+[DEBUG]   (f) finalName = Biometric-Attendance-Parser-1.0-SNAPSHOT
+[DEBUG]   (f) forceCreation = false
+[DEBUG]   (f) outputDirectory = C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target
+[DEBUG]   (f) project = MavenProject: org.bioparse:Biometric-Attendance-Parser:1.0-SNAPSHOT @ C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\pom.xml
+[DEBUG]   (f) session = org.apache.maven.execution.MavenSession@7fd8c559
+[DEBUG]   (f) skipIfEmpty = false
+[DEBUG]   (f) useDefaultManifestFile = false
+[DEBUG] -- end configuration --
+[DEBUG] isUp2date: false (Destination C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\Biometric-Attendance-Parser-1.0-SNAPSHOT.jar not found.)
+[INFO] Building jar: C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser\target\Biometric-Attendance-Parser-1.0-SNAPSHOT.jar
+[DEBUG] adding directory META-INF/
+[DEBUG] adding entry META-INF/MANIFEST.MF
+[DEBUG] adding directory org/
+[DEBUG] adding directory org/bioparse/
+[DEBUG] adding directory org/bioparse/cleaning/
+[DEBUG] adding entry org/bioparse/cleaning/AttendanceAppGUI$1.class
+[DEBUG] adding entry org/bioparse/cleaning/AttendanceAppGUI$2.class
+[DEBUG] adding entry org/bioparse/cleaning/AttendanceAppGUI$3.class
+[DEBUG] adding entry org/bioparse/cleaning/AttendanceAppGUI.class
+[DEBUG] adding entry org/bioparse/cleaning/AttendanceMerger$EmployeeData.class
+[DEBUG] adding entry org/bioparse/cleaning/AttendanceMerger$MergeResult.class
+[DEBUG] adding entry org/bioparse/cleaning/AttendanceMerger.class
+[DEBUG] adding entry org/bioparse/cleaning/AttendanceQueryViewer$1.class
+[DEBUG] adding entry org/bioparse/cleaning/AttendanceQueryViewer$2.class
+[DEBUG] adding entry org/bioparse/cleaning/AttendanceQueryViewer.class
+[DEBUG] adding entry org/bioparse/cleaning/AttendanceReportGenerator$Metrics.class
+[DEBUG] adding entry org/bioparse/cleaning/AttendanceReportGenerator.class
+[DEBUG] adding entry org/bioparse/cleaning/AttendanceUtils.class
+[DEBUG] adding directory META-INF/maven/
+[DEBUG] adding directory META-INF/maven/org.bioparse/
+[DEBUG] adding directory META-INF/maven/org.bioparse/Biometric-Attendance-Parser/
+[DEBUG] adding entry META-INF/maven/org.bioparse/Biometric-Attendance-Parser/pom.xml
+[DEBUG] adding entry META-INF/maven/org.bioparse/Biometric-Attendance-Parser/pom.properties
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.939 s
+[INFO] Finished at: 2025-10-07T11:46:09+05:30
+[INFO] ------------------------------------------------------------------------
+[DEBUG] Shutting down adapter factory; available factories [file-lock, rwlock-local, semaphore-local, noop]; available name mappers [discriminating, file-gav, file-hgav, file-static, gav, static]
+[DEBUG] Shutting down 'file-lock' factory
+[DEBUG] Shutting down 'rwlock-local' factory
+[DEBUG] Shutting down 'semaphore-local' factory
+[DEBUG] Shutting down 'noop' factory

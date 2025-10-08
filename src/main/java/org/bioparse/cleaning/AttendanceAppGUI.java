@@ -1,22 +1,21 @@
 package org.bioparse.cleaning;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.*;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.FileInputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 import java.util.List;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import com.formdev.flatlaf.FlatLightLaf; // Add dependency: com.formdev:flatlaf
@@ -34,6 +33,13 @@ public class AttendanceAppGUI extends JFrame {
     private AttendanceMerger.MergeResult mergeResult;
     private AttendanceReportGenerator reportGenerator = new AttendanceReportGenerator();
     private AttendanceQueryViewer queryViewer;
+
+    // Report filter UI
+    private JPanel reportFilterPanel;
+    private JTextField reportGlobalSearchField;
+    private JComboBox<String> statusFilterCombo;
+    private TableRowSorter<DefaultTableModel> reportSorter;
+    private int statusColumnIndex = -1;
 
     public AttendanceAppGUI() {
         try {
@@ -100,7 +106,6 @@ public class AttendanceAppGUI extends JFrame {
         gbc.insets = new Insets(20, 0, 0, 0);
         gbc.anchor = GridBagConstraints.CENTER;
         panel.add(new JLabel("Welcome to Attendance Parser Dashboard"), gbc);
-        // TODO: Add summary cards (e.g., recent files, stats)
         return panel;
     }
 
@@ -219,6 +224,10 @@ public class AttendanceAppGUI extends JFrame {
         dataModel = new DefaultTableModel();
         dataTable = new JTable(dataModel);
         dataTable.setToolTipText("Attendance data table");
+
+        // Ensure grid and clean look
+        configureTableAppearance(dataTable);
+
         viewerPanel.add(new JScrollPane(dataTable), BorderLayout.CENTER);
 
         return viewerPanel;
@@ -229,8 +238,55 @@ public class AttendanceAppGUI extends JFrame {
         reportModel = new DefaultTableModel();
         reportTable = new JTable(reportModel);
         reportTable.setToolTipText("Employee metrics report");
+
+        // Configure appearance
+        configureTableAppearance(reportTable);
+
+        // Create filter panel (global search + status dropdown)
+        reportFilterPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        reportFilterPanel.add(new JLabel("Search:"));
+        reportGlobalSearchField = new JTextField(20);
+        reportFilterPanel.add(reportGlobalSearchField);
+
+        reportFilterPanel.add(new JLabel("Status:"));
+        statusFilterCombo = new JComboBox<>(new String[] {"All"});
+        reportFilterPanel.add(statusFilterCombo);
+
+        // Initially hidden until a report is loaded
+        reportFilterPanel.setVisible(false);
+        reportViewerPanel.add(reportFilterPanel, BorderLayout.NORTH);
+
         reportViewerPanel.add(new JScrollPane(reportTable), BorderLayout.CENTER);
         return reportViewerPanel;
+    }
+
+    /**
+     * Configure a JTable to show grid lines, small spacing, and a default renderer that replaces null/empty with "-"
+     */
+    private void configureTableAppearance(JTable table) {
+        table.setShowGrid(true);
+        table.setGridColor(new Color(220, 220, 220));
+        table.setIntercellSpacing(new Dimension(1, 1));
+        table.setRowHeight(22);
+        table.setAutoCreateRowSorter(true);
+
+        // Default renderer: display "-" for null/empty values
+        DefaultTableCellRenderer defaultRenderer = new DefaultTableCellRenderer() {
+            @Override
+            public void setValue(Object value) {
+                String text = displayValue(value);
+                setText(text);
+            }
+        };
+        defaultRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        table.setDefaultRenderer(Object.class, defaultRenderer);
+    }
+
+    private String displayValue(Object v) {
+        if (v == null) return "-";
+        String s = String.valueOf(v);
+        if (s.trim().isEmpty()) return "-";
+        return s;
     }
 
     private void selectFile(ActionEvent e) {
@@ -321,13 +377,23 @@ public class AttendanceAppGUI extends JFrame {
 
             for (AttendanceMerger.EmployeeData emp : mergeResult.allEmployees) {
                 for (int d = from; d <= to; d++) {
-                    String in = AttendanceUtils.safeGet(emp.dailyData.get("InTime"), d - 1);
-                    String out = AttendanceUtils.safeGet(emp.dailyData.get("OutTime"), d - 1);
-                    String dur = AttendanceUtils.safeGet(emp.dailyData.get("Duration"), d - 1);
-                    String stat = AttendanceUtils.safeGet(emp.dailyData.get("Status"), d - 1);
+                    String in = displayValue(AttendanceUtils.safeGet(emp.dailyData.get("InTime"), d - 1));
+                    String out = displayValue(AttendanceUtils.safeGet(emp.dailyData.get("OutTime"), d - 1));
+                    String dur = displayValue(AttendanceUtils.safeGet(emp.dailyData.get("Duration"), d - 1));
+                    String stat = displayValue(AttendanceUtils.safeGet(emp.dailyData.get("Status"), d - 1));
 
                     dataModel.addRow(new Object[]{emp.empId, emp.empName, d, in, out, dur, stat});
                 }
+            }
+
+            // Make some reasonable column alignments for dataTable
+            TableColumnModel cm = dataTable.getColumnModel();
+            for (int i = 0; i < cm.getColumnCount(); i++) {
+                TableColumn col = cm.getColumn(i);
+                DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
+                if (i == 1) renderer.setHorizontalAlignment(SwingConstants.LEFT); // name
+                else renderer.setHorizontalAlignment(SwingConstants.CENTER);
+                col.setCellRenderer(renderer);
             }
         }
     }
@@ -343,23 +409,139 @@ public class AttendanceAppGUI extends JFrame {
         Row header = sheet.getRow(0);
         Object[] columns = new Object[header.getLastCellNum()];
         for (int i = 0; i < columns.length; i++) {
-            columns[i] = header.getCell(i).getStringCellValue();
+            Cell cell = header.getCell(i);
+            columns[i] = (cell == null) ? ("Col" + i) : cell.getStringCellValue();
         }
         reportModel.setColumnIdentifiers(columns);
 
         for (int r = 1; r <= sheet.getLastRowNum(); r++) {
             Row row = sheet.getRow(r);
+            if (row == null) continue;
             Object[] data = new Object[row.getLastCellNum()];
             for (int c = 0; c < data.length; c++) {
                 Cell cell = row.getCell(c);
-                if (cell.getCellType() == CellType.NUMERIC) data[c] = cell.getNumericCellValue();
-                else data[c] = cell.getStringCellValue();
+                if (cell == null) data[c] = "-";
+                else if (cell.getCellType() == CellType.NUMERIC) {
+                    // convert numeric to string for consistent display
+                    double dv = cell.getNumericCellValue();
+                    if (dv == Math.rint(dv)) data[c] = String.valueOf((long) dv);
+                    else data[c] = String.valueOf(dv);
+                } else if (cell.getCellType() == CellType.STRING) {
+                    String s = cell.getStringCellValue();
+                    data[c] = (s == null || s.trim().isEmpty()) ? "-" : s;
+                } else {
+                    String s = cell.toString();
+                    data[c] = (s == null || s.trim().isEmpty()) ? "-" : s;
+                }
             }
             reportModel.addRow(data);
         }
 
         wb.close();
         fis.close();
+
+        // Attach sorter and filtering UI
+        reportSorter = new TableRowSorter<>(reportModel);
+        reportTable.setRowSorter(reportSorter);
+
+        // Show and populate filter panel
+        reportFilterPanel.setVisible(true);
+        // Determine the index of Status column if present (case-insensitive)
+        statusColumnIndex = -1;
+        for (int i = 0; i < reportModel.getColumnCount(); i++) {
+            if (String.valueOf(reportModel.getColumnName(i)).equalsIgnoreCase("Status")) {
+                statusColumnIndex = i;
+                break;
+            }
+        }
+
+        // Populate status filter values if status column exists
+        if (statusColumnIndex >= 0) {
+            Set<String> statuses = new LinkedHashSet<>();
+            statuses.add("All");
+            for (int r = 0; r < reportModel.getRowCount(); r++) {
+                Object val = reportModel.getValueAt(r, statusColumnIndex);
+                statuses.add(displayValue(val));
+            }
+            statusFilterCombo.setModel(new DefaultComboBoxModel<>(statuses.toArray(new String[0])));
+            statusFilterCombo.setEnabled(true);
+        } else {
+            statusFilterCombo.setModel(new DefaultComboBoxModel<>(new String[] {"All"}));
+            statusFilterCombo.setEnabled(false);
+        }
+
+        // install listeners for filtering
+        installReportFilters();
+
+        // Tweak column renderers for readability
+        TableColumnModel cm = reportTable.getColumnModel();
+        for (int i = 0; i < cm.getColumnCount(); i++) {
+            TableColumn col = cm.getColumn(i);
+            DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
+            // left align likely textual columns like name; otherwise center
+            String colName = reportModel.getColumnName(i).toLowerCase();
+            if (colName.contains("name") || colName.contains("emp")) renderer.setHorizontalAlignment(SwingConstants.LEFT);
+            else renderer.setHorizontalAlignment(SwingConstants.CENTER);
+            col.setCellRenderer(renderer);
+        }
+    }
+
+    private void installReportFilters() {
+        // Global search text filter
+        reportGlobalSearchField.getDocument().removeDocumentListener(globalSearchListener); // safe remove
+        reportGlobalSearchField.getDocument().addDocumentListener(globalSearchListener);
+
+        // Status combo filter
+        statusFilterCombo.removeActionListener(statusComboListener); // safe remove
+        statusFilterCombo.addActionListener(statusComboListener);
+
+        applyCombinedReportFilter();
+    }
+
+    private final DocumentListener globalSearchListener = new DocumentListener() {
+        @Override public void insertUpdate(DocumentEvent e) { applyCombinedReportFilter(); }
+        @Override public void removeUpdate(DocumentEvent e) { applyCombinedReportFilter(); }
+        @Override public void changedUpdate(DocumentEvent e) { applyCombinedReportFilter(); }
+    };
+
+    private final java.awt.event.ActionListener statusComboListener = e -> applyCombinedReportFilter();
+
+    private void applyCombinedReportFilter() {
+        if (reportSorter == null) return;
+
+        List<RowFilter<Object,Object>> filters = new ArrayList<>();
+
+        // Global search: match anywhere in row (case-insensitive)
+        String text = reportGlobalSearchField.getText();
+        if (text != null && !text.trim().isEmpty()) {
+            String expr = "(?i).*" + Pattern.quote(text.trim()) + ".*";
+            RowFilter<Object,Object> regexFilter = RowFilter.regexFilter(expr);
+            filters.add(regexFilter);
+        }
+
+        // Status filter (exact match on status column)
+        if (statusColumnIndex >= 0 && statusFilterCombo.getSelectedItem() != null) {
+            String sel = String.valueOf(statusFilterCombo.getSelectedItem());
+            if (!"All".equalsIgnoreCase(sel)) {
+                RowFilter<Object,Object> statusFilter = new RowFilter<Object,Object>() {
+                    @Override
+                    public boolean include(Entry<? extends Object, ? extends Object> entry) {
+                        Object v = entry.getValue(statusColumnIndex);
+                        String s = (v == null) ? "-" : String.valueOf(v);
+                        return s.equalsIgnoreCase(sel);
+                    }
+                };
+                filters.add(statusFilter);
+            }
+        }
+
+        if (filters.isEmpty()) {
+            reportSorter.setRowFilter(null);
+        } else if (filters.size() == 1) {
+            reportSorter.setRowFilter(filters.get(0));
+        } else {
+            reportSorter.setRowFilter(RowFilter.andFilter(filters));
+        }
     }
 
     private List<Integer> parseHolidays() {
