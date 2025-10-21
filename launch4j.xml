@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch4jConfig>
+  <headerType>gui</headerType>
+  <outfile>output\AttendanceApp.exe</outfile>
+  <jar>output\Biometric-Attendance-Parser-1.0-SNAPSHOT.jar</jar>
+  <jre>
+    <bundledJre64Bit>true</bundledJre64Bit>
+    <minVersion>1.8.0</minVersion>
+  </jre>
+</launch4jConfig>

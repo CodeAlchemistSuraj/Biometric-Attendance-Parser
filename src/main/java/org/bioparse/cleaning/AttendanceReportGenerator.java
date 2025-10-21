@@ -176,9 +176,17 @@ public class AttendanceReportGenerator {
     }
 
     private static boolean isWeekend(int year, int month, int day) {
-        LocalDate d = LocalDate.of(year, month, day);
-        DayOfWeek dow = d.getDayOfWeek();
-        return dow == DayOfWeek.SATURDAY || dow == DayOfWeek.SUNDAY;
+        try {
+            // Validate date before creating it
+            if (day < 1 || day > java.time.YearMonth.of(year, month).lengthOfMonth()) {
+                return false;
+            }
+            LocalDate d = LocalDate.of(year, month, day);
+            DayOfWeek dow = d.getDayOfWeek();
+            return dow == DayOfWeek.SATURDAY || dow == DayOfWeek.SUNDAY;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public String getShiftStart() { return shiftStart; }

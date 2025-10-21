@@ -1,0 +1,2 @@
+Attendance Analytics Dashboard v1.0  
+Copyright (c) 2025 BioParse Solutions  

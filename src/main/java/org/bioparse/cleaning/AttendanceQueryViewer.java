@@ -1,14 +1,17 @@
 package org.bioparse.cleaning;
 
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.Color;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +20,8 @@ public class AttendanceQueryViewer {
     private Workbook wb;
     private Sheet masterSheet;
     private List<AttendanceMerger.EmployeeData> employees;
+    private JTable currentTable;
+    private String currentTitle;
 
     public AttendanceQueryViewer(String mergedFile, List<AttendanceMerger.EmployeeData> employees) throws Exception {
         FileInputStream fis = new FileInputStream(mergedFile);
@@ -110,6 +115,8 @@ public class AttendanceQueryViewer {
 
     private void showTable(String title, DefaultTableModel model) {
         JTable table = new JTable(model);
+        this.currentTable = table;
+        this.currentTitle = title;
 
         // Show grid lines and a subtle color
         table.setShowGrid(true);
@@ -142,14 +149,116 @@ public class AttendanceQueryViewer {
 
         JScrollPane scrollPane = new JScrollPane(table);
 
+        // Create export button
+        JButton exportButton = new JButton("Export to Excel");
+        exportButton.addActionListener(e -> exportTableToExcel());
+        
+        // Create button panel
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        buttonPanel.add(exportButton);
+
         JFrame frame = new JFrame(title);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(900, 600);
         frame.setLayout(new BorderLayout());
         frame.add(scrollPane, BorderLayout.CENTER);
+        frame.add(buttonPanel, BorderLayout.SOUTH);
 
         // center frame on screen
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+    }
+
+    /**
+     * Export the current table data to Excel file
+     */
+    private void exportTableToExcel() {
+        if (currentTable == null) {
+            JOptionPane.showMessageDialog(null, "No table data to export!");
+            return;
+        }
+
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Save Excel File");
+        fileChooser.setSelectedFile(new java.io.File(currentTitle + ".xlsx"));
+        
+        int userSelection = fileChooser.showSaveDialog(null);
+        
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            java.io.File fileToSave = fileChooser.getSelectedFile();
+            
+            // Ensure .xlsx extension
+            if (!fileToSave.getName().toLowerCase().endsWith(".xlsx")) {
+                fileToSave = new java.io.File(fileToSave.getAbsolutePath() + ".xlsx");
+            }
+            
+            try {
+                exportTableDataToExcel(fileToSave);
+                JOptionPane.showMessageDialog(null, "Data exported successfully to:\n" + fileToSave.getAbsolutePath());
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Error exporting data: " + ex.getMessage(), "Export Error", JOptionPane.ERROR_MESSAGE);
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Actual Excel export implementation
+     */
+    private void exportTableDataToExcel(java.io.File outputFile) throws Exception {
+        Workbook workbook = new XSSFWorkbook();
+        Sheet sheet = workbook.createSheet("Attendance Data");
+        
+        TableModel model = currentTable.getModel();
+        int rowCount = model.getRowCount();
+        int colCount = model.getColumnCount();
+        
+        // Create header row with style
+        CellStyle headerStyle = workbook.createCellStyle();
+        headerStyle.setFillForegroundColor(IndexedColors.LIGHT_BLUE.getIndex());
+        headerStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        Font headerFont = workbook.createFont();
+        headerFont.setBold(true);
+        headerStyle.setFont(headerFont);
+        
+        Row headerRow = sheet.createRow(0);
+        for (int col = 0; col < colCount; col++) {
+            Cell cell = headerRow.createCell(col);
+            cell.setCellValue(model.getColumnName(col));
+            cell.setCellStyle(headerStyle);
+        }
+        
+        // Create data rows
+        CellStyle dataStyle = workbook.createCellStyle();
+        dataStyle.setWrapText(true);
+        
+        for (int row = 0; row < rowCount; row++) {
+            Row dataRow = sheet.createRow(row + 1);
+            for (int col = 0; col < colCount; col++) {
+                Cell cell = dataRow.createCell(col);
+                Object value = model.getValueAt(row, col);
+                String cellValue = (value == null) ? "" : value.toString();
+                
+                // Replace display "-" with empty string for export
+                if ("-".equals(cellValue)) {
+                    cellValue = "";
+                }
+                
+                cell.setCellValue(cellValue);
+                cell.setCellStyle(dataStyle);
+            }
+        }
+        
+        // Auto-size columns
+        for (int col = 0; col < colCount; col++) {
+            sheet.autoSizeColumn(col);
+        }
+        
+        // Write to file
+        try (FileOutputStream fos = new FileOutputStream(outputFile)) {
+            workbook.write(fos);
+        }
+        
+        workbook.close();
     }
 }
