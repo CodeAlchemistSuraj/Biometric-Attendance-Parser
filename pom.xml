@@ -40,6 +40,19 @@
             <artifactId>flatlaf</artifactId>
             <version>3.2.5</version>
         </dependency>
+        <!-- JFreeChart for charting -->
+	    <dependency>
+	        <groupId>org.jfree</groupId>
+	        <artifactId>jfreechart</artifactId>
+	        <version>1.5.3</version>
+	    </dependency>
+	    
+	    <!-- JCommon for JFreeChart -->
+	    <dependency>
+	        <groupId>org.jfree</groupId>
+	        <artifactId>jcommon</artifactId>
+	        <version>1.0.24</version>
+	    </dependency>
     </dependencies>
 
     <build>

@@ -1,70 +1,106 @@
 @echo off
-echo ========================================
-echo 🚀 BUILDING ATTENDANCE APP - FULL AUTOMATION
-echo ========================================
+setlocal EnableDelayedExpansion
 
-REM Ensure we're in project root
-cd /d "C:\Users\MOHD GULZAR KHAN\Desktop\Suraj Working\java.git.projects\Biometric-Attendance-Parser"
+echo.
+echo ================================================
+echo   BUILDING BIOMETRIC ATTENDANCE PARSER
+echo ================================================
+echo.
 
-echo [1/6] Building JAR...
-mvn clean package
-
-echo [2/6] Creating dist folder...
-if not exist "dist" mkdir dist
-
-echo [3/6] Downloading JRE (50MB)...
-powershell -Command ^
-"try { ^
-    Invoke-WebRequest -Uri 'https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.4%2B7/OpenJDK21U-jre_x64_windows_hotspot_21.0.4_7.zip' -OutFile 'dist\jre.zip' -UseBasicParsing; ^
-    Write-Host 'JRE Download SUCCESS!' ^
-} catch { ^
-    Write-Host 'Download failed, trying alternative...'; ^
-    Invoke-WebRequest -Uri 'https://download.java.net/java/GA/jdk21.0.4/2dac2138f8304deea6a0b5c5700d9a7c/13/GPL/openjdk-21.0.4_windows-x64_bin.zip' -OutFile 'dist\jre.zip' -UseBasicParsing ^
-}"
-
-echo [4/6] Extracting JRE...
-powershell -Command "Expand-Archive -Path 'dist\jre.zip' -DestinationPath 'dist' -Force"
-powershell -Command "ren 'dist\jdk-21.0.4' 'jre'"
-powershell -Command "rd /s /q 'dist\jre.zip'"
-
-echo [5/6] Creating LICENSE...
-echo Attendance Analytics Dashboard v1.0 > LICENSE.txt
-echo Copyright (c) 2025 BioParse Solutions > LICENSE.txt
-
-echo [6/6] Building EXE...
-mkdir output
-copy "target\Biometric-Attendance-Parser-1.0-SNAPSHOT.jar" "output\AttendanceApp.jar"
-
-REM Simple Launch4J (download if needed)
-if not exist "launch4j\bin\launch4j.exe" (
-    echo Downloading Launch4J...
-    powershell -Command "Invoke-WebRequest -Uri 'https://sourceforge.net/projects/launch4j/files/launch4j-3/3.5/launch4j-3.5-win32.zip/download' -OutFile 'launch4j.zip' -UseBasicParsing"
-    powershell -Command "Expand-Archive -Path 'launch4j.zip' -DestinationPath '.' -Force"
-    rmdir /s /q launch4j.zip
+rem --- 1. Maven: Build Fat JAR ---
+echo [1/4] Building fat JAR with Maven...
+call mvn clean package -DskipTests
+if not %errorlevel% == 0 (
+    echo *** ERROR: Maven failed! ***
+    pause
+    exit /b 1
 )
 
-REM Launch4J Config
-(
-echo ^<?xml version="1.0" encoding="UTF-8"?^>
-echo ^<launch4jConfig^>
-echo   ^<headerType^>gui^</headerType^>
-echo   ^<outfile^>output\AttendanceApp.exe^</outfile^>
-echo   ^<jar^>output\AttendanceApp.jar^</jar^>
-echo   ^<jre^>
-echo     ^<path^>jre^</path^>
-echo     ^<minVersion^>21.0^</minVersion^>
-echo   ^</jre^>
-echo ^</launch4jConfig^>
-) > launch4j.xml
+rem --- 2. jlink: Create Custom JRE ---
+echo.
+echo [2/4] Creating slim JRE with jlink...
+rmdir /s /q custom-jre 2>nul
 
-launch4j\bin\launch4j.exe launch4j.xml
+if not defined JAVA_HOME (
+    echo *** ERROR: JAVA_HOME not set! ***
+    pause
+    exit /b 1
+)
 
-echo ========================================
-echo 🎉 SUCCESS! 
-echo ========================================
-echo 📁 JAR:        target\Biometric-Attendance-Parser-1.0-SNAPSHOT.jar
-echo 🖥️  EXE:        output\AttendanceApp.exe  
-echo 📦 JRE:        dist\jre\
-echo ========================================
-echo NEXT: Install Inno Setup, then run installer.iss
+if not exist "%JAVA_HOME%\jmods" (
+    echo *** ERROR: jmods not found! JAVA_HOME = %JAVA_HOME% ***
+    pause
+    exit /b 1
+)
+
+echo Running jlink command...
+jlink ^
+    --module-path "%JAVA_HOME%\jmods" ^
+    --add-modules java.base,java.desktop,java.logging,java.xml,java.naming,java.sql,java.management,java.instrument,java.security.jgss,java.security.sasl,java.scripting,java.compiler,java.net.http,java.prefs,java.datatransfer ^
+    --strip-debug --no-header-files --no-man-pages --compress=2 ^
+    --output custom-jre
+
+if not %errorlevel% == 0 (
+    echo.
+    echo *** ERROR: jlink failed with error code %errorlevel%! ***
+    echo.
+    echo Common jlink issues:
+    echo - Module names might be incorrect
+    echo - Java version compatibility issues
+    echo - Missing modules
+    echo.
+    echo Let's try a simpler module set...
+    
+    rem Try with minimal modules
+    jlink --module-path "%JAVA_HOME%\jmods" --add-modules java.base,java.desktop,java.logging,java.xml --strip-debug --no-header-files --no-man-pages --output custom-jre
+    
+    if not %errorlevel% == 0 (
+        echo.
+        echo *** ERROR: jlink failed even with minimal modules! ***
+        pause
+        exit /b 1
+    )
+)
+
+echo jlink completed successfully!
+
+rem --- 3. jpackage: Create portable app (no WiX required) ---
+echo.
+echo [3/4] Creating portable application...
+rmdir /s /q output 2>nul
+
+rem Check if icon file exists
+set ICON_OPTION=
+if exist "src\main\resources\app.ico" (
+    set ICON_OPTION=--icon src\main\resources\app.ico
+    echo Using icon: src\main\resources\app.ico
+) else (
+    echo Warning: Icon file not found, proceeding without icon
+)
+
+echo Running jpackage command...
+jpackage --type app-image --input target --name "Biometric Attendance Parser" --main-jar Biometric-Attendance-Parser-1.0-SNAPSHOT.jar --main-class org.bioparse.cleaning.AttendanceAppGUI --runtime-image custom-jre %ICON_OPTION% --dest output --win-console --java-options "--add-opens=java.desktop/javax.swing=ALL-UNNAMED"
+
+if not %errorlevel% == 0 (
+    echo.
+    echo *** ERROR: jpackage failed! ***
+    pause
+    exit /b 1
+)
+
+rem --- 4. SUCCESS ---
+echo.
+echo [4/4] SUCCESS!
+echo.
+echo ================================================
+echo   PORTABLE APPLICATION CREATED!
+echo ================================================
+echo.
+echo Application location: output\"Biometric Attendance Parser"
+echo.
+echo To run the application:
+echo   output\"Biometric Attendance Parser\Biometric Attendance Parser.exe"
+echo.
+echo You can copy the entire folder to any Windows PC!
+echo.
 pause
