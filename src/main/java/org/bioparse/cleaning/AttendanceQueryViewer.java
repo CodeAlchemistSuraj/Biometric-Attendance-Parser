@@ -214,6 +214,8 @@ public class AttendanceQueryViewer {
 
     private DefaultTableModel createTableModel(String[] columns) {
         return new DefaultTableModel(columns, 0) {
+            private static final long serialVersionUID = 1L;
+            
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false; // Read-only
@@ -239,6 +241,8 @@ public class AttendanceQueryViewer {
 
         // Custom renderer for highlighting and centering (safe checks)
         DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer() {
+            private static final long serialVersionUID = 1L;
+            
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
                                                           boolean hasFocus, int row, int column) {

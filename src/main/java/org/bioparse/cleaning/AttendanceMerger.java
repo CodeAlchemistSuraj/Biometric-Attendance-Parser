@@ -14,10 +14,10 @@ import java.util.*;
 
 public class AttendanceMerger {
 
-    static class EmployeeData {
+  public  static class EmployeeData {
         String empId;
         String empName;
-        Map<String, List<String>> dailyData = new LinkedHashMap<>();
+        public Map<String, List<String>> dailyData = new LinkedHashMap<>();
     }
 
     public static class MergeResult {

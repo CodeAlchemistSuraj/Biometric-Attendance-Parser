@@ -2,6 +2,7 @@ package org.bioparse.cleaning;
 
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.bioparse.cleaning.AttendanceMerger.EmployeeData;
 
 import java.io.*;
 import java.time.*;
@@ -9,310 +10,341 @@ import java.util.*;
 
 public class AttendanceReportGenerator {
 
+    // --- Configuration ---
     private String shiftStart = "09:30";
-    private String onTimeEnd = "09:46";        // inclusive end of on-time window
-    private String halfDayThreshold = "10:16"; // In-time after 10:16 counts as half day
-    private int fullDayMinutes = 510; // 8 hours 30 minutes
-    private int halfDayMinutes = 240; // 4 hours
-    private int otThresholdMinutes = 30; // Overtime threshold for non-holiday/weekend
-    private int fullOtMinutes = 480; // 8 hours for OT days
+    private String onTimeEnd = "09:46";
+    private String halfDayThreshold = "10:15";
+    private int fullDayMinutes = 510; // 8.5 hrs
+    private int halfDayMinutes = 240; // 4 hrs
+    private int otThresholdMinutes = 30;
+    private int fullOtMinutes = 480; // 8 hrs
     private int allowedLatesPerMonth = 5;
 
-    static class Metrics {
-        int totalWorkingDays;
-        int totalLates;
-        int totalAbsent;
-        int totalFullDays;
-        int halfDays;
+    public static class Metrics {
+    	 public int totalWorkingDays;
+    	 public int totalLates;
+    	 public int totalAbsent;
+    	  public int totalFullDays;
+    	  public  int halfDays;
 
-        // New breakdown columns for half-day reasons
-        int halfDaysDueToLate;       // arrivals after 10:15 OR lates beyond allowed
-        int halfDaysDueToPunchMiss;  // single missing punch on working day
-        int halfDaysDueToDuration;   // duration >= 240 and < 510
+    	  public int halfDaysDueToLate;
+    	  public int halfDaysDueToPunchMiss;
+    	  public int halfDaysDueToDuration;
 
-        int totalOTDays;
-        int totalOTMinutes;
-        int totalPunchMissed;
-        int totalHalfOTDays;
+    	  public int totalPunchMissed;
+        
+
+        // OT tracking
+    	  public int workingDayOTMinutes;
+    	  public int weekendFullOTMinutes;
+    	  public int weekendHalfOTMinutes;
+    	  public int weekendHolidayPresentDays;
+    	  public int totalOTDays;
+    	  public int totalHalfOTDays;
+    	  public int totalOTMinutes;
+    	  public List<String> remarks = new ArrayList<>();
     }
+
+    // ======================= REPORT GENERATION =======================
 
     public void generate(String inputFile, String outputFile,
                          List<AttendanceMerger.EmployeeData> allEmployees,
-                         int monthDays,
-                         List<Integer> holidays,
+                         int monthDays, List<Integer> holidays,
                          int year, int month) throws Exception {
 
-        FileInputStream fis = new FileInputStream(inputFile);
-        Workbook wb = new XSSFWorkbook(fis);
+        Workbook wb = new XSSFWorkbook(new FileInputStream(inputFile));
+        Sheet sheet = wb.createSheet("Employee_Report");
 
-        Sheet reportSheet = wb.createSheet("Employee_Report");
-        int rowNum = 0;
-
-        Row header = reportSheet.createRow(rowNum++);
         String[] cols = {
-        		 	"Employee Code",
-        		    "Total Working Days",
-        		    "Total Full Days",
-        		    "Half Days Due To Duration",
-        		    "Half Days Due To PunchMiss",
-        		    "Half Days Due To Lates",
-        		    "Total Half Days",
-        		    "Total Lates",
-        		    "Total Absent",
-        		    "Total Punch Missed",
-        		    "Total OT Days",
-        		    "Total Half OT Days",
-        		    "Total OT Hours" 
+                "Employee Code",
+                "Total Working Days",
+                "Total Full Days",
+                "Half Days Due To Duration",
+                "Half Days Due To Punch Miss",
+                "Half Days Due To Lates",
+                "Total Half Days",
+                "Total Lates",
+                "Total Absent",
+                "Total Punch Missed",
+                "Weekend/Holiday Present Days",
+                "Working Day OT Hours",
+                "Weekend/Holiday Full OT Hours",
+                "Weekend/Holiday Half OT Hours",
+                "Total OT Hours",
+                "Remarks"
         };
+
+        Row header = sheet.createRow(0);
         for (int i = 0; i < cols.length; i++) {
             header.createCell(i).setCellValue(cols[i]);
         }
 
+        int rowNum = 1;
         for (AttendanceMerger.EmployeeData emp : allEmployees) {
             Metrics m = computeMetrics(emp, monthDays, holidays, year, month);
 
-            Row row = reportSheet.createRow(rowNum++);
+            Row r = sheet.createRow(rowNum++);
             int c = 0;
-            row.createCell(c++).setCellValue(emp.empId);
-            row.createCell(c++).setCellValue(m.totalWorkingDays);
-            row.createCell(c++).setCellValue(m.totalFullDays);
-            row.createCell(c++).setCellValue(m.halfDaysDueToDuration);
-            row.createCell(c++).setCellValue(m.halfDaysDueToPunchMiss);
-            row.createCell(c++).setCellValue(m.halfDaysDueToLate);
-            row.createCell(c++).setCellValue(m.halfDays);
-            row.createCell(c++).setCellValue(m.totalLates);
-            row.createCell(c++).setCellValue(m.totalAbsent);
-            row.createCell(c++).setCellValue(m.totalPunchMissed);
-            row.createCell(c++).setCellValue(m.totalOTDays);
-            row.createCell(c++).setCellValue(m.totalHalfOTDays);
-        
-            
-            // convert total OT minutes to ceil 30-min blocks and then to hours (0.5 hr per block)
-            int blocks = (m.totalOTMinutes + 29) / 30; // ceil to 30-min blocks
-            double otHours = blocks * 0.5;
-            row.createCell(c++).setCellValue(Math.round(otHours * 100.0) / 100.0); // two-decimal hours
+
+            r.createCell(c++).setCellValue(emp.empId);
+            r.createCell(c++).setCellValue(m.totalWorkingDays);
+            r.createCell(c++).setCellValue(m.totalFullDays);
+            r.createCell(c++).setCellValue(m.halfDaysDueToDuration);
+            r.createCell(c++).setCellValue(m.halfDaysDueToPunchMiss);
+            r.createCell(c++).setCellValue(m.halfDaysDueToLate);
+            r.createCell(c++).setCellValue(m.halfDays);
+            r.createCell(c++).setCellValue(m.totalLates);
+            r.createCell(c++).setCellValue(m.totalAbsent);
+            r.createCell(c++).setCellValue(m.totalPunchMissed);
+            r.createCell(c++).setCellValue(m.weekendHolidayPresentDays);
+
+            // Working-day OT (rounded)
+            int blocks = (m.workingDayOTMinutes + 29) / 30;
+            double workingOTHours = blocks * 0.5;
+
+            double weekendFullOTHours = m.weekendFullOTMinutes / 60.0;
+            double weekendHalfOTHours = m.weekendHalfOTMinutes / 60.0;
+
+            double totalOTHours = workingOTHours + weekendFullOTHours + weekendHalfOTHours;
+
+            r.createCell(c++).setCellValue(round2(workingOTHours));
+            r.createCell(c++).setCellValue(round2(weekendFullOTHours));
+            r.createCell(c++).setCellValue(round2(weekendHalfOTHours));
+            r.createCell(c++).setCellValue(round2(totalOTHours));
+            r.createCell(c++).setCellValue(String.join("; ", m.remarks));
         }
 
-        for (int i = 0; i < cols.length; i++) {
-            reportSheet.autoSizeColumn(i);
-        }
+        for (int i = 0; i < cols.length; i++) sheet.autoSizeColumn(i);
 
-        fis.close();
         FileOutputStream fos = new FileOutputStream(outputFile);
         wb.write(fos);
         fos.close();
         wb.close();
-
-        System.out.println("✅ Employee report generated in: " + outputFile);
     }
 
-    public void exportToCsv(String outputCsvPath, List<AttendanceMerger.EmployeeData> allEmployees,
-                            int monthDays, List<Integer> holidays, int year, int month) throws IOException {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputCsvPath))) {
-        	writer.write("Employee Code,Total Working Days,Total Full Days,Half Days Due To Duration,Half Days Due To PunchMiss,Half Days Due To Extra Lates,Total Half Days,Total Lates,Total Absent,Total Punch Missed,Total OT Days,Total Half OT Days,Total OT Hours\n");
-            for (AttendanceMerger.EmployeeData emp : allEmployees) {
-                Metrics m = computeMetrics(emp, monthDays, holidays, year, month);
-                
-                int blocks = (m.totalOTMinutes + 29) / 30; // ceil to 30-min blocks
-                double otHours = blocks * 0.5;
+    // ======================= CORE LOGIC =======================
 
-                writer.write(String.format("%s,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%.2f\n",
-                        emp.empId,
-                        m.totalWorkingDays,
-                        m.totalFullDays,
-                        m.halfDaysDueToDuration,
-                        m.halfDaysDueToPunchMiss,
-                        m.halfDaysDueToLate,
-                        m.halfDays,
-                        m.totalLates,
-                        m.totalAbsent,
-                        m.totalPunchMissed,
-                        m.totalOTDays,
-                        m.totalHalfOTDays,
-                        otHours));
-            }
-        }
-        System.out.println("✅ CSV exported to: " + outputCsvPath);
-    }
-
-    private Metrics computeMetrics(AttendanceMerger.EmployeeData emp, int monthDays,
+    public Metrics computeMetrics(AttendanceMerger.EmployeeData emp, int monthDays,
                                    List<Integer> holidays, int year, int month) {
 
         Metrics m = new Metrics();
 
-        // compute weekend & working days correctly (avoid double-subtracting holidays on weekends)
         int weekendDays = 0;
-        for (int day = 1; day <= monthDays; day++) {
-            if (isWeekend(year, month, day)) weekendDays++;
-        }
-        int holidaysOnWorkingDays = 0;
-        if (holidays != null) {
-            for (Integer hd : holidays) {
-                if (hd != null && hd >= 1 && hd <= monthDays && !isWeekend(year, month, hd)) {
-                    holidaysOnWorkingDays++;
-                }
-            }
-        }
-        m.totalWorkingDays = monthDays - weekendDays - holidaysOnWorkingDays;
+        for (int d = 1; d <= monthDays; d++) if (isWeekend(year, month, d)) weekendDays++;
+
+        int holidayWD = 0;
+        if (holidays != null)
+            for (Integer h : holidays)
+                if (!isWeekend(year, month, h)) holidayWD++;
+
+        m.totalWorkingDays = monthDays - weekendDays - holidayWD;
 
         List<String> inTimes = emp.dailyData.getOrDefault("InTime", new ArrayList<>());
         List<String> outTimes = emp.dailyData.getOrDefault("OutTime", new ArrayList<>());
-        List<String> status = emp.dailyData.getOrDefault("Status", new ArrayList<>());
+        List<String> statusList = emp.dailyData.getOrDefault("Status", new ArrayList<>());
 
-        int latesSeen = 0; // counts only working-day lates
+        String[] status = new String[monthDays];
+        for (int i = 0; i < monthDays; i++) {
+            status[i] = Optional.ofNullable(AttendanceUtils.safeGet(statusList, i))
+                    .orElse("").toUpperCase();
+        }
 
-        for (int day = 0; day < monthDays; day++) {
-            int dayNum = day + 1;
-            boolean isHolidayOrWeekend = isWeekend(year, month, dayNum) || (holidays != null && holidays.contains(dayNum));
+        // Sandwich rule
+        List<Integer> abs = new ArrayList<>();
+        for (int i = 0; i < monthDays; i++) if ("A".equals(status[i])) abs.add(i);
+        for (int i = 0; i < abs.size() - 1; i++) {
+            for (int j = abs.get(i) + 1; j < abs.get(i + 1); j++) {
+                if ("H".equals(status[j]) || "WO".equals(status[j])) status[j] = "A";
+            }
+        }
 
-            String in = AttendanceUtils.safeGet(inTimes, day);
-            String out = AttendanceUtils.safeGet(outTimes, day);
-            String stat = AttendanceUtils.safeGet(status, day);
+        int latesSeen = 0;
+        LocalTime shiftStartTime = LocalTime.parse(shiftStart);
+
+        for (int d = 0; d < monthDays; d++) {
+            int dayNum = d + 1;
+            boolean isHolidayOrWeekend = isWeekend(year, month, dayNum)
+                    || (holidays != null && holidays.contains(dayNum));
+
+            String in = AttendanceUtils.safeGet(inTimes, d);
+            String out = AttendanceUtils.safeGet(outTimes, d);
+            boolean inP = in != null && !in.isEmpty();
+            boolean outP = out != null && !out.isEmpty();
+            boolean punchMiss = inP ^ outP;
 
             int minutes = calculateDuration(in, out);
 
-            // Absent detection (explicit A)
-            if ("A".equalsIgnoreCase(stat) && (in == null || in.isEmpty()) && (out == null || out.isEmpty()) && minutes == 0) {
-                m.totalAbsent++;
-            }
+            if ("A".equals(status[d]) && !inP && !outP) m.totalAbsent++;
 
-            // Punch missed: count anytime exactly one punch is missing (applies to any day)
-            boolean singlePunchMissing = ((in == null || in.isEmpty()) ^ (out == null || out.isEmpty()));
-            if (singlePunchMissing) {
-                m.totalPunchMissed++;
-            }
+            if (punchMiss) m.totalPunchMissed++;
 
-            // Only evaluate lates and working-day half-day logic on working days
-            if (!isHolidayOrWeekend && !"A".equalsIgnoreCase(stat)) {
-                // PRIORITY for half-day classification (only one reason per day):
-                // 1) single missing punch -> half-day due to punch miss
-                // 2) arrival after 10:15 -> half-day due to late
-                // 3) late and latesSeen > allowed -> half-day due to late
-                // 4) duration-based half-day (240 <= minutes < 510) -> half-day due to duration
+            // ---------------- WORKING DAY ----------------
+            if (!isHolidayOrWeekend && !"A".equals(status[d])) {
 
-                boolean afterHalfDay = isAfterHalfDayThreshold(in); // in > 10:15
-                boolean late = isLate(in);                          // in > 09:45 && in <= 10:15
-
-                // Case 1: single missing punch on working day => half-day due to punch miss
-                if (singlePunchMissing) {
+                if (punchMiss) {
                     m.halfDays++;
                     m.halfDaysDueToPunchMiss++;
-                    // totalPunchMissed already incremented above
-                } else {
-                    // Case 2: arrival after 10:15 -> half-day due to late (arrival beyond threshold)
-                    if (afterHalfDay) {
+                    m.remarks.add(dayNum + "th: Half day due to punch miss");
+                    continue;
+                }
+
+                if (isAfterHalfDayThreshold(in)) {
+                    m.halfDays++;
+                    m.halfDaysDueToLate++;
+                    m.remarks.add(dayNum + "th: Half day due to late arrival (>10:15)");
+                    continue;
+                }
+
+                if (isLate(in)) {
+                    latesSeen++;
+                    m.totalLates++;
+                    if (latesSeen > allowedLatesPerMonth) {
                         m.halfDays++;
                         m.halfDaysDueToLate++;
-                    } else {
-                        // Case 3: late within (09:45,10:15] and exceeds monthly allowed -> half-day due to late
-                        if (late) {
-                            latesSeen++;
-                            m.totalLates++;
-                            if (latesSeen > allowedLatesPerMonth) {
-                                m.halfDays++;
-                                m.halfDaysDueToLate++;
-                            }
-                        }
-                        // Case 4: duration-based half day (only if not already half-day by above)
-                        if (minutes >= halfDayMinutes && minutes < fullDayMinutes) {
-                            m.halfDays++;
-                            m.halfDaysDueToDuration++;
-                        }
-                        // If minutes >= fullDayMinutes and not afterHalfDay => full day
-                        if (minutes >= fullDayMinutes && !afterHalfDay) {
-                            m.totalFullDays++;
-                        }
+                        m.remarks.add(dayNum + "th: Half day due to excess lates");
+                        continue;
                     }
                 }
 
-                // Working-day OT minutes accumulation 
-                if (minutes > fullDayMinutes + otThresholdMinutes) {
-                    int otMinutes = minutes - fullDayMinutes;
-                    m.totalOTMinutes += otMinutes;
+                if (minutes >= halfDayMinutes && minutes < fullDayMinutes) {
+                    m.halfDays++;
+                    m.halfDaysDueToDuration++;
+                    m.remarks.add(dayNum + "th: Half day – duration < 8.5 hrs");
+                } else if (minutes >= fullDayMinutes) {
+                    m.totalFullDays++;
+                }
+
+                // Working day OT
+                if (inP && outP) {
+                    LocalTime inT = LocalTime.parse(in);
+                    LocalTime outT = LocalTime.parse(out);
+                    long worked = Duration.between(
+                            inT.isBefore(shiftStartTime) ? shiftStartTime : inT,
+                            outT).toMinutes();
+                    if (worked >= fullDayMinutes + otThresholdMinutes) {
+                        m.workingDayOTMinutes += (worked - fullDayMinutes);
+                    }
                 }
             }
-            // Holiday/weekend: OT and punch-miss logic (punch-miss counted above)
-            else if (isHolidayOrWeekend) {
-                boolean inPresent = in != null && !in.isEmpty();
-                boolean outPresent = out != null && !out.isEmpty();
 
-                if (inPresent ^ outPresent) {
-                    // one punch missing on weekend => half OT day (and punch missed already counted)
+            // ---------------- WEEKEND / HOLIDAY ----------------
+            else if (isHolidayOrWeekend) {
+            	
+            	// Weekend/Holiday presence count (Option B: any punch)
+            	if (inP || outP) {
+            	    m.weekendHolidayPresentDays++;
+            	}
+
+                if (punchMiss) {
                     m.totalHalfOTDays++;
-                } else if (inPresent && outPresent) {
-                	if (minutes >= fullOtMinutes) {
-                	    m.totalOTDays++;
-                	    int otMinutes = minutes - fullOtMinutes;
-                	    m.totalOTMinutes += otMinutes;
-                	} else if (minutes >= halfDayMinutes) {
-                	    m.totalHalfOTDays++;
-                	    m.totalOTMinutes += minutes;
-                	} else if (minutes > 0) {
-                	    m.totalOTMinutes += minutes;
-                	}
+                    m.weekendHalfOTMinutes += 240;
+                    m.remarks.add(dayNum + "th: Half OT day due to punch miss");
+                } else if (inP && outP) {
+                    int worked = calculateDuration(in, out);
+                    if (worked >= fullOtMinutes) {
+                        m.totalOTDays++;
+                        m.weekendFullOTMinutes += worked;
+                    } else if (worked >= halfDayMinutes) {
+                        m.totalHalfOTDays++;
+                        m.weekendHalfOTMinutes += worked;
+                    }
                 }
             }
         }
-
         return m;
     }
 
-    private int calculateDuration(String inTime, String outTime) {
-        if (inTime == null || inTime.isEmpty() || outTime == null || outTime.isEmpty()) {
-            return 0;
-        }
-        try {
-            LocalTime in = LocalTime.parse(inTime);
-            LocalTime out = LocalTime.parse(outTime);
-            // Handle cases where outTime is on the next day (e.g., after midnight)
-            long minutes = Duration.between(in, out).toMinutes();
-            if (minutes < 0) {
-                minutes += 24 * 60; // Add 24 hours if negative
-            }
-            return (int) minutes;
-        } catch (Exception e) {
-            return 0;
-        }
+    // ======================= HELPERS =======================
+
+    private int calculateDuration(String in, String out) {
+        if (in == null || out == null || in.isEmpty() || out.isEmpty()) return 0;
+        long m = Duration.between(LocalTime.parse(in), LocalTime.parse(out)).toMinutes();
+        return m < 0 ? (int) (m + 1440) : (int) m;
     }
 
-    // Late: strictly after 09:45 and up to 10:15 (inclusive)
-    private boolean isLate(String inTime) {
-        if (inTime == null || inTime.isEmpty()) return false;
-        try {
-            LocalTime in = LocalTime.parse(inTime);
-            LocalTime onEnd = LocalTime.parse(onTimeEnd);          // 09:45
-            LocalTime halfDayThresh = LocalTime.parse(halfDayThreshold); // 10:15
-            return in.isAfter(onEnd) && !in.isAfter(halfDayThresh); // (09:45, 10:15]
-        } catch (Exception e) {
-            return false;
-        }
+    private boolean isLate(String in) {
+        if (in == null || in.isEmpty()) return false;
+        LocalTime t = LocalTime.parse(in);
+        return t.isAfter(LocalTime.parse(onTimeEnd))
+                && !t.isAfter(LocalTime.parse(halfDayThreshold));
     }
 
-    // After 10:15 => half day
-    private boolean isAfterHalfDayThreshold(String inTime) {
-        if (inTime == null || inTime.isEmpty()) return false;
-        try {
-            LocalTime in = LocalTime.parse(inTime);
-            LocalTime halfDayThresh = LocalTime.parse(halfDayThreshold);
-            return in.isAfter(halfDayThresh); // strictly > 10:15
-        } catch (Exception e) {
-            return false;
-        }
+    private boolean isAfterHalfDayThreshold(String in) {
+        return in != null && !in.isEmpty()
+                && LocalTime.parse(in).isAfter(LocalTime.parse(halfDayThreshold));
     }
 
-    private static boolean isWeekend(int year, int month, int day) {
-        try {
-            if (day < 1 || day > java.time.YearMonth.of(year, month).lengthOfMonth()) {
-                return false;
-            }
-            LocalDate d = LocalDate.of(year, month, day);
-            DayOfWeek dow = d.getDayOfWeek();
-            return dow == DayOfWeek.SATURDAY || dow == DayOfWeek.SUNDAY;
-        } catch (Exception e) {
-            return false;
-        }
+    private static boolean isWeekend(int y, int m, int d) {
+        DayOfWeek dow = LocalDate.of(y, m, d).getDayOfWeek();
+        return dow == DayOfWeek.SATURDAY || dow == DayOfWeek.SUNDAY;
     }
 
-    public String getShiftStart() { return shiftStart; }
-    public void setShiftStart(String shiftStart) { this.shiftStart = shiftStart; }
+    private double round2(double v) {
+        return Math.round(v * 100.0) / 100.0;
+    }
+
+    public void exportToCsv(String absolutePath,
+            List<AttendanceMerger.EmployeeData> allEmployees,
+            int monthDays,
+            List<Integer> holidays,
+            int year,
+            int month) {
+
+try (BufferedWriter writer = new BufferedWriter(new FileWriter(absolutePath))) {
+
+// CSV Header
+writer.write(
+    "Employee Code," +
+    "Total Working Days," +
+    "Total Full Days," +
+    "Half Days Due To Duration," +
+    "Half Days Due To PunchMiss," +
+    "Half Days Due To Lates," +
+    "Total Half Days," +
+    "Total Lates," +
+    "Total Absent," +
+    "Total Punch Missed," +
+    "Total OT Days," +
+    "Total Half OT Days," +
+    "Total OT Hours"
+);
+writer.newLine();
+
+// Data rows
+for (AttendanceMerger.EmployeeData emp : allEmployees) {
+
+Metrics m = computeMetrics(emp, monthDays, holidays, year, month);
+
+// Weekend/Holiday OT rounding rule:
+// exact minutes → exact hours (NO 30-min block rounding)
+double otHours = Math.round((m.totalOTMinutes / 60.0) * 100.0) / 100.0;
+
+writer.write(String.format(
+        "%s,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%.2f",
+        emp.empId,
+        m.totalWorkingDays,
+        m.totalFullDays,
+        m.halfDaysDueToDuration,
+        m.halfDaysDueToPunchMiss,
+        m.halfDaysDueToLate,
+        m.halfDays,
+        m.totalLates,
+        m.totalAbsent,
+        m.totalPunchMissed,
+        m.totalOTDays,
+        m.totalHalfOTDays,
+        otHours
+));
+writer.newLine();
+}
+
+System.out.println("✅ CSV exported successfully to: " + absolutePath);
+
+} catch (Exception e) {
+throw new RuntimeException("Error exporting CSV: " + e.getMessage(), e);
+}
+}
+
+
+
 }

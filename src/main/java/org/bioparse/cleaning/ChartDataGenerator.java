@@ -4,230 +4,280 @@ import org.jfree.chart.*;
 import org.jfree.chart.plot.*;
 import org.jfree.chart.renderer.category.*;
 import org.jfree.chart.renderer.xy.*;
+import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.general.PieDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.chart.labels.*;
-import org.jfree.chart.entity.*;
-import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.TextAnchor;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
+import java.time.Duration;
 import java.util.*;
-import java.util.List;
 
 public class ChartDataGenerator {
 
     public static final Color[] CHART_COLORS = {
-        new Color(41, 128, 185),    // Blue
-        new Color(39, 174, 96),     // Green
-        new Color(243, 156, 18),    // Orange
-        new Color(231, 76, 60),     // Red
-        new Color(155, 89, 182),    // Purple
-        new Color(52, 73, 94),      // Dark Blue
-        new Color(241, 196, 15),    // Yellow
-        new Color(230, 126, 34)     // Dark Orange
+        new Color(70, 130, 180),    // Steel Blue
+        new Color(60, 179, 113),    // Medium Sea Green
+        new Color(255, 165, 0),     // Orange
+        new Color(220, 20, 60),     // Crimson
+        new Color(186, 85, 211),    // Medium Orchid
+        new Color(46, 139, 87),     // Sea Green
+        new Color(255, 99, 71),     // Tomato
+        new Color(106, 90, 205)     // Slate Blue
     };
 
-    // ==================== JFreeChart Base Classes ====================
-
-    abstract static class JFreeBarChartPanel extends JPanel {
-        public JFreeBarChartPanel(String title, String xLabel, String yLabel) {
-            setLayout(new BorderLayout());
+    // Compact base chart panel
+    abstract static class BaseChartPanel extends JPanel {
+        private static final long serialVersionUID = 1L;
+        protected String title;
+        
+        public BaseChartPanel(String title) {
+            this.title = title;
+            setLayout(new BorderLayout(0, 5));
             setBackground(Color.WHITE);
-            setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
-          //  setPreferredSize(new Dimension(500, 350));
-            createChart(title, xLabel, yLabel);
+            setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         }
+        
+        protected JPanel createExportPanel(JFreeChart chart) {
+            JPanel panel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 5, 0));
+            panel.setOpaque(false);
+            panel.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));
+            
+            JButton exportBtn = new JButton("📥");
+            exportBtn.setToolTipText("Export as PNG");
+            exportBtn.setPreferredSize(new Dimension(30, 25));
+            exportBtn.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+            exportBtn.setFocusPainted(false);
+            exportBtn.setBorder(BorderFactory.createEmptyBorder(2, 5, 2, 5));
+            exportBtn.addActionListener(e -> exportChart(chart, "png"));
+            
+            panel.add(exportBtn);
+            return panel;
+        }
+    }
 
-        protected void createChart(String title, String xLabel, String yLabel) {
-            DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-            Map<String, List<Double>> data = getData();
-            List<String> categories = getCategories();
-
-            for (Map.Entry<String, List<Double>> entry : data.entrySet()) {
-                String series = entry.getKey();
-                List<Double> values = entry.getValue();
-                for (int i = 0; i < values.size() && i < categories.size(); i++) {
-                    dataset.addValue(values.get(i), series, categories.get(i));
-                }
-            }
-
+    // Compact Bar Chart (200x200)
+    abstract static class CompactBarChart extends BaseChartPanel {
+        private static final long serialVersionUID = 1L;
+        
+        public CompactBarChart(String title, String xLabel, String yLabel) {
+            super(title);
+            createChart(xLabel, yLabel);
+        }
+        
+        private void createChart(String xLabel, String yLabel) {
+            DefaultCategoryDataset dataset = createDataset();
             JFreeChart chart = ChartFactory.createBarChart(
                 title, xLabel, yLabel, dataset,
-                PlotOrientation.VERTICAL, true, true, false
+                PlotOrientation.VERTICAL, true, false, false
             );
-
-            CategoryPlot plot = chart.getCategoryPlot();
-            BarRenderer renderer = (BarRenderer) plot.getRenderer();
-            for (int i = 0; i < data.size() && i < CHART_COLORS.length; i++) {
-                renderer.setSeriesPaint(i, CHART_COLORS[i]);
-            }
-            renderer.setDefaultItemLabelGenerator(new StandardCategoryItemLabelGenerator());
-            renderer.setDefaultItemLabelsVisible(true);
-            renderer.setDefaultPositiveItemLabelPosition(new ItemLabelPosition(ItemLabelAnchor.OUTSIDE12, TextAnchor.BOTTOM_CENTER));
-
-            plot.setBackgroundPaint(Color.WHITE);
-            plot.setRangeGridlinePaint(Color.LIGHT_GRAY);
-            plot.setDomainGridlinePaint(Color.LIGHT_GRAY);
-
+            
+            customizeChart(chart, dataset);
+            
             ChartPanel chartPanel = new ChartPanel(chart);
-            chartPanel.setMouseWheelEnabled(true);
+            chartPanel.setPreferredSize(new Dimension(200, 200));
+            chartPanel.setMinimumSize(new Dimension(180, 180));
+            chartPanel.setMaximumDrawWidth(1000);
+            chartPanel.setMaximumDrawHeight(1000);
+            
             add(createExportPanel(chart), BorderLayout.NORTH);
             add(chartPanel, BorderLayout.CENTER);
         }
-
-        protected abstract Map<String, List<Double>> getData();
-        protected abstract List<String> getCategories();
-    }
-
-    abstract static class JFreeStackedBarChartPanel extends JPanel {
-        public JFreeStackedBarChartPanel(String title, String xLabel, String yLabel) {
-            setLayout(new BorderLayout());
-            setBackground(Color.WHITE);
-            setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
-           // setPreferredSize(new Dimension(500, 350));
-            createChart(title, xLabel, yLabel);
-        }
-
-        protected void createChart(String title, String xLabel, String yLabel) {
+        
+        private DefaultCategoryDataset createDataset() {
             DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-            Map<String, List<Double>> data = getData();
-            List<String> categories = getCategories();
-
-            for (Map.Entry<String, List<Double>> entry : data.entrySet()) {
+            Map<String, java.util.List<Double>> data = getData();
+            java.util.List<String> categories = getCategories();
+            
+            for (Map.Entry<String, java.util.List<Double>> entry : data.entrySet()) {
                 String series = entry.getKey();
-                List<Double> values = entry.getValue();
-                for (int i = 0; i < values.size() && i < categories.size(); i++) {
+                java.util.List<Double> values = entry.getValue();
+                for (int i = 0; i < Math.min(values.size(), categories.size()); i++) {
                     dataset.addValue(values.get(i), series, categories.get(i));
                 }
             }
-
-            JFreeChart chart = ChartFactory.createStackedBarChart(
-                title, xLabel, yLabel, dataset,
-                PlotOrientation.VERTICAL, true, true, false
-            );
-
+            return dataset;
+        }
+        
+        private void customizeChart(JFreeChart chart, CategoryDataset dataset) {
             CategoryPlot plot = chart.getCategoryPlot();
-            StackedBarRenderer renderer = (StackedBarRenderer) plot.getRenderer();
-            for (int i = 0; i < data.size() && i < CHART_COLORS.length; i++) {
-                renderer.setSeriesPaint(i, CHART_COLORS[i]);
+            BarRenderer renderer = (BarRenderer) plot.getRenderer();
+            
+            // Use gradient colors
+            for (int i = 0; i < dataset.getRowCount() && i < CHART_COLORS.length; i++) {
+                Color base = CHART_COLORS[i % CHART_COLORS.length];
+                renderer.setSeriesPaint(i, base);
             }
+            
+            // Remove item labels for compactness
+            renderer.setDefaultItemLabelsVisible(false);
+            
+            // Compact styling
+            plot.setBackgroundPaint(new Color(250, 250, 250));
+            plot.setRangeGridlinePaint(new Color(220, 220, 220));
+            plot.setDomainGridlinePaint(new Color(220, 220, 220));
+            plot.setOutlineVisible(false);
+            
+            // Compact fonts
+            chart.getTitle().setFont(new Font("Segoe UI", Font.BOLD, 14));
+            plot.getDomainAxis().setLabelFont(new Font("Segoe UI", Font.PLAIN, 11));
+            plot.getRangeAxis().setLabelFont(new Font("Segoe UI", Font.PLAIN, 11));
+            plot.getDomainAxis().setTickLabelFont(new Font("Segoe UI", Font.PLAIN, 9));
+            plot.getRangeAxis().setTickLabelFont(new Font("Segoe UI", Font.PLAIN, 9));
+            
+            // Reduce padding
+            plot.getDomainAxis().setCategoryMargin(0.15);
+            renderer.setItemMargin(0.15);
+        }
+        
+        protected abstract Map<String, java.util.List<Double>> getData();
+        protected abstract java.util.List<String> getCategories();
+    }
 
-            plot.setBackgroundPaint(Color.WHITE);
-            plot.setRangeGridlinePaint(Color.LIGHT_GRAY);
-
+    // Compact Pie Chart (200x200)
+    abstract static class CompactPieChart extends BaseChartPanel {
+        private static final long serialVersionUID = 1L;
+        
+        public CompactPieChart(String title) {
+            super(title);
+            createChart();
+        }
+        
+        private void createChart() {
+            DefaultPieDataset<String> dataset = createDataset();
+            JFreeChart chart = ChartFactory.createPieChart(
+                title, dataset, true, false, false
+            );
+            
+            customizeChart(chart, dataset);
+            
             ChartPanel chartPanel = new ChartPanel(chart);
-            chartPanel.setMouseWheelEnabled(true);
+            chartPanel.setPreferredSize(new Dimension(200, 200));
+            chartPanel.setMinimumSize(new Dimension(180, 180));
+            
             add(createExportPanel(chart), BorderLayout.NORTH);
             add(chartPanel, BorderLayout.CENTER);
         }
-
-        protected abstract Map<String, List<Double>> getData();
-        protected abstract List<String> getCategories();
-    }
-
-    abstract static class JFreePieChartPanel extends JPanel {
-        public JFreePieChartPanel(String title) {
-            setLayout(new BorderLayout());
-            setBackground(Color.WHITE);
-            setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
-           // setPreferredSize(new Dimension(500, 350));
-            createChart(title);
-        }
-
-        protected void createChart(String title) {
-            DefaultPieDataset dataset = new DefaultPieDataset();
+        
+        private DefaultPieDataset<String> createDataset() {
+            DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
             Map<String, Double> data = getData();
-            data.forEach((k, v) -> { if (v > 0) dataset.setValue(k, v); });
-
-            JFreeChart chart = ChartFactory.createPieChart(title, dataset, true, true, false);
-            PiePlot plot = (PiePlot) chart.getPlot();
+            // Sort by value descending
+            data.entrySet().stream()
+                .sorted(Map.Entry.<String, Double>comparingByValue().reversed())
+                .forEachOrdered(entry -> dataset.setValue(entry.getKey(), entry.getValue()));
+            return dataset;
+        }
+        
+        private void customizeChart(JFreeChart chart, PieDataset<String> dataset) {
+            PiePlot<String> plot = (PiePlot<String>) chart.getPlot();
+            
+            // Apply colors
             for (int i = 0; i < dataset.getItemCount() && i < CHART_COLORS.length; i++) {
                 plot.setSectionPaint(dataset.getKey(i), CHART_COLORS[i % CHART_COLORS.length]);
             }
-            plot.setLabelGenerator(new StandardPieSectionLabelGenerator("{0}: {1} ({2})"));
-
-            ChartPanel chartPanel = new ChartPanel(chart);
-            chartPanel.setMouseWheelEnabled(true);
-            add(createExportPanel(chart), BorderLayout.NORTH);
-            add(chartPanel, BorderLayout.CENTER);
+            
+            // Compact label settings
+            plot.setLabelGenerator(new StandardPieSectionLabelGenerator("{1}"));
+            plot.setLabelFont(new Font("Segoe UI", Font.PLAIN, 10));
+            plot.setLabelBackgroundPaint(new Color(255, 255, 255, 200));
+            plot.setLabelShadowPaint(null);
+            plot.setLabelOutlinePaint(null);
+            
+            plot.setBackgroundPaint(new Color(250, 250, 250));
+            plot.setOutlineVisible(false);
+            plot.setShadowPaint(null);
+            
+            chart.getTitle().setFont(new Font("Segoe UI", Font.BOLD, 14));
+            
+            // Show legend instead of labels if too many items
+            if (dataset.getItemCount() > 5) {
+                plot.setLabelGenerator(null);
+            }
         }
-
+        
         protected abstract Map<String, Double> getData();
     }
 
-    abstract static class JFreeLineChartPanel extends JPanel {
-        public JFreeLineChartPanel(String title, String xLabel, String yLabel) {
-            setLayout(new BorderLayout());
-            setBackground(Color.WHITE);
-            setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
-           // setPreferredSize(new Dimension(500, 350));
-            createChart(title, xLabel, yLabel);
+    // Compact Line Chart (200x200)
+    abstract static class CompactLineChart extends BaseChartPanel {
+        private static final long serialVersionUID = 1L;
+        
+        public CompactLineChart(String title, String xLabel, String yLabel) {
+            super(title);
+            createChart(xLabel, yLabel);
         }
-
-        protected void createChart(String title, String xLabel, String yLabel) {
-            XYSeriesCollection dataset = new XYSeriesCollection();
-            Map<String, List<Double>> data = getData();
-            List<String> categories = getCategories();
-
-            for (Map.Entry<String, List<Double>> entry : data.entrySet()) {
-                XYSeries series = new XYSeries(entry.getKey());
-                List<Double> values = entry.getValue();
-                for (int i = 0; i < values.size() && i < categories.size(); i++) {
-                    series.add(i + 1, values.get(i));
-                }
-                dataset.addSeries(series);
-            }
-
+        
+        private void createChart(String xLabel, String yLabel) {
+            XYSeriesCollection dataset = createDataset();
             JFreeChart chart = ChartFactory.createXYLineChart(
                 title, xLabel, yLabel, dataset,
-                PlotOrientation.VERTICAL, true, true, false
+                PlotOrientation.VERTICAL, true, false, false
             );
-
-            XYPlot plot = chart.getXYPlot();
-            XYLineAndShapeRenderer renderer = (XYLineAndShapeRenderer) plot.getRenderer();
-            for (int i = 0; i < data.size() && i < CHART_COLORS.length; i++) {
-                renderer.setSeriesPaint(i, CHART_COLORS[i]);
-                renderer.setSeriesStroke(i, new BasicStroke(2.5f));
-            }
-
-            plot.setBackgroundPaint(Color.WHITE);
-            plot.setRangeGridlinePaint(Color.LIGHT_GRAY);
-            plot.setDomainGridlinePaint(Color.LIGHT_GRAY);
-
+            
+            customizeChart(chart);
+            
             ChartPanel chartPanel = new ChartPanel(chart);
-            chartPanel.setMouseWheelEnabled(true);
+            chartPanel.setPreferredSize(new Dimension(200, 200));
+            chartPanel.setMinimumSize(new Dimension(180, 180));
+            
             add(createExportPanel(chart), BorderLayout.NORTH);
             add(chartPanel, BorderLayout.CENTER);
         }
-
-        protected abstract Map<String, List<Double>> getData();
-        protected abstract List<String> getCategories();
+        
+        private XYSeriesCollection createDataset() {
+            XYSeriesCollection dataset = new XYSeriesCollection();
+            Map<String, java.util.List<Double>> data = getData();
+            
+            for (Map.Entry<String, java.util.List<Double>> entry : data.entrySet()) {
+                XYSeries series = new XYSeries(entry.getKey());
+                java.util.List<Double> values = entry.getValue();
+                for (int i = 0; i < values.size(); i++) {
+                    series.add(i, values.get(i));
+                }
+                dataset.addSeries(series);
+            }
+            return dataset;
+        }
+        
+        private void customizeChart(JFreeChart chart) {
+            XYPlot plot = chart.getXYPlot();
+            XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
+            
+            for (int i = 0; i < plot.getSeriesCount() && i < CHART_COLORS.length; i++) {
+                Color color = CHART_COLORS[i % CHART_COLORS.length];
+                renderer.setSeriesPaint(i, color);
+                renderer.setSeriesStroke(i, new BasicStroke(1.5f));
+                renderer.setSeriesShapesVisible(i, true);
+                renderer.setSeriesShape(i, new java.awt.geom.Ellipse2D.Double(-2, -2, 4, 4));
+            }
+            
+            plot.setRenderer(renderer);
+            plot.setBackgroundPaint(new Color(250, 250, 250));
+            plot.setRangeGridlinePaint(new Color(220, 220, 220));
+            plot.setDomainGridlinePaint(new Color(220, 220, 220));
+            plot.setOutlineVisible(false);
+            
+            chart.getTitle().setFont(new Font("Segoe UI", Font.BOLD, 14));
+            plot.getDomainAxis().setLabelFont(new Font("Segoe UI", Font.PLAIN, 11));
+            plot.getRangeAxis().setLabelFont(new Font("Segoe UI", Font.PLAIN, 11));
+            plot.getDomainAxis().setTickLabelFont(new Font("Segoe UI", Font.PLAIN, 9));
+            plot.getRangeAxis().setTickLabelFont(new Font("Segoe UI", Font.PLAIN, 9));
+        }
+        
+        protected abstract Map<String, java.util.List<Double>> getData();
     }
 
-    // ==================== Export Panel ====================
-    private static JPanel createExportPanel(JFreeChart chart) {
-        JPanel panel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        panel.setBackground(Color.WHITE);
-
-        JButton pngBtn = new JButton("PNG");
-        pngBtn.setToolTipText("Export as PNG");
-        pngBtn.addActionListener(e -> exportChart(chart, "png"));
-
-        JButton pdfBtn = new JButton("PDF");
-        pdfBtn.setToolTipText("Export as PDF");
-        pdfBtn.addActionListener(e -> exportChart(chart, "pdf"));
-
-        panel.add(pngBtn);
-        panel.add(pdfBtn);
-        return panel;
-    }
-
+    // Export functionality
     private static void exportChart(JFreeChart chart, String format) {
         JFileChooser fc = new JFileChooser();
         fc.setSelectedFile(new File(chart.getTitle().getText() + "." + format));
@@ -235,58 +285,65 @@ public class ChartDataGenerator {
             try {
                 File file = fc.getSelectedFile();
                 if ("png".equalsIgnoreCase(format)) {
-                    ChartUtils.saveChartAsPNG(file, chart, 800, 600);
-                } else if ("pdf".equalsIgnoreCase(format)) {
-                   // ChartUtils.saveChartAsPDF(file, chart, 800, 600, new org.jfree.pdf.PDFGraphics2D(new java.awt.geom.Rectangle2D.Double(0, 0, 800, 600)));
+                    ChartUtils.saveChartAsPNG(file, chart, 600, 400);
+                    JOptionPane.showMessageDialog(null, "Chart exported: " + file.getName(),
+                        "Export Successful", JOptionPane.INFORMATION_MESSAGE);
                 }
-                JOptionPane.showMessageDialog(null, "Exported: " + file.getName());
             } catch (IOException ex) {
-                JOptionPane.showMessageDialog(null, "Export failed: " + ex.getMessage());
+                JOptionPane.showMessageDialog(null, "Export failed: " + ex.getMessage(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
 
-    // ==================== CHARTS ====================
+    // ==================== COMPACT CHART METHODS ====================
 
-    public static JPanel createAttendanceTrendChart(List<AttendanceMerger.EmployeeData> employees, int monthDays, int year, int month) {
-        return new JFreeBarChartPanel("Monthly Attendance Trend", "Day", "Employees") {
-            @Override protected Map<String, List<Double>> getData() {
-                Map<String, List<Double>> data = new LinkedHashMap<>();
-                data.put("Present", new ArrayList<>());
-                data.put("Absent", new ArrayList<>());
-                data.put("Late", new ArrayList<>());
-
-                for (int day = 1; day <= monthDays; day++) {
-                    int present = 0, absent = 0, late = 0;
+    public static JPanel createAttendanceTrendChart(java.util.List<AttendanceMerger.EmployeeData> employees, int monthDays) {
+        return new CompactBarChart("Daily Trend", "Day", "Count") {
+            private static final long serialVersionUID = 1L;
+            
+            @Override 
+            protected Map<String, java.util.List<Double>> getData() {
+                Map<String, java.util.List<Double>> data = new LinkedHashMap<>();
+                data.put("P", new java.util.ArrayList<>());
+                data.put("A", new java.util.ArrayList<>());
+                
+                // Sample every 3 days for compactness
+                for (int day = 1; day <= monthDays; day += 3) {
+                    int present = 0, absent = 0;
                     for (AttendanceMerger.EmployeeData emp : employees) {
                         String status = AttendanceUtils.safeGet(emp.dailyData.get("Status"), day - 1);
-                        String inTime = AttendanceUtils.safeGet(emp.dailyData.get("InTime"), day - 1);
                         if ("P".equalsIgnoreCase(status) || "WO".equalsIgnoreCase(status) || "WOP".equalsIgnoreCase(status)) {
                             present++;
-                            if (isLateArrival(inTime)) late++;
                         } else if ("A".equalsIgnoreCase(status)) absent++;
                     }
-                    data.get("Present").add((double) present);
-                    data.get("Absent").add((double) absent);
-                    data.get("Late").add((double) late);
+                    data.get("P").add((double) present);
+                    data.get("A").add((double) absent);
                 }
                 return data;
             }
-            @Override protected List<String> getCategories() {
-                List<String> cats = new ArrayList<>();
-                for (int i = 1; i <= monthDays; i++) cats.add("D" + i);
+            
+            @Override 
+            protected java.util.List<String> getCategories() {
+                java.util.List<String> cats = new java.util.ArrayList<>();
+                // Show every 3rd day label
+                for (int i = 1; i <= monthDays; i += 3) {
+                    cats.add("D" + i);
+                }
                 return cats;
             }
         };
     }
 
-    public static JPanel createAttendanceDistributionChart(List<AttendanceMerger.EmployeeData> employees, int monthDays) {
-        return new JFreePieChartPanel("Attendance Distribution") {
-            @Override protected Map<String, Double> getData() {
-                Map<String, Double> data = new LinkedHashMap<>();
+    public static JPanel createAttendanceDistributionChart(java.util.List<AttendanceMerger.EmployeeData> employees, int monthDays) {
+        return new CompactPieChart("Attendance") {
+            private static final long serialVersionUID = 1L;
+            
+            @Override 
+            protected Map<String, Double> getData() {
                 int present = 0, absent = 0, half = 0, leave = 0;
                 for (AttendanceMerger.EmployeeData emp : employees) {
-                    List<String> statusList = emp.dailyData.get("Status");
+                    java.util.List<String> statusList = emp.dailyData.get("Status");
                     if (statusList != null) {
                         for (String s : statusList) {
                             if (s == null || s.trim().isEmpty()) continue;
@@ -300,115 +357,134 @@ public class ChartDataGenerator {
                         }
                     }
                 }
+                Map<String, Double> data = new LinkedHashMap<>();
                 data.put("Present", (double) present);
                 data.put("Absent", (double) absent);
-                data.put("Half Days", (double) half);
-                data.put("Leaves", (double) leave);
+                data.put("Half Day", (double) half);
+                data.put("Leave", (double) leave);
                 return data;
             }
         };
     }
 
-    public static JPanel createDepartmentWiseAttendanceChart(List<AttendanceMerger.EmployeeData> employees) {
-        return new JFreeBarChartPanel("Department-wise Headcount", "Department", "Employees") {
-            @Override protected Map<String, List<Double>> getData() {
+    public static JPanel createDepartmentWiseAttendanceChart(java.util.List<AttendanceMerger.EmployeeData> employees) {
+        return new CompactBarChart("By Department", "Dept", "Count") {
+            private static final long serialVersionUID = 1L;
+            
+            @Override 
+            protected Map<String, java.util.List<Double>> getData() {
                 Map<String, Integer> deptCounts = new LinkedHashMap<>();
-                deptCounts.put("IT", 0); deptCounts.put("HR", 0);
-                deptCounts.put("Finance", 0); deptCounts.put("Operations", 0); deptCounts.put("Admin", 0);
-
-                Random rand = new Random();
-                String[] depts = {"IT", "HR", "Finance", "Operations", "Admin"};
+                String[] depts = {"IT", "HR", "Finance", "Ops", "Admin"};
+                
+                for (String dept : depts) deptCounts.put(dept, 0);
+                
                 for (AttendanceMerger.EmployeeData emp : employees) {
                     String dept = depts[Math.abs(emp.empId.hashCode()) % depts.length];
                     deptCounts.put(dept, deptCounts.get(dept) + 1);
                 }
-
-                Map<String, List<Double>> data = new LinkedHashMap<>();
-                data.put("Employees", new ArrayList<>());
-                deptCounts.values().forEach(v -> data.get("Employees").add(v.doubleValue()));
+                
+                Map<String, java.util.List<Double>> data = new LinkedHashMap<>();
+                data.put("Emp", new java.util.ArrayList<>());
+                deptCounts.values().forEach(v -> data.get("Emp").add(v.doubleValue()));
                 return data;
             }
-            @Override protected List<String> getCategories() {
-                return Arrays.asList("IT", "HR", "Finance", "Operations", "Admin");
+            
+            @Override 
+            protected java.util.List<String> getCategories() {
+                return Arrays.asList("IT", "HR", "Finance", "Ops", "Admin");
             }
         };
     }
 
-    public static JPanel createTopPerformersChart(List<AttendanceMerger.EmployeeData> employees, int monthDays) {
-        return new JFreeBarChartPanel("Employee Performance", "Attendance Range", "Count") {
-            @Override protected Map<String, List<Double>> getData() {
+    public static JPanel createTopPerformersChart(java.util.List<AttendanceMerger.EmployeeData> employees, int monthDays) {
+        return new CompactBarChart("Performance", "Range", "Count") {
+            private static final long serialVersionUID = 1L;
+            
+            @Override 
+            protected Map<String, java.util.List<Double>> getData() {
                 int excellent = 0, good = 0, average = 0, poor = 0;
                 for (AttendanceMerger.EmployeeData emp : employees) {
                     int present = 0;
-                    List<String> statusList = emp.dailyData.get("Status");
+                    java.util.List<String> statusList = emp.dailyData.get("Status");
                     if (statusList != null) {
                         for (String s : statusList) {
                             if ("P".equalsIgnoreCase(s) || "WO".equalsIgnoreCase(s) || "WOP".equalsIgnoreCase(s)) present++;
                         }
                     }
-                    double rate = present * 100.0 / monthDays;
+                    double rate = (present * 100.0) / monthDays;
                     if (rate >= 90) excellent++;
                     else if (rate >= 75) good++;
                     else if (rate >= 60) average++;
                     else poor++;
                 }
-                Map<String, List<Double>> data = new LinkedHashMap<>();
-                data.put("Employees", Arrays.asList((double)excellent, (double)good, (double)average, (double)poor));
+                Map<String, java.util.List<Double>> data = new LinkedHashMap<>();
+                data.put("Emp", Arrays.asList((double)excellent, (double)good, (double)average, (double)poor));
                 return data;
             }
-            @Override protected List<String> getCategories() {
-                return Arrays.asList("90-100%", "75-89%", "60-74%", "Below 60%");
+            
+            @Override 
+            protected java.util.List<String> getCategories() {
+                return Arrays.asList("90%+", "75-89%", "60-74%", "<60%");
             }
         };
     }
 
-    public static JPanel createLateArrivalsAnalysis(List<AttendanceMerger.EmployeeData> employees, int monthDays) {
-        return new JFreeBarChartPanel("Late Arrivals by Time", "Time Range", "Count") {
-            @Override protected Map<String, List<Double>> getData() {
-                int r1 = 0, r2 = 0, r3 = 0, r4 = 0;
+    public static JPanel createLateArrivalsAnalysis(java.util.List<AttendanceMerger.EmployeeData> employees, int monthDays) {
+        return new CompactBarChart("Late Arrivals", "Delay", "Count") {
+            private static final long serialVersionUID = 1L;
+            
+            @Override 
+            protected Map<String, java.util.List<Double>> getData() {
+                int[] ranges = new int[4];
                 for (AttendanceMerger.EmployeeData emp : employees) {
-                    List<String> inTimes = emp.dailyData.get("InTime");
-                    List<String> statusList = emp.dailyData.get("Status");
+                    java.util.List<String> inTimes = emp.dailyData.get("InTime");
+                    java.util.List<String> statusList = emp.dailyData.get("Status");
                     if (inTimes == null || statusList == null) continue;
-                    for (int i = 0; i < inTimes.size(); i++) {
+                    for (int i = 0; i < Math.min(inTimes.size(), statusList.size()); i++) {
                         String status = statusList.get(i);
                         String inTime = inTimes.get(i);
                         if (!("P".equalsIgnoreCase(status) || "WO".equalsIgnoreCase(status) || "WOP".equalsIgnoreCase(status))) continue;
                         if (!isLateArrival(inTime)) continue;
                         try {
-                            java.time.LocalTime arrival = java.time.LocalTime.parse(inTime);
-                            java.time.LocalTime threshold = java.time.LocalTime.parse("09:45");
-                            long minutesLate = java.time.Duration.between(threshold, arrival).toMinutes();
-                            if (minutesLate <= 15) r1++;
-                            else if (minutesLate <= 30) r2++;
-                            else if (minutesLate <= 60) r3++;
-                            else r4++;
-                        } catch (Exception ignored) {}
+                            LocalTime arrival = LocalTime.parse(inTime);
+                            LocalTime threshold = LocalTime.parse("09:45");
+                            long minutesLate = Duration.between(threshold, arrival).toMinutes();
+                            if (minutesLate <= 15) ranges[0]++;
+                            else if (minutesLate <= 30) ranges[1]++;
+                            else if (minutesLate <= 60) ranges[2]++;
+                            else ranges[3]++;
+                        } catch (DateTimeParseException ignored) {}
                     }
                 }
-                Map<String, List<Double>> data = new LinkedHashMap<>();
-                data.put("Late", Arrays.asList((double)r1, (double)r2, (double)r3, (double)r4));
+                Map<String, java.util.List<Double>> data = new LinkedHashMap<>();
+                data.put("Late", Arrays.asList((double)ranges[0], (double)ranges[1], (double)ranges[2], (double)ranges[3]));
                 return data;
             }
-            @Override protected List<String> getCategories() {
-                return Arrays.asList("0-15 min", "16-30 min", "31-60 min", "60+ min");
+            
+            @Override 
+            protected java.util.List<String> getCategories() {
+                return Arrays.asList("0-15", "16-30", "31-60", "60+");
             }
         };
     }
 
-    public static JPanel createOvertimeAnalysisChart(List<AttendanceMerger.EmployeeData> employees) {
-        return new JFreePieChartPanel("Overtime Distribution") {
-            @Override protected Map<String, Double> getData() {
+    public static JPanel createOvertimeAnalysisChart(java.util.List<AttendanceMerger.EmployeeData> employees) {
+        return new CompactPieChart("Overtime") {
+            private static final long serialVersionUID = 1L;
+            
+            @Override 
+            protected Map<String, Double> getData() {
                 int none = 0, low = 0, medium = 0, high = 0;
                 for (AttendanceMerger.EmployeeData emp : employees) {
                     double totalOT = 0;
-                    List<String> durations = emp.dailyData.get("Duration");
+                    java.util.List<String> durations = emp.dailyData.get("Duration");
                     if (durations != null) {
                         for (String d : durations) {
                             if (d == null || d.isEmpty() || "-".equals(d)) continue;
                             try {
                                 String[] parts = d.split(":");
-                                int h = Integer.parseInt(parts[0]), m = Integer.parseInt(parts[1]);
+                                int h = Integer.parseInt(parts[0]);
+                                int m = parts.length > 1 ? Integer.parseInt(parts[1]) : 0;
                                 double mins = h * 60 + m;
                                 if (mins > 510) totalOT += (mins - 510) / 60.0;
                             } catch (Exception ignored) {}
@@ -421,86 +497,93 @@ public class ChartDataGenerator {
                 }
                 Map<String, Double> data = new LinkedHashMap<>();
                 data.put("None", (double)none);
-                data.put("1-10 hrs", (double)low);
-                data.put("11-30 hrs", (double)medium);
-                data.put("30+ hrs", (double)high);
+                data.put("1-10h", (double)low);
+                data.put("11-30h", (double)medium);
+                data.put("30+h", (double)high);
                 return data;
             }
         };
     }
 
-    public static JPanel createDailyAttendanceLineChart(List<AttendanceMerger.EmployeeData> employees, int monthDays) {
-        return new JFreeLineChartPanel("Daily Attendance Trend", "Day", "Employees") {
-            @Override protected Map<String, List<Double>> getData() {
-                List<Double> present = new ArrayList<>(), absent = new ArrayList<>();
-                for (int day = 1; day <= monthDays; day++) {
+    public static JPanel createDailyAttendanceLineChart(java.util.List<AttendanceMerger.EmployeeData> employees, int monthDays) {
+        return new CompactLineChart("Daily Trend", "Day", "Count") {
+            private static final long serialVersionUID = 1L;
+            
+            @Override 
+            protected Map<String, java.util.List<Double>> getData() {
+                java.util.List<Double> present = new java.util.ArrayList<>();
+                java.util.List<Double> absent = new java.util.ArrayList<>();
+                
+                // Sample data points (reduce for compactness)
+                for (int day = 1; day <= monthDays; day += 2) {
                     int p = 0, a = 0;
                     for (AttendanceMerger.EmployeeData emp : employees) {
                         String status = AttendanceUtils.safeGet(emp.dailyData.get("Status"), day - 1);
                         if ("P".equalsIgnoreCase(status) || "WO".equalsIgnoreCase(status) || "WOP".equalsIgnoreCase(status)) p++;
                         else if ("A".equalsIgnoreCase(status)) a++;
                     }
-                    present.add((double)p); absent.add((double)a);
+                    present.add((double)p); 
+                    absent.add((double)a);
                 }
-                Map<String, List<Double>> data = new LinkedHashMap<>();
+                
+                Map<String, java.util.List<Double>> data = new LinkedHashMap<>();
                 data.put("Present", present);
                 data.put("Absent", absent);
                 return data;
             }
-            @Override protected List<String> getCategories() {
-                List<String> cats = new ArrayList<>();
-                for (int i = 1; i <= monthDays; i++) cats.add("D" + i);
-                return cats;
-            }
         };
     }
 
-    public static JPanel createWeeklyAttendanceChart(List<AttendanceMerger.EmployeeData> employees, int monthDays) {
-        return new JFreeStackedBarChartPanel("Weekly Attendance Pattern", "Week", "Days") {
-            @Override protected Map<String, List<Double>> getData() {
-                Map<String, List<Double>> data = new LinkedHashMap<>();
-                data.put("Present", new ArrayList<>());
-                data.put("Absent", new ArrayList<>());
-                data.put("Late", new ArrayList<>());
-
+    public static JPanel createWeeklyAttendanceChart(java.util.List<AttendanceMerger.EmployeeData> employees, int monthDays) {
+        return new CompactBarChart("Weekly Pattern", "Week", "Days") {
+            private static final long serialVersionUID = 1L;
+            
+            @Override 
+            protected Map<String, java.util.List<Double>> getData() {
+                Map<String, java.util.List<Double>> data = new LinkedHashMap<>();
+                data.put("P", new java.util.ArrayList<>());
+                data.put("A", new java.util.ArrayList<>());
+                
                 int weeks = (monthDays + 6) / 7;
                 for (int w = 0; w < weeks; w++) {
-                    int present = 0, absent = 0, late = 0;
+                    int present = 0, absent = 0;
                     int start = w * 7 + 1, end = Math.min(start + 6, monthDays);
                     for (int d = start; d <= end; d++) {
                         for (AttendanceMerger.EmployeeData emp : employees) {
                             String status = AttendanceUtils.safeGet(emp.dailyData.get("Status"), d - 1);
-                            String inTime = AttendanceUtils.safeGet(emp.dailyData.get("InTime"), d - 1);
                             if ("P".equalsIgnoreCase(status) || "WO".equalsIgnoreCase(status) || "WOP".equalsIgnoreCase(status)) {
                                 present++;
-                                if (isLateArrival(inTime)) late++;
                             } else if ("A".equalsIgnoreCase(status)) absent++;
                         }
                     }
-                    data.get("Present").add((double)present);
-                    data.get("Absent").add((double)absent);
-                    data.get("Late").add((double)late);
+                    data.get("P").add((double)present);
+                    data.get("A").add((double)absent);
                 }
                 return data;
             }
-            @Override protected List<String> getCategories() {
-                List<String> cats = new ArrayList<>();
+            
+            @Override 
+            protected java.util.List<String> getCategories() {
+                java.util.List<String> cats = new java.util.ArrayList<>();
                 int weeks = (monthDays + 6) / 7;
-                for (int i = 1; i <= weeks; i++) cats.add("Week " + i);
+                for (int i = 1; i <= weeks; i++) cats.add("W" + i);
                 return cats;
             }
         };
     }
 
-    public static JPanel createShiftComplianceChart(List<AttendanceMerger.EmployeeData> employees) {
-        return new JFreePieChartPanel("Shift Compliance") {
-            @Override protected Map<String, Double> getData() {
-                int onTime = 0, late = 0, early = 0;
+    public static JPanel createShiftComplianceChart(java.util.List<AttendanceMerger.EmployeeData> employees) {
+        return new CompactPieChart("Punctuality") {
+            private static final long serialVersionUID = 1L;
+            
+            @Override 
+            protected Map<String, Double> getData() {
+                int onTime = 0, late = 0;
                 for (AttendanceMerger.EmployeeData emp : employees) {
-                    List<String> inTimes = emp.dailyData.get("InTime");
-                    List<String> statusList = emp.dailyData.get("Status");
+                    java.util.List<String> inTimes = emp.dailyData.get("InTime");
+                    java.util.List<String> statusList = emp.dailyData.get("Status");
                     if (inTimes == null || statusList == null) continue;
-                    for (int i = 0; i < inTimes.size(); i++) {
+                    for (int i = 0; i < Math.min(inTimes.size(), statusList.size()); i++) {
                         String status = statusList.get(i);
                         String inTime = inTimes.get(i);
                         if (!("P".equalsIgnoreCase(status) || "WO".equalsIgnoreCase(status))) continue;
@@ -516,13 +599,14 @@ public class ChartDataGenerator {
         };
     }
 
+    // Utility method for late arrival detection
     private static boolean isLateArrival(String inTime) {
         if (inTime == null || inTime.isEmpty() || "-".equals(inTime)) return false;
         try {
-            java.time.LocalTime arrival = java.time.LocalTime.parse(inTime);
-            java.time.LocalTime threshold = java.time.LocalTime.parse("09:45");
+            LocalTime arrival = LocalTime.parse(inTime);
+            LocalTime threshold = LocalTime.parse("09:45");
             return arrival.isAfter(threshold);
-        } catch (Exception e) {
+        } catch (DateTimeParseException e) {
             return false;
         }
     }
